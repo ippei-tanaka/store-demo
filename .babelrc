@@ -8,6 +8,6 @@
     "transform-object-rest-spread",
     "add-module-exports",
     "babel-plugin-webpack-alias",
-    "babel-plugin-inline-import" // BABEL_DISABLE_CACHE=1 is set in package.json for graphql files
+    "babel-plugin-inline-import"
   ]
 }

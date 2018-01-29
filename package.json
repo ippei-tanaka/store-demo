@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "BABEL_DISABLE_CACHE=1 jest -c ./.jestconfig.json",
-    "dev-server": "BABEL_DISABLE_CACHE=1 babel-node scripts/run-server.js",
+    "test": "jest -c ./.jestconfig.json",
+    "dev-server": "babel-node scripts/run-server.js",
     "build-server": "babel src --out-dir build",
     "build-client": "webpack"
   },
