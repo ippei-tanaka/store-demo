@@ -12,6 +12,8 @@ const schema = graphql`
         createProduct(input: ProductInput!): Product
         updateProduct(id: ID!, input: ProductInput!): Product
         deleteProduct(id: ID!): Product
+
+        createUser(input: UserInput!): User
     }
 
     type Product {
@@ -23,6 +25,16 @@ const schema = graphql`
     input ProductInput {
         name: String!
         price: Int!
+    }
+    
+    type User {
+        id: ID!
+        name: String!
+    }
+
+    input UserInput {
+        name: String!
+        password: String!
     }
 `;
 

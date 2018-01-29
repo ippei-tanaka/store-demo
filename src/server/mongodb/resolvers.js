@@ -1,4 +1,5 @@
 import ProductModel from "./models/product";
+import UserModel from "./models/user";
 
 export default {
     product: async ({id}) => {
@@ -23,5 +24,18 @@ export default {
     deleteProduct: async ({id}) => {
         const product = await ProductModel.findById(id);
         return product.remove();
-    }
+    },
+
+    user: async ({id}) => {
+        return UserModel.findById(id);
+    },
+
+    users: () => {
+        return UserModel.find();
+    },
+
+    createUser: ({input}) => {
+        const user = new UserModel({...input});
+        return user.save();
+    },
 };

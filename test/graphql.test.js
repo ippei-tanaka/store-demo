@@ -7,6 +7,7 @@ const TEST_DB = "store-demo-graphql-test";
 
 beforeAll(() => connect({dbName: TEST_DB}));
 beforeEach(() => dropDatabase());
+afterAll(() => dropDatabase());
 afterAll(() => disconnect());
 
 const createProduct = async ({name, price}) =>
@@ -106,5 +107,31 @@ describe("deleteProduct", () =>
         const query = "{ products { id } }";
         const {data} = await graphql(schema, query, {...resolvers});
         expect(data.products).toHaveLength(0);
+    });
+});
+
+const createUser = async ({name}) =>
+{
+    const query = `
+        mutation { 
+            createUser (input: {name: "${name}"})
+            { id }
+        }
+    `;
+    const {data} = await graphql(schema, query, {...resolvers});
+    return data.createUser.id;
+};
+
+describe("createUser", () =>
+{
+    it("should create a user", async () => {
+        const query = `
+            mutation { 
+                createUser (input: {name: "the user", password: "password"})
+                { id }
+            }
+        `;
+        const {data} = await graphql(schema, query, {...resolvers});
+        expect(data.createUser.id).toBeTruthy();
     });
 });
