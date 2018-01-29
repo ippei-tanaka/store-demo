@@ -5,9 +5,9 @@
   "plugins": [
     //"dynamic-import-node",
     //"dynamic-import-webpack",
+    //"babel-plugin-inline-import",
     "transform-object-rest-spread",
     "add-module-exports",
-    "babel-plugin-webpack-alias",
-    "babel-plugin-inline-import"
+    "babel-plugin-webpack-alias"
   ]
 }
