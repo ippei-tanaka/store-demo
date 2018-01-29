@@ -1,15 +1,14 @@
 import express from "express";
-import bodyParser from "body-parser";
 import {connect} from "./mongodb";
 import router from "./router";
 import {log} from "../logger";
 
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: false}));
 app.use(router);
 
-export const start = async ({httpPort}) => {
+export const start = async ({httpPort}) =>
+{
     await connect({dbName: "store-demo"});
     log("Connected to Mongo DB.");
 
