@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest -c ./.jestconfig.json",
     "dev-server": "babel-node scripts/run-server.js",
     "build-server": "babel src --out-dir build",
     "build-client": "webpack"
@@ -24,9 +25,13 @@
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-dynamic-import-node": "^1.2.0",
     "babel-plugin-dynamic-import-webpack": "^1.0.2",
+    "babel-plugin-webpack-alias": "^2.1.2",
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.16.0",
+    "eslint-plugin-jest": "^21.7.0",
     "eslint-plugin-react": "^7.6.0",
+    "graphql-tools": "^2.19.0",
+    "jest": "^22.1.4",
     "webpack": "^3.10.0"
   }
 }

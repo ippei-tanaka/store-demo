@@ -1,8 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
-import mongoose from "mongoose";
+import {connect} from "./mongodb";
 import router from "./router";
-import {log} from "../utilities";
+import {log} from "../logger";
 
 const app = express();
 
@@ -10,9 +10,11 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(router);
 
 export const start = async ({httpPort}) => {
-    await mongoose.connect("mongodb://localhost/store-demo");
+    await connect({dbName: "store-demo"});
     log("Connected to Mongo DB.");
 
-    await new Promise((resolve) => app.listen(httpPort, resolve));
+    await startWebServer({port: httpPort});
     log(`Web Server started at port ${httpPort}.`);
 };
+
+export const startWebServer = ({port}) => new Promise((resolve) => app.listen(port, resolve));

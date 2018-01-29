@@ -5,6 +5,7 @@
   "plugins": [
     "dynamic-import-node",
     //"dynamic-import-webpack",
-    "add-module-exports"
+    "add-module-exports",
+    "babel-plugin-webpack-alias"
   ]
 }
