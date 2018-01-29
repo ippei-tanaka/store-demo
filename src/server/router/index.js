@@ -2,7 +2,7 @@ import path from "path";
 import {Router} from "express";
 import graphqlHTTP from "express-graphql";
 import schema from "../graphql/schema";
-import resolvers from "../graphql/resolvers";
+import resolvers from "../mongodb/resolvers";
 
 const router = new Router();
 

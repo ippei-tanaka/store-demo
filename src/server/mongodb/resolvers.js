@@ -1,13 +1,13 @@
-import ProductModel from "../mongodb/models/product";
+import ProductModel from "./models/product";
 
 export default
 {
-    product: ({id}) => {
-        return ProductModel.find({id});
+    product: async ({id}) => {
+        return ProductModel.findById(id);
     },
 
     products: () => {
-        return ProductModel.find({});
+        return ProductModel.find();
     },
 
     createProduct: ({input}) => {
