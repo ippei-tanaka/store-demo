@@ -38,4 +38,15 @@ export default {
         const user = new UserModel({...input});
         return user.save();
     },
+
+    updateUser: async ({id, input}) => {
+        const user = await UserModel.findById(id);
+        Object.assign(user, input);
+        return user.save();
+    },
+
+    deleteUser: async ({id}) => {
+        const user = await UserModel.findById(id);
+        return user.remove();
+    }
 };

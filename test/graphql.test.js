@@ -110,11 +110,11 @@ describe("deleteProduct", () =>
     });
 });
 
-const createUser = async ({name}) =>
+const createUser = async ({name, password}) =>
 {
     const query = `
         mutation { 
-            createUser (input: {name: "${name}"})
+            createUser (input: {name: "${name}", password: "${password}"})
             { id }
         }
     `;
@@ -135,3 +135,84 @@ describe("createUser", () =>
         expect(data.createUser.id).toBeTruthy();
     });
 });
+
+describe("user", () =>
+{
+    it("should return a user", async () => {
+        const id = await createUser({name: "test item", password: "thisispassword"});
+        const query = `{ user (id: "${id}") { name } }`;
+        const {data, errors} = await graphql(schema, query, {...resolvers});
+        expect(data.user).toEqual({name: "test item"});
+        expect(errors).toBeFalsy();
+    });
+
+    it("should not return a user with their password", async () => {
+        const id = await createUser({name: "test item", password: "thisispassword"});
+        const query = `{ user (id: "${id}") { name, password } }`;
+        const {errors} = await graphql(schema, query, {...resolvers});
+        expect(errors).toBeTruthy();
+    });
+});
+
+describe("users", () =>
+{
+    it("should return a list of users", async () => {
+        await createUser({name: "user1", password: "pass1"});
+        await createUser({name: "user2", password: "pass2"});
+        await createUser({name: "user3", password: "pass3"});
+        const query = "{ users { name } }";
+        const {data} = await graphql(schema, query, {...resolvers});
+        expect(data.users).toHaveLength(3);
+        expect(data.users[0]).toEqual({name: "user1"});
+        expect(data.users[1]).toEqual({name: "user2"});
+        expect(data.users[2]).toEqual({name: "user3"});
+    });
+});
+
+describe("updateUser", () =>
+{
+    it("should update a user", async () => {
+        const id = await createUser({name: "userA", password: "pass1"});
+        const newName = "userB";
+        const mutation = `
+            mutation { 
+                updateUser (
+                    id : "${id}",
+                    input: {
+                        name: "${newName}"
+                    }
+                ) { id, name }
+            }
+        `;
+        const {data: {updateUser}} = await graphql(schema, mutation, {...resolvers});
+        expect(updateUser.id).toBeTruthy();
+        expect(updateUser.name).toBe(newName);
+
+        const query = `{ user (id: "${id}") { id, name } }`;
+        const {data: {user}} = await graphql(schema, query, {...resolvers});
+        expect(user).toEqual({id, name: newName});
+    });
+});
+
+/*
+
+describe("deleteProduct", () =>
+{
+    it("should delete a product", async () => {
+        const id = await createProduct({name: "coffee", price: 10});
+        const mutation = `
+            mutation { 
+                deleteProduct (id : "${id}") { id, name, price }
+            }
+        `;
+        const {data: {deleteProduct}} = await graphql(schema, mutation, {...resolvers});
+        expect(deleteProduct.id).toBeTruthy();
+        expect(deleteProduct.name).toBe("coffee");
+        expect(deleteProduct.price).toBe(10);
+
+        const query = "{ products { id } }";
+        const {data} = await graphql(schema, query, {...resolvers});
+        expect(data.products).toHaveLength(0);
+    });
+});
+*/

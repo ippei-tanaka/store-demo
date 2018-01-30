@@ -6,6 +6,9 @@ const schema = graphql`
     type Query {
         product(id: ID!): Product
         products: [Product]
+
+        user(id: ID!): User
+        users: [User]
     }
 
     type Mutation {
@@ -13,7 +16,8 @@ const schema = graphql`
         updateProduct(id: ID!, input: ProductInput!): Product
         deleteProduct(id: ID!): Product
 
-        createUser(input: UserInput!): User
+        createUser(input: NewUserInput!): User
+        updateUser(id: ID!, input: ExistingUserInput!): User
     }
 
     type Product {
@@ -32,9 +36,13 @@ const schema = graphql`
         name: String!
     }
 
-    input UserInput {
+    input NewUserInput {
         name: String!
         password: String!
+    }
+    
+    input ExistingUserInput {
+        name: String
     }
 `;
 
