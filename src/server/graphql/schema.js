@@ -18,6 +18,7 @@ const schema = graphql`
 
         createUser(input: NewUserInput!): User
         updateUser(id: ID!, input: ExistingUserInput!): User
+        deleteUser(id: ID!): User
     }
 
     type Product {

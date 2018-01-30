@@ -194,25 +194,21 @@ describe("updateUser", () =>
     });
 });
 
-/*
-
-describe("deleteProduct", () =>
+describe("deleteUser", () =>
 {
-    it("should delete a product", async () => {
-        const id = await createProduct({name: "coffee", price: 10});
+    it("should delete a user", async () => {
+        const id = await createUser({name: "my name", password: "test"});
         const mutation = `
             mutation { 
-                deleteProduct (id : "${id}") { id, name, price }
+                deleteUser (id : "${id}") { id, name }
             }
         `;
-        const {data: {deleteProduct}} = await graphql(schema, mutation, {...resolvers});
-        expect(deleteProduct.id).toBeTruthy();
-        expect(deleteProduct.name).toBe("coffee");
-        expect(deleteProduct.price).toBe(10);
+        const {data: {deleteUser}} = await graphql(schema, mutation, {...resolvers});
+        expect(deleteUser.id).toBeTruthy();
+        expect(deleteUser.name).toBe("my name");
 
-        const query = "{ products { id } }";
+        const query = "{ users { id } }";
         const {data} = await graphql(schema, query, {...resolvers});
-        expect(data.products).toHaveLength(0);
+        expect(data.users).toHaveLength(0);
     });
 });
-*/
