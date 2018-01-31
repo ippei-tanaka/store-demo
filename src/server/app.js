@@ -2,18 +2,51 @@ import express from "express";
 import {connect} from "./mongodb";
 import router from "./router";
 import {log} from "../logger";
+import fs from "fs";
+import path from "path";
+//import session from "express-session";
+//import passport from "./passport";
 
-const app = express();
+let server = null;
 
-app.use(router);
+const DEFAULT_CONFIG_PATH = path.resolve(__dirname, "./config.json");
 
-export const start = async ({httpPort}) =>
-{
-    await connect({dbName: "store-demo"});
+const readFile = (path) => new Promise((resolve, reject) =>
+    fs.readFile(path, "utf8", (err, data) => err ? reject(err) : resolve(data)));
+
+export const start = async ({
+    configFilePath = DEFAULT_CONFIG_PATH
+} = {}) => {
+    if (server) { await stop(); }
+
+    const config = JSON.parse(await readFile(configFilePath));
+
+    const app = express();
+    app.use(router);
+    /*
+    app.use(session({
+        secret: config.session_secret,
+        resave: false,
+        saveUninitialized: false
+    }));
+    app.use(passport.initialize());
+    app.use(passport.session());
+    */
+
+    await connect({dbName: config.database_name});
     log("Connected to Mongo DB.");
 
-    await startWebServer({port: httpPort});
-    log(`Web Server started at port ${httpPort}.`);
+    await new Promise((resolve) => {
+        server = app.listen(config.http_port, resolve)
+    });
+    log(`Web Server has started at port ${config.http_port}.`);
 };
 
-export const startWebServer = ({port}) => new Promise((resolve) => app.listen(port, resolve));
+export const stop = async () => {
+    if (server)
+    {
+        await server.close();
+        log("Web Server has stopped.");
+        server = null;
+    }
+};

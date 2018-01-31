@@ -2,21 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <title>Test</title>
 </head>
 <body>
-<h1>Test GraphQL</h1>
-<h2>This is just a normal POST</h2>
-<div>Enter a new item in the text box and hit Submit to save it to the database</div>
-<form action="/quotes" method="POST">
-    <input type="text" placeholder="item" name="item">
-    <button type="submit">Submit</button>
-</form>
-<hr/>
-<h2>GraphQL Test</h2>
-<hr/>
 <div>
-    <a href="/graphql?query={todo(itemId:1){itemId,item}}">GraphQL Test</a>
+    <h2>Login</h2>
+    <form id="LoginForm">
+        username: <input type="text" name="username"><br>
+        password: <input type="password" name="password"><br>
+        <button>Login</button>
+    </form>
 </div>
+<hr>
+<div>
+    <h2>Get Something</h2>
+    <form id="ApiForm">
+        Token:<br><textarea id="Token" name="token" disabled style="width: 100%; height: 5em;"></textarea>
+        <button>Get</button>
+    </form>
+    <textarea id="Output" disabled></textarea>
+</div>
+<script>
+    $("#LoginForm").on("submit", (e) => {
+        e.preventDefault();
+        const $form = $(e.currentTarget);
+        const username = $form.find("[name='username']").val();
+        const password = $form.find("[name='password']").val();
+        const query = `
+            mutation {
+                authenticate (input: {
+                    username: "${username}",
+                    password: "${password}"
+                }) {token}
+            }
+        `;
+
+        $.post({
+            url: "/auth",
+            data: JSON.stringify({"query": query}),
+            contentType: "application/json"
+        }).done((response) => {
+            const token = response.data.authenticate.token;
+            $("#Token").val(token);
+        });
+    });
+
+    $("#ApiForm").on("submit", (e) => {
+        e.preventDefault();
+        const $form = $(e.currentTarget);
+        const token = $form.find("[name='token']").val();
+        const query = `
+            query {
+                users {id, name}
+            }
+        `;
+        $.post({
+            url: "/graphql",
+            data: JSON.stringify({"query": query}),
+            contentType: "application/json",
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).done((response) => {
+            if (response.data)
+            {
+                $("#Output").val(response.data.users.map(user => `name: ${user.name}`).join("\n"));
+            }
+            else
+            {
+                $("#Output").val("");
+            }
+        });
+    });
+</script>
 </body>
 </html>
