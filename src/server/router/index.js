@@ -1,33 +1,28 @@
 import path from "path";
 import {Router} from "express";
+import {graphql} from "graphql";
 import graphqlHTTP from "express-graphql";
 import adminSchema from "@/server/graphql-schemas/admin-schema";
 import adminResolvers from "@/server/resolvers/admin-resolvers";
 import authSchema from "@/server/graphql-schemas/auth-schema";
-import authResolver from "@/server/resolvers/auth-resolvers";
+import authResolvers from "@/server/resolvers/auth-resolvers";
 import {authorize} from "@/server/auth";
+import {pickBackReferences} from "@/server/regex-parser";
 
 const router = new Router();
 
-const parseToken = (str) =>
-{
-    if (!str) return "";
-    const match = str.match(/Bearer (\S+)/);
-    if (!match) return "";
-    return match[1];
-};
-
 const authMiddleware = (request, response, next) =>
 {
-    const token = parseToken(request.get("Authorization"));
-    authorize(token).then(userId => {
-        if (userId)
+    const token = pickBackReferences(request.get("Authorization"), /Bearer (\S+)/)[0] || "";
+    const query = `query { authorize (input: {token: "${token}"}) { success, userId } }`;
+
+    graphql(authSchema, query, authResolvers).then((data) => {
+        if (data.authorize.success)
         {
-            request.userId = userId;
-            next();
-            return;
+            request.userId = data.authorize.userId;
+            return next();
         }
-        response.json({errors: [{message: "Unauthorized"}]});
+        response.json({errors: [new Error("Unauthorized")]});
     });
 };
 
@@ -37,15 +32,13 @@ router.get("/", (req, res) => {
 
 router.use("/auth", graphqlHTTP(() => ({
     schema: authSchema,
-    rootValue: {...authResolver},
-    //graphiql: true
+    rootValue: authResolvers
 })));
 
 router.use("/graphql", authMiddleware, graphqlHTTP((request) => ({
     schema: adminSchema,
-    rootValue: {...adminResolvers},
-    context: {request},
-    //graphiql: true
+    rootValue: adminResolvers,
+    context: {userId: request.userId}
 })));
 
 export default router;

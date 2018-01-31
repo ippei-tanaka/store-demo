@@ -4,7 +4,7 @@ const graphql = strings => buildSchema(strings[0]);
 
 const schema = graphql`
     type Query {
-        authorize(input: TokenInput): TokenValidation
+        authorize(input: TokenInput): AuthorizationResult
     }
 
     type Mutation {
@@ -24,8 +24,9 @@ const schema = graphql`
         token: String!
     }
 
-    type TokenValidation {
-        isTokenValid: Boolean!
+    type AuthorizationResult {
+        success: Boolean!
+        userId: ID
     }
 `;
 

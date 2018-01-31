@@ -1,3 +1,6 @@
 {
-  "verbose": true
+  "verbose": false,
+  "testMatch": [
+    "**/?(*.)(spec|test).js?(x)"
+  ]
 }
