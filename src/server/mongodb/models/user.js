@@ -1,5 +1,4 @@
 import mongoose, {Schema} from "mongoose";
-//import passportLocalMongoose from "passport-local-mongoose";
 
 const schema = new Schema({
     name: {
@@ -8,12 +7,5 @@ const schema = new Schema({
     },
     password: String
 });
-
-/*
-schema.plugin(passportLocalMongoose, {
-    usernameField: "name",
-    usernameUnique: true
-});
-*/
 
 export default mongoose.model("User", schema);

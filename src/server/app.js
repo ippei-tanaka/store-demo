@@ -1,11 +1,9 @@
 import express from "express";
-import {connect} from "./mongodb";
-import router from "./router";
-import {log} from "../logger";
+import {connect} from "@/server/mongodb";
+import router from "@/server/router";
+import {log} from "@/logger";
 import fs from "fs";
 import path from "path";
-//import session from "express-session";
-//import passport from "./passport";
 
 let server = null;
 
@@ -23,15 +21,6 @@ export const start = async ({
 
     const app = express();
     app.use(router);
-    /*
-    app.use(session({
-        secret: config.session_secret,
-        resave: false,
-        saveUninitialized: false
-    }));
-    app.use(passport.initialize());
-    app.use(passport.session());
-    */
 
     await connect({dbName: config.database_name});
     log("Connected to Mongo DB.");
