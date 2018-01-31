@@ -1,4 +1,4 @@
-import {authenticate, authorize} from "@/server/auth";
+import {authenticate, authorize} from "@/server/auth/index";
 
 export default
 {

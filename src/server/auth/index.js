@@ -1,4 +1,4 @@
-import UserModel from "@/server/mongodb/models/user";
+import UserModel from "@/server/mongo-models/user";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 

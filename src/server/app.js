@@ -1,5 +1,5 @@
 import express from "express";
-import {connect} from "@/server/mongodb";
+import {connect} from "@/server/mongo-db-driver";
 import router from "@/server/router";
 import {log} from "@/logger";
 import fs from "fs";

@@ -1,10 +1,10 @@
 import path from "path";
 import {Router} from "express";
 import graphqlHTTP from "express-graphql";
-import schema from "@/server/graphql/schema";
-import resolvers from "@/server/mongodb/resolvers";
-import authSchema from "@/server/graphql/auth-schema";
-import authResolver from "@/server/mongodb/auth-resolvers";
+import adminSchema from "@/server/graphql-schemas/admin-schema";
+import adminResolvers from "@/server/resolvers/admin-resolvers";
+import authSchema from "@/server/graphql-schemas/auth-schema";
+import authResolver from "@/server/resolvers/auth-resolvers";
 import {authorize} from "@/server/auth";
 
 const router = new Router();
@@ -38,12 +38,12 @@ router.get("/", (req, res) => {
 router.use("/auth", graphqlHTTP(() => ({
     schema: authSchema,
     rootValue: {...authResolver},
-    graphiql: true
+    //graphiql: true
 })));
 
 router.use("/graphql", authMiddleware, graphqlHTTP((request) => ({
-    schema: schema,
-    rootValue: {...resolvers},
+    schema: adminSchema,
+    rootValue: {...adminResolvers},
     context: {request},
     //graphiql: true
 })));

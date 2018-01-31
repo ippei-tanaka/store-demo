@@ -1,5 +1,5 @@
-import ProductModel from "@/server/mongodb/models/product";
-import UserModel from "@/server/mongodb/models/user";
+import ProductModel from "@/server/mongo-models/product";
+import UserModel from "@/server/mongo-models/user";
 
 export default {
     product: async ({id}) => {

@@ -1,7 +1,7 @@
 import {graphql} from "graphql";
-import schema from "@/server/graphql/schema";
-import resolvers from "@/server/mongodb/resolvers";
-import {connect, disconnect, dropDatabase} from "@/server/mongodb";
+import schema from "@/server/graphql-schemas/admin-schema";
+import resolvers from "@/server/resolvers/admin-resolvers";
+import {connect, disconnect, dropDatabase} from "@/server/mongo-db-driver";
 
 const TEST_DB = "store-demo-graphql-test";
 
