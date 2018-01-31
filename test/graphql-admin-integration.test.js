@@ -136,6 +136,18 @@ describe("createUser", () =>
         const {data} = await graphql(adminSchema, query, adminResolvers);
         expect(data.createUser.id).toBeTruthy();
     });
+
+    it("should fail when creating a user with a duplicated name", async () => {
+        const query = `
+            mutation { 
+                createUser (input: {name: "the+user", password: "password"})
+                { id }
+            }
+        `;
+        await graphql(adminSchema, query, adminResolvers);
+        const {errors} = await graphql(adminSchema, query, adminResolvers);
+        expect(errors).toBeTruthy();
+    });
 });
 
 describe("user", () =>

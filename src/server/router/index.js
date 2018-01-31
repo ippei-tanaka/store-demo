@@ -6,7 +6,6 @@ import adminSchema from "@/server/graphql-schemas/admin-schema";
 import adminResolvers from "@/server/resolvers/admin-resolvers";
 import authSchema from "@/server/graphql-schemas/auth-schema";
 import authResolvers from "@/server/resolvers/auth-resolvers";
-import {authorize} from "@/server/auth";
 import {pickBackReferences} from "@/server/regex-parser";
 
 const router = new Router();
@@ -32,13 +31,15 @@ router.get("/", (req, res) => {
 
 router.use("/auth", graphqlHTTP(() => ({
     schema: authSchema,
-    rootValue: authResolvers
+    rootValue: authResolvers,
+    graphiql: true
 })));
 
-router.use("/graphql", authMiddleware, graphqlHTTP((request) => ({
+router.use("/admin", graphqlHTTP((request) => ({
     schema: adminSchema,
     rootValue: adminResolvers,
-    context: {userId: request.userId}
+    context: {userId: request.userId},
+    graphiql: true
 })));
 
 export default router;
