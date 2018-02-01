@@ -10,6 +10,8 @@ beforeEach(() => dropDatabase());
 afterAll(() => dropDatabase());
 afterAll(() => disconnect());
 
+jest.setTimeout(10000);
+
 const createProduct = async ({name, price}) =>
 {
     const query = `
@@ -21,8 +23,6 @@ const createProduct = async ({name, price}) =>
     const response = await graphql(adminSchema, query, adminResolvers);
     return response.data.createProduct.id;
 };
-
-jest.setTimeout(10000);
 
 describe("createProduct", () =>
 {

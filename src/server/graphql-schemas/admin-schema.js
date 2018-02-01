@@ -20,8 +20,8 @@ const schema = graphql`
     }
 
     type Mutation {
-        createProduct(input: ProductInput!): Product
-        updateProduct(id: ID!, input: ProductInput!): Product
+        createProduct(input: NewProductInput!): Product
+        updateProduct(id: ID!, input: ExistingProductInput!): Product
         deleteProduct(id: ID!): Product
 
         createUser(input: NewUserInput!): User
@@ -35,11 +35,16 @@ const schema = graphql`
         price: Int!
     }
 
-    input ProductInput {
+    input NewProductInput {
         name: String!
         price: Int!
     }
-    
+
+    input ExistingProductInput {
+        name: String
+        price: Int
+    }
+
     type User {
         id: ID!
         name: String!
@@ -51,12 +56,12 @@ const schema = graphql`
         password: String!
         permissions: [Permission]
     }
-    
+
     input ExistingUserInput {
         name: String
         permissions: [Permission]
     }
-    
+
     enum Permission {
         ${SHOP},
         ${ADMIN}
