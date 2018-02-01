@@ -1,13 +1,14 @@
 const path = require("path");
+//const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
 
-    entry: "./src/client/app",
+    entry: "./src/client/assets/scripts/app",
 
     output: {
-        path: path.resolve(__dirname, "build/client"),
-        filename: "bundle.js",
-        publicPath: "/assets/"
+        path: path.resolve(__dirname, "build/client/assets/scripts"),
+        filename: "app.js",
+        publicPath: "/assets/scripts"
     },
 
     module: {
@@ -16,6 +17,14 @@ module.exports = {
                 test: /\.jsx?$/,
                 include: [path.resolve(__dirname, "src")],
                 loader: "babel-loader"
+            },
+            {
+                test: /\.html$/,
+                include: [path.resolve(__dirname, "src")],
+                loader: "file-loader",
+                options: {
+                    name: "[path][name].[ext]"
+                }
             }
         ]
     },
@@ -33,5 +42,9 @@ module.exports = {
 
     //context: path.resolve(__dirname, "src"),
 
-    //plugins: [],
+    // plugins: [new HtmlWebpackPlugin({
+    //     title: "Store Demo",
+    //     filename: path.resolve(__dirname, "build/client/index.html"),
+    //     //template: path.resolve(__dirname, "src/client/index.html")
+    // })]
 };
