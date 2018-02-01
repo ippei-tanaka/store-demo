@@ -21,6 +21,14 @@ export const start = async ({
     const config = JSON.parse(await readFile(configFilePath));
 
     const app = express();
+    app.use("/assets", express.static(
+        path.resolve(path.dirname(configFilePath), config.assets_directory)
+    ));
+    app.use("/", (req, res) => {
+        res.sendFile(
+            path.resolve(path.dirname(configFilePath), config.index_file_path)
+        );
+    });
     app.use(router);
 
     await connect({dbName: config.database_name});

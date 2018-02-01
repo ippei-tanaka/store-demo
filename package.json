@@ -9,7 +9,7 @@
     "prd-server": "NODE_ENV=production node scripts/run-server.js",
     "build-server": "npm-run-all build-server:*",
     "build-server:clear": "rimraf ./build",
-    "build-server:build": "babel src --out-dir build --copy-files",
+    "build-server:build": "babel ./src --out-dir ./build --copy-files",
     "build-client": "webpack"
   },
   "author": "",

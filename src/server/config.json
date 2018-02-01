@@ -4,5 +4,7 @@
   "default_user": {
     "name": "store-owner",
     "password": "password"
-  }
+  },
+  "assets_directory": "../client/assets",
+  "index_file_path": "../client/index.html"
 }
