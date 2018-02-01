@@ -168,6 +168,17 @@ describe("findUserById", () =>
     });
 });
 
+describe("findUserByName", () =>
+{
+    it("should return a user", async () => {
+        await createUser({name: "test&item", password: "thisispassword"});
+        const query = "{ findUserByName (name: \"test&item\") { name } }";
+        const {data, errors} = await graphql(adminSchema, query, adminResolvers);
+        expect(data.findUserByName).toEqual({name: "test&item"});
+        expect(errors).toBeFalsy();
+    });
+});
+
 describe("getAllUsers", () =>
 {
     it("should return a list of users", async () => {
