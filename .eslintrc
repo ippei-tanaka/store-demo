@@ -37,6 +37,8 @@
       "error",
       "always"
     ],
-    "no-console": "off"
+    "no-console": "off",
+    "react/jsx-uses-react": "warn",
+    "react/jsx-uses-vars": "warn"
   }
 }

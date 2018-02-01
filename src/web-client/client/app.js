@@ -1,8 +1,3 @@
-import {love} from "@/web-client/client/love";
+import React from "react";
 
-console.log(123);
-
-document.querySelector("#button").onclick = (e) => {
-    e.preventDefault();
-    love();
-};
+export default () => <div>Store Demo</div>;

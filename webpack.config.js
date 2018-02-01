@@ -1,9 +1,9 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
 
-    entry: "./src/web-client/client/app",
+    entry: "./src/web-client/client/entry",
 
     output: {
         path: path.resolve(__dirname, "build/client/assets"),
@@ -50,7 +50,7 @@ module.exports = {
 
     devServer: {
         contentBase: path.join(__dirname, "src/web-client/assets"),
-        compress: true,
+        // compress: true,
         port: 9000
     }
 };
