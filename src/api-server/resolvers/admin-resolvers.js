@@ -1,5 +1,5 @@
-import ProductModel from "@/server/mongo-models/product";
-import UserModel from "@/server/mongo-models/user";
+import ProductModel from "@/api-server/mongo-models/product";
+import UserModel from "@/api-server/mongo-models/user";
 
 export default {
     findProductById: async ({id}) => {

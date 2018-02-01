@@ -1,13 +1,13 @@
 import path from "path";
 import {Router} from "express";
 import graphqlHTTP from "express-graphql";
-import adminSchema from "@/server/graphql-schemas/admin-schema";
-import adminResolvers from "@/server/resolvers/admin-resolvers";
-import authSchema from "@/server/graphql-schemas/auth-schema";
-import authResolvers from "@/server/resolvers/auth-resolvers";
-import {pickBackReferences} from "@/server/regex-parser";
-import {verifyToken, findUserById} from "@/server/graphql-queries";
-import {ADMIN, SHOP} from "@/server/permissions";
+import adminSchema from "@/api-server/graphql-schemas/admin-schema";
+import adminResolvers from "@/api-server/resolvers/admin-resolvers";
+import authSchema from "@/api-server/graphql-schemas/auth-schema";
+import authResolvers from "@/api-server/resolvers/auth-resolvers";
+import {pickBackReferences} from "@/api-server/regex-parser";
+import {verifyToken, findUserById} from "@/api-server/graphql-queries";
+import {ADMIN, SHOP} from "@/api-server/permissions";
 import R from "ramda";
 
 const router = new Router();
@@ -36,10 +36,6 @@ const authorize = (permission) =>
         }
     };
 };
-
-router.get("/", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../index.html"));
-});
 
 router.use("/auth", graphqlHTTP(() => ({
     schema: authSchema,

@@ -1,4 +1,4 @@
-import {start} from "@/server/app";
+import {start} from "@/api-server/app";
 
 (async () => {
     await start();

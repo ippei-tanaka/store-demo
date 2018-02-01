@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest -c ./.jestconfig.json",
-    "dev-server": "babel-node scripts/run-dev-server.js",
+    "dev-api-server": "babel-node scripts/run-dev-api-server.js",
     "prd-server": "NODE_ENV=production node scripts/run-server.js",
     "build-server": "npm-run-all build-server:*",
     "build-server:clear": "rimraf ./build",

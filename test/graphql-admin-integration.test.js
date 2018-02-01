@@ -1,7 +1,7 @@
 import {graphql} from "graphql";
-import adminSchema from "@/server/graphql-schemas/admin-schema";
-import adminResolvers from "@/server/resolvers/admin-resolvers";
-import {connect, disconnect, dropDatabase} from "@/server/mongo-db-driver";
+import adminSchema from "@/api-server/graphql-schemas/admin-schema";
+import adminResolvers from "@/api-server/resolvers/admin-resolvers";
+import {connect, disconnect, dropDatabase} from "@/api-server/mongo-db-driver";
 
 const TEST_DB = "store-demo-graphql-admin-test";
 

@@ -1,10 +1,10 @@
 import express from "express";
-import {connect} from "@/server/mongo-db-driver";
-import router from "@/server/router";
+import {connect} from "@/api-server/mongo-db-driver";
+import router from "@/api-server/router";
 import {log} from "@/logger";
 import fs from "fs";
 import path from "path";
-import {createAdmin, findUserByName} from "@/server/graphql-queries";
+import {createAdmin, findUserByName} from "@/api-server/graphql-queries";
 
 let server = null;
 
@@ -21,14 +21,6 @@ export const start = async ({
     const config = JSON.parse(await readFile(configFilePath));
 
     const app = express();
-    app.use("/assets", express.static(
-        path.resolve(path.dirname(configFilePath), config.assets_directory)
-    ));
-    app.use("/", (req, res) => {
-        res.sendFile(
-            path.resolve(path.dirname(configFilePath), config.index_file_path)
-        );
-    });
     app.use(router);
 
     await connect({dbName: config.database_name});

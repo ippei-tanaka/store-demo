@@ -1,5 +1,5 @@
 import {buildSchema} from "graphql";
-import {ADMIN, SHOP} from "@/server/permissions";
+import {ADMIN, SHOP} from "@/api-server/permissions";
 import R from "ramda";
 
 const graphql = (...args) => {

@@ -1,9 +1,9 @@
 import {graphql} from "graphql";
-import authSchema from "@/server/graphql-schemas/auth-schema";
-import authResolvers from "@/server/resolvers/auth-resolvers";
-import adminSchema from "@/server/graphql-schemas/admin-schema";
-import adminResolvers from "@/server/resolvers/admin-resolvers";
-import {connect, disconnect, dropDatabase} from "@/server/mongo-db-driver";
+import authSchema from "@/api-server/graphql-schemas/auth-schema";
+import authResolvers from "@/api-server/resolvers/auth-resolvers";
+import adminSchema from "@/api-server/graphql-schemas/admin-schema";
+import adminResolvers from "@/api-server/resolvers/admin-resolvers";
+import {connect, disconnect, dropDatabase} from "@/api-server/mongo-db-driver";
 
 const TEST_DB = "store-demo-graphql-auth-test";
 

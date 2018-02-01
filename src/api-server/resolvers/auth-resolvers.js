@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-import UserModel from "@/server/mongo-models/user";
+import UserModel from "@/api-server/mongo-models/user";
 
 const SECRET = crypto.randomBytes(24).toString("hex");
 
