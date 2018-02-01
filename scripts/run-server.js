@@ -1,8 +1,6 @@
-import {start} from "@/server/app";
+const server = require("../build/server/app");
 
-(async () => {
-    await start();
-})().catch((e) => {
+server.start().catch((e) => {
     console.error(e);
     process.exitCode = 1;
 });

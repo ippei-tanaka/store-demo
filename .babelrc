@@ -8,6 +8,16 @@
     //"babel-plugin-inline-import",
     "transform-object-rest-spread",
     "add-module-exports",
-    "babel-plugin-webpack-alias"
+    //"babel-plugin-webpack-alias",
+    ["module-alias", [ {
+      "src": "./src",
+      "expose": "@"
+    }]],
+    "transform-runtime"
   ]
+//  "env": {
+//    "production": {
+//      "plugins": []
+//    }
+//  }
 }
