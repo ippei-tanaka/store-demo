@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest -c ./.jestconfig.json",
     "dev-api-server": "babel-node scripts/run-dev-api-server.js",
-    "prd-server": "NODE_ENV=production node scripts/run-server.js",
+    "prd-server": "NODE_ENV=production node scripts/run-prd-api-server.js",
+    "prd-web-client-server": "babel-node scripts/run-prd-web-client-server.js",
     "build-server": "npm-run-all build-server:*",
     "build-server:clear": "rimraf ./build",
     "build-server:build": "babel ./src --out-dir ./build --ignore ./src/client --copy-files",
@@ -49,6 +50,7 @@
     "jest": "^22.1.4",
     "npm-run-all": "^4.1.2",
     "rimraf": "^2.6.2",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
   }
 }

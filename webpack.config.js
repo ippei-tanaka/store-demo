@@ -1,14 +1,14 @@
 const path = require("path");
-//const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
 
-    entry: "./src/client/assets/scripts/app",
+    entry: "./src/web-client/client/app",
 
     output: {
-        path: path.resolve(__dirname, "build/client/assets/scripts"),
+        path: path.resolve(__dirname, "build/client/assets"),
         filename: "app.js",
-        publicPath: "/assets/scripts"
+        publicPath: "/"
     },
 
     module: {
@@ -18,14 +18,14 @@ module.exports = {
                 include: [path.resolve(__dirname, "src")],
                 loader: "babel-loader"
             },
-            {
-                test: /\.html$/,
-                include: [path.resolve(__dirname, "src")],
-                loader: "file-loader",
-                options: {
-                    name: "[path][name].[ext]"
-                }
-            }
+            // {
+            //     test: /\.html$/,
+            //     include: [path.resolve(__dirname, "src")],
+            //     loader: "file-loader",
+            //     options: {
+            //         name: "[path][name].[ext]"
+            //     }
+            // }
         ]
     },
 
@@ -43,8 +43,14 @@ module.exports = {
     //context: path.resolve(__dirname, "src"),
 
     // plugins: [new HtmlWebpackPlugin({
-    //     title: "Store Demo",
-    //     filename: path.resolve(__dirname, "build/client/index.html"),
+    //     title: "Store Demo 343",
+    //     filename: path.resolve(__dirname, "src/web-client/assets/index.html"),
     //     //template: path.resolve(__dirname, "src/client/index.html")
-    // })]
+    // })],
+
+    devServer: {
+        contentBase: path.join(__dirname, "src/web-client/assets"),
+        compress: true,
+        port: 9000
+    }
 };
