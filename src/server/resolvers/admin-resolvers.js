@@ -26,7 +26,11 @@ export default {
         return product.remove();
     },
 
-    user: async ({id}) => {
+    findUserByName: ({name}) => {
+        return UserModel.findOne({name});
+    },
+
+    user: ({id}) => {
         return UserModel.findById(id);
     },
 

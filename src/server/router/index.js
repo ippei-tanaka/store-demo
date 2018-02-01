@@ -1,28 +1,40 @@
 import path from "path";
 import {Router} from "express";
-import {graphql} from "graphql";
 import graphqlHTTP from "express-graphql";
 import adminSchema from "@/server/graphql-schemas/admin-schema";
 import adminResolvers from "@/server/resolvers/admin-resolvers";
 import authSchema from "@/server/graphql-schemas/auth-schema";
 import authResolvers from "@/server/resolvers/auth-resolvers";
 import {pickBackReferences} from "@/server/regex-parser";
+import {verifyToken, findUserById} from "@/server/graphql-queries";
+import {ADMIN, SHOP} from "@/server/permissions";
+import R from "ramda";
 
 const router = new Router();
 
-const authMiddleware = (request, response, next) =>
+const identifyUser = async (request, response, next) =>
 {
     const token = pickBackReferences(request.get("Authorization"), /Bearer (\S+)/)[0] || "";
-    const query = `query { authorize (input: {token: "${token}"}) { success, userId } }`;
+    const {data} = await verifyToken(token);
+    if (data && data.authorize.success)
+    {
+        request.user = await findUserById(data.authorize.userId);
+    }
+    next();
+};
 
-    graphql(authSchema, query, authResolvers).then((data) => {
-        if (data.authorize.success)
+const authorize = (permission) =>
+{
+    return (request, response, next) =>
+    {
+        const user = request.user;
+        if (user && user.id && R.contains(permission, user.permissions))
         {
-            request.userId = data.authorize.userId;
-            return next();
+            next();
+        } else {
+            response.json({errors: [new Error("Unauthorized")]});
         }
-        response.json({errors: [new Error("Unauthorized")]});
-    });
+    };
 };
 
 router.get("/", (req, res) => {
@@ -35,10 +47,10 @@ router.use("/auth", graphqlHTTP(() => ({
     graphiql: true
 })));
 
-router.use("/admin", graphqlHTTP((request) => ({
+router.use("/admin", identifyUser, authorize(ADMIN), graphqlHTTP((request) => ({
     schema: adminSchema,
     rootValue: adminResolvers,
-    context: {userId: request.userId},
+    context: {user: request.user},
     graphiql: true
 })));
 

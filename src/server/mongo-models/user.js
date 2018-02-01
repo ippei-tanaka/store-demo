@@ -17,6 +17,10 @@ const schema = new Schema({
             validator: (v) => /^[a-zA-Z][a-zA-Z0-9_\-@!#%&*+]+$/.test(v)
         }
     },
+    permissions: {
+        type: [String],
+        required: true
+    },
     hashed_password: {
         required: true,
         type: String

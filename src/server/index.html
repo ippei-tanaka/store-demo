@@ -21,7 +21,7 @@
         Token:<br><textarea id="Token" name="token" disabled style="width: 100%; height: 5em;"></textarea>
         <button>Get</button>
     </form>
-    <textarea id="Output" disabled></textarea>
+    <textarea id="Output" disabled style="width: 100%; height: 5em;"></textarea>
 </div>
 <script>
     $("#LoginForm").on("submit", (e) => {
@@ -58,7 +58,7 @@
             }
         `;
         $.post({
-            url: "/graphql",
+            url: "/admin",
             data: JSON.stringify({"query": query}),
             contentType: "application/json",
             headers: {

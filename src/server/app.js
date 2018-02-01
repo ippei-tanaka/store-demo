@@ -4,6 +4,7 @@ import router from "@/server/router";
 import {log} from "@/logger";
 import fs from "fs";
 import path from "path";
+import {createAdmin, findUserByName} from "@/server/graphql-queries";
 
 let server = null;
 
@@ -24,6 +25,13 @@ export const start = async ({
 
     await connect({dbName: config.database_name});
     log("Connected to Mongo DB.");
+
+    if (!(await findUserByName(config.default_user.name)))
+    {
+        const {name, password} = config.default_user;
+        await createAdmin({name, password});
+        log("Created the default user.");
+    }
 
     await new Promise((resolve) => {
         server = app.listen(config.http_port, resolve)
