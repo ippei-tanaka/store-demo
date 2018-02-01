@@ -6,7 +6,7 @@ const SECRET = crypto.randomBytes(24).toString("hex");
 
 export default
 {
-    authorize: async ({input}) => {
+    verifyToken: async ({input}) => {
         const {token} = input;
         let id;
 
@@ -15,7 +15,7 @@ export default
             id = decoded.id;
         } catch (e) {
             return {
-                success: false,
+                isValid: false,
                 userId: null
             };
         }
@@ -23,13 +23,13 @@ export default
         const user = await UserModel.findById(id);
         if (!user) {
             return {
-                success: false,
+                isValid: false,
                 userId: null
             };
         }
 
         return {
-            success: true,
+            isValid: true,
             userId: id
         };
     },

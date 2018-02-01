@@ -14,10 +14,9 @@ const schema = graphql`
         product(id: ID!): Product
         products: [Product]
 
-        user(id: ID!): User
-        users: [User]
-
+        findUserById(id: ID!): User
         findUserByName(name: String!): User
+        getAllUsers: [User]
     }
 
     type Mutation {

@@ -150,36 +150,36 @@ describe("createUser", () =>
     });
 });
 
-describe("user", () =>
+describe("findUserById", () =>
 {
     it("should return a user", async () => {
         const id = await createUser({name: "test&item", password: "thisispassword"});
-        const query = `{ user (id: "${id}") { name } }`;
+        const query = `{ findUserById (id: "${id}") { name } }`;
         const {data, errors} = await graphql(adminSchema, query, adminResolvers);
-        expect(data.user).toEqual({name: "test&item"});
+        expect(data.findUserById).toEqual({name: "test&item"});
         expect(errors).toBeFalsy();
     });
 
     it("should not return a user with their password", async () => {
         const id = await createUser({name: "test*item", password: "thisispassword"});
-        const query = `{ user (id: "${id}") { name, password } }`;
+        const query = `{ findUserById (id: "${id}") { name, password } }`;
         const {errors} = await graphql(adminSchema, query, adminResolvers);
         expect(errors).toBeTruthy();
     });
 });
 
-describe("users", () =>
+describe("getAllUsers", () =>
 {
     it("should return a list of users", async () => {
         await createUser({name: "user1", password: "password1"});
         await createUser({name: "user2", password: "password2"});
         await createUser({name: "user3", password: "password3"});
-        const query = "{ users { name } }";
+        const query = "{ getAllUsers { name } }";
         const response = await graphql(adminSchema, query, adminResolvers);
-        expect(response.data.users).toHaveLength(3);
-        expect(response.data.users[0]).toEqual({name: "user1"});
-        expect(response.data.users[1]).toEqual({name: "user2"});
-        expect(response.data.users[2]).toEqual({name: "user3"});
+        expect(response.data.getAllUsers).toHaveLength(3);
+        expect(response.data.getAllUsers[0]).toEqual({name: "user1"});
+        expect(response.data.getAllUsers[1]).toEqual({name: "user2"});
+        expect(response.data.getAllUsers[2]).toEqual({name: "user3"});
     });
 });
 
@@ -202,9 +202,9 @@ describe("updateUser", () =>
         expect(response.data.updateUser.id).toBeTruthy();
         expect(response.data.updateUser.name).toBe(newName);
 
-        const query = `{ user (id: "${id}") { id, name } }`;
+        const query = `{ findUserById (id: "${id}") { id, name } }`;
         const response2 = await graphql(adminSchema, query, adminResolvers);
-        expect(response2.data.user).toEqual({id, name: newName});
+        expect(response2.data.findUserById).toEqual({id, name: newName});
     });
 });
 
@@ -221,8 +221,8 @@ describe("deleteUser", () =>
         expect(deleteUser.id).toBeTruthy();
         expect(deleteUser.name).toBe("my_name");
 
-        const query = "{ users { id } }";
+        const query = "{ getAllUsers { id } }";
         const {data} = await graphql(adminSchema, query, adminResolvers);
-        expect(data.users).toHaveLength(0);
+        expect(data.getAllUsers).toHaveLength(0);
     });
 });

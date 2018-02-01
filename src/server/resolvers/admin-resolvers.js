@@ -26,15 +26,15 @@ export default {
         return product.remove();
     },
 
+    findUserById: ({id}) => {
+        return UserModel.findById(id);
+    },
+
     findUserByName: ({name}) => {
         return UserModel.findOne({name});
     },
 
-    user: ({id}) => {
-        return UserModel.findById(id);
-    },
-
-    users: () => {
+    getAllUsers: () => {
         return UserModel.find();
     },
 

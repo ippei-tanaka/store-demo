@@ -15,10 +15,10 @@ const router = new Router();
 const identifyUser = async (request, response, next) =>
 {
     const token = pickBackReferences(request.get("Authorization"), /Bearer (\S+)/)[0] || "";
-    const {data} = await verifyToken(token);
-    if (data && data.authorize.success)
+    const {isValid, userId} = await verifyToken(token);
+    if (isValid && userId)
     {
-        request.user = await findUserById(data.authorize.userId);
+        request.user = await findUserById(userId);
     }
     next();
 };

@@ -77,33 +77,33 @@ const getToken = async ({name, password, tokenOptions = {}}) =>
     return response.data.authenticate.token;
 };
 
-describe("authorize", () =>
+describe("verifyToken", () =>
 {
     it("should succeed if the token is valid", async () => {
         const id = await createUser({name: "my345", password: "my-password"});
         const token = await getToken({name:"my345", password: "my-password"});
         const query = `
             query { 
-                authorize (input: {token: "${token}"})
-                { success, userId }
+                verifyToken (input: {token: "${token}"})
+                { isValid, userId }
             }
         `;
         const response = await graphql(authSchema, query, authResolvers);
-        expect(response.data.authorize.success).toBe(true);
-        expect(response.data.authorize.userId).toBe(id);
+        expect(response.data.verifyToken.isValid).toBe(true);
+        expect(response.data.verifyToken.userId).toBe(id);
     });
 
     it("should fail if the token is invalid", async () => {
         const token = "invalidtoken";
         const query = `
             query { 
-                authorize (input: {token: "${token}"})
-                { success, userId }
+                verifyToken (input: {token: "${token}"})
+                { isValid, userId }
             }
         `;
         const response = await graphql(authSchema, query, authResolvers);
-        expect(response.data.authorize.success).toBe(false);
-        expect(response.data.authorize.userId).toBeNull();
+        expect(response.data.verifyToken.isValid).toBe(false);
+        expect(response.data.verifyToken.userId).toBeNull();
     });
 
     it("should fail if the token is expired", async () => {
@@ -111,17 +111,17 @@ describe("authorize", () =>
         const token = await getToken({name:"my345", password: "my-password", tokenOptions: {expiresIn: "4s"}});
         const query = `
             query { 
-                authorize (input: {token: "${token}"})
-                { success, userId }
+                verifyToken (input: {token: "${token}"})
+                { isValid, userId }
             }
         `;
         const response1 = await graphql(authSchema, query, authResolvers);
-        expect(response1.data.authorize.success).toBe(true);
-        expect(response1.data.authorize.userId).toBe(id);
+        expect(response1.data.verifyToken.isValid).toBe(true);
+        expect(response1.data.verifyToken.userId).toBe(id);
 
         await new Promise(resolve => setTimeout(resolve, 4500));
         const response2 = await graphql(authSchema, query, authResolvers);
-        expect(response2.data.authorize.success).toBe(false);
-        expect(response2.data.authorize.userId).toBeNull();
+        expect(response2.data.verifyToken.isValid).toBe(false);
+        expect(response2.data.verifyToken.userId).toBeNull();
     });
 });

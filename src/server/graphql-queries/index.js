@@ -17,13 +17,14 @@ export const findUserByName = async (username) => {
 };
 
 export const findUserById = async (id) => {
-    const query = `query { user (id: "${id}") { id, name, permissions } }`;
+    const query = `query { findUserById (id: "${id}") { id, name, permissions } }`;
     const {data} = await graphql(adminSchema, query, adminResolvers);
-    return data.user;
+    return data.findUserById;
 };
 
 export const verifyToken = async (token) =>
 {
-    const query = `query { authorize (input: {token: "${token}"}) { success, userId } }`;
-    return await graphql(authSchema, query, authResolvers);
+    const query = `query { verifyToken (input: {token: "${token}"}) { isValid, userId } }`;
+    const {data} = await graphql(authSchema, query, authResolvers);
+    return data.verifyToken;
 };

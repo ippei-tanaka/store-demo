@@ -54,7 +54,7 @@
         const token = $form.find("[name='token']").val();
         const query = `
             query {
-                users {id, name}
+                getAllUsers {id, name}
             }
         `;
         $.post({
@@ -67,7 +67,7 @@
         }).done((response) => {
             if (response.data)
             {
-                $("#Output").val(response.data.users.map(user => `name: ${user.name}`).join("\n"));
+                $("#Output").val(response.data.getAllUsers.map(user => `name: ${user.name}`).join("\n"));
             }
             else
             {
