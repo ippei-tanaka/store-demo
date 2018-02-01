@@ -11,8 +11,8 @@ const graphql = (...args) => {
 
 const schema = graphql`
     type Query {
-        product(id: ID!): Product
-        products: [Product]
+        findProductById(id: ID!): Product
+        getAllProducts: [Product]
 
         findUserById(id: ID!): User
         findUserByName(name: String!): User

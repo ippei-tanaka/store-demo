@@ -38,32 +38,32 @@ describe("createProduct", () =>
     });
 });
 
-describe("product", () =>
+describe("findProductById", () =>
 {
     it("should return a product", async () => {
         const id = await createProduct({name: "test item", price: 444});
-        const query = `{ product (id: "${id}") { name, price } }`;
+        const query = `{ findProductById (id: "${id}") { name, price } }`;
         const {data} = await graphql(adminSchema, query, adminResolvers);
-        expect(data.product).toEqual({name: "test item", price: 444});
+        expect(data.findProductById).toEqual({name: "test item", price: 444});
     });
 });
 
-describe("products", () =>
+describe("getAllProducts", () =>
 {
     it("should return an empty array when db is clean", async () => {
-        const query = "{ products { id } }";
+        const query = "{ getAllProducts { id } }";
         const {data} = await graphql(adminSchema, query, adminResolvers);
-        expect(data.products).toHaveLength(0);
+        expect(data.getAllProducts).toHaveLength(0);
     });
 
     it("should return a list of products", async () => {
         await createProduct({name: "my item 1", price: 123});
         await createProduct({name: "my item 2", price: 456});
-        const query = "{ products { name, price } }";
+        const query = "{ getAllProducts { name, price } }";
         const {data} = await graphql(adminSchema, query, adminResolvers);
-        expect(data.products).toHaveLength(2);
-        expect(data.products[0]).toEqual({name: "my item 1", price: 123});
-        expect(data.products[1]).toEqual({name: "my item 2", price: 456});
+        expect(data.getAllProducts).toHaveLength(2);
+        expect(data.getAllProducts[0]).toEqual({name: "my item 1", price: 123});
+        expect(data.getAllProducts[1]).toEqual({name: "my item 2", price: 456});
     });
 });
 
@@ -86,9 +86,9 @@ describe("updateProduct", () =>
         expect(updateProduct.name).toBe(newProduct.name);
         expect(updateProduct.price).toBe(newProduct.price);
 
-        const query = `{ product (id: "${id}") { name, price } }`;
-        const {data: {product}} = await graphql(adminSchema, query, adminResolvers);
-        expect(product).toEqual(newProduct);
+        const query = `{ findProductById (id: "${id}") { name, price } }`;
+        const {data: {findProductById}} = await graphql(adminSchema, query, adminResolvers);
+        expect(findProductById).toEqual(newProduct);
     });
 });
 
@@ -106,9 +106,9 @@ describe("deleteProduct", () =>
         expect(deleteProduct.name).toBe("coffee");
         expect(deleteProduct.price).toBe(10);
 
-        const query = "{ products { id } }";
+        const query = "{ getAllProducts { id } }";
         const {data} = await graphql(adminSchema, query, adminResolvers);
-        expect(data.products).toHaveLength(0);
+        expect(data.getAllProducts).toHaveLength(0);
     });
 });
 

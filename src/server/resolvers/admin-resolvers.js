@@ -2,11 +2,11 @@ import ProductModel from "@/server/mongo-models/product";
 import UserModel from "@/server/mongo-models/user";
 
 export default {
-    product: async ({id}) => {
+    findProductById: async ({id}) => {
         return ProductModel.findById(id);
     },
 
-    products: () => {
+    getAllProducts: () => {
         return ProductModel.find();
     },
 
