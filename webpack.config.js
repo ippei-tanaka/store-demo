@@ -3,10 +3,10 @@ const path = require("path");
 
 module.exports = {
 
-    entry: "./src/web-client/client/entry",
+    entry: "./src/web-client/entry",
 
     output: {
-        path: path.resolve(__dirname, "build/client/assets"),
+        path: path.resolve(__dirname, "build/web-client/assets"),
         filename: "app.js",
         publicPath: "/"
     },
@@ -51,6 +51,7 @@ module.exports = {
     devServer: {
         contentBase: path.join(__dirname, "src/web-client/assets"),
         // compress: true,
-        port: 9000
+        port: 9000,
+        historyApiFallback: true
     }
 };
