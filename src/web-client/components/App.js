@@ -1,10 +1,10 @@
 import React from 'react';
-import AuthHeader from '@/web-client/containers/HeaderContainer';
+import HeaderContainer from '@/web-client/containers/HeaderContainer';
 import Footer from '@/web-client/components/Footer';
 
 export default ({children}) => (
     <div>
-        <AuthHeader/>
+        <HeaderContainer/>
         {children}
         <Footer/>
     </div>

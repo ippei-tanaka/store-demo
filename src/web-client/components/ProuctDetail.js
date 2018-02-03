@@ -1,8 +1,14 @@
 import React from 'react';
 
-export default ({product}) => (
+export default ({product, onClickBuyButton}) => (
     <div>
         <h1>{product.name}</h1>
-        <p>Hey! This is a good product.</p>
+        <p>{product.description}</p>
+        <p>${product.price}</p>
+        <button onClick={(e) => {
+            e.preventDefault();
+            onClickBuyButton(e);
+        }}>Add to Cart
+        </button>
     </div>
 );

@@ -1,17 +1,16 @@
-import {LOGIN, LOGOUT} from '@/web-client/actions';
+import {
+    LOGIN,
+    LOGOUT,
+    ADD_TO_CART
+} from '@/web-client/actions';
 
-const authenticatedUser = (state = {name: null}, action) => {
-    const {type, payload} = action;
+const user = (state = null, {type, payload}) => {
     if (type === LOGIN) {
         return {
-            ...state,
             name: payload.name,
         };
     } else if (type === LOGOUT) {
-        return {
-            ...state,
-            name: null,
-        };
+        return null;
     }
     return state;
 };
@@ -20,21 +19,38 @@ const productList = (state = [
     {
         name: 'Shampoo',
         id: 0,
+        description: 'This product lets you clean your hair.',
+        price: 5.77
     },
     {
         name: 'Cutting Board',
         id: 1,
+        description: 'This product lets you cut food with a knife.',
+        price: 40.43
     },
     {
         name: 'Tea',
         id: 2,
+        description: 'Something to drink.',
+        price: 16.80
     },
 ], action) => {
     return state;
 };
 
+const cart = (state = {}, {type, payload}) => {
+    if (type === ADD_TO_CART) {
+        const amount = state[payload.productId] || 0;
+        return {
+            ...state,
+            [payload.productId]: amount + 1,
+        };
+    }
+    return state;
+};
+
 export default (state = {}, action) => ({
-    authenticatedUser: authenticatedUser(state.authenticatedUser, action),
+    user: user(state.user, action),
     productList: productList(state.productList, action),
-    // location: location(state.location, action),
+    cart: cart(state.cart, action),
 });

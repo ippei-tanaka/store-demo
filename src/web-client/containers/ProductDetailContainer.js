@@ -1,10 +1,19 @@
 import {connect} from 'react-redux';
 import ProductDetail from '@/web-client/components/ProuctDetail';
+import {addToCart} from '@/web-client/actions';
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = ({productList}, {productId}) => {
     return {
-        product: state.productList[props.productId]
+        product: productList[productId]
     };
 };
 
-export default connect(mapStateToProps, null)(ProductDetail);
+const mapDispatchToProps = (dispatch, {productId}) => {
+    return {
+        onClickBuyButton: () => {
+            dispatch(addToCart({productId}));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);

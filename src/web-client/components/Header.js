@@ -1,23 +1,23 @@
 import React from 'react';
 import Link from '@/web-client/components/Link';
+import CartContainer from '@/web-client/containers/CartContainer';
+import LoginFormContainer from '@/web-client/containers/LoginFormContainer';
+import LogoutButtonContainer from '@/web-client/containers/LogoutButtonContainer';
 
 const Header = (
     {
-        authenticatedUserName,
-        onClickLoginButton,
-        onClickLogoutButton,
-        onClickHeading,
+        user
     }) => {
     return (
         <header>
-            <h1><Link href="/" onClick={onClickHeading}>Store Demo</Link></h1>
-            {authenticatedUserName ? (
+            <h1><Link href="/">Store Demo</Link></h1>
+            {user ? (
                 <div>
-                    <p>Hello! {authenticatedUserName}.</p>
-                    <button onClick={onClickLogoutButton}>Logout</button>
+                    <p>Hello! {user.name}.</p>
+                    <LogoutButtonContainer>Logout</LogoutButtonContainer>
                 </div>
             ) : (
-                <button onClick={onClickLoginButton}>Login</button>
+                <LoginFormContainer />
             )}
         </header>
     );
