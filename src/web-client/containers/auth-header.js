@@ -1,16 +1,14 @@
-import {connect} from "react-redux";
-import {login, logout} from "@/web-client/actions";
-import Header from "@/web-client/components/header";
+import {connect} from 'react-redux';
+import {login, logout} from '@/web-client/actions';
+import Header from '@/web-client/components/header';
 
-const mapStateToProps = (state) =>
-{
+const mapStateToProps = (state) => {
     return {
-        authenticatedUserName: state.authenticatedUser.name
+        authenticatedUserName: state.authenticatedUser.name,
     };
 };
 
-const mapDispatchToProps = (dispatch) =>
-{
+const mapDispatchToProps = (dispatch) => {
     return {
         onClickLoginButton: (e) => {
             e.preventDefault();
@@ -19,7 +17,7 @@ const mapDispatchToProps = (dispatch) =>
         onClickLogoutButton: (e) => {
             e.preventDefault();
             dispatch(logout());
-        }
+        },
     };
 };
 

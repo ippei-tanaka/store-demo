@@ -1,9 +1,14 @@
-import React from "react";
+import React from 'react';
+import Link from '@/web-client/components/link';
 
-export default () => (
+export default ({productList}) => (
     <ul>
-        <li>Product A</li>
-        <li>Product B</li>
-        <li>Product C</li>
+        {productList.map(product => (
+            <li key={product.id}>
+                <Link href={`/products/${product.id}`}>
+                    {product.name}
+                </Link>
+            </li>
+        ))}
     </ul>
 );

@@ -1,9 +1,16 @@
-import React from "react";
+import React from 'react';
+import Link from '@/web-client/components/link';
 
-const Header = ({authenticatedUserName, onClickLoginButton, onClickLogoutButton}) => {
+const Header = (
+    {
+        authenticatedUserName,
+        onClickLoginButton,
+        onClickLogoutButton,
+        onClickHeading,
+    }) => {
     return (
         <header>
-            <h1>Store Demo</h1>
+            <h1><Link href="/" onClick={onClickHeading}>Store Demo</Link></h1>
             {authenticatedUserName ? (
                 <div>
                     <p>Hello! {authenticatedUserName}.</p>

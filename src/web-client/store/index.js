@@ -1,4 +1,15 @@
-import {createStore} from "redux";
-import reducers from "../reducers";
+import rootReducer from '../reducers';
+//import thunkMiddleware from 'redux-thunk';
+import promiseMiddleware from 'redux-promise';
+import {createStore, applyMiddleware} from 'redux';
 
-export default createStore(reducers);
+const store = createStore(
+    rootReducer,
+    applyMiddleware(
+        promiseMiddleware,
+        //thunkMiddleware,
+        //loggerMiddleware // neat middleware that logs actions
+    ),
+);
+
+export default store;

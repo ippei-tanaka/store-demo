@@ -1,12 +1,11 @@
-import React from "react";
-import AuthHeader from "@/web-client/containers/AuthHeader";
-import ProductList from "@/web-client/components/prouct-list";
-import Footer from "@/web-client/components/footer";
+import React from 'react';
+import AuthHeader from '@/web-client/containers/auth-header';
+import Footer from '@/web-client/components/footer';
 
-export default () => (
+export default ({children}) => (
     <div>
         <AuthHeader/>
-        <ProductList/>
+        {children}
         <Footer/>
     </div>
 );
