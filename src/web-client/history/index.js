@@ -2,7 +2,6 @@ import createBrowserHistory from 'history/createBrowserHistory';
 import parse from 'url-parse';
 import deepEqual from 'deep-equal';
 
-
 const history = createBrowserHistory();
 
 const _push = history.push;
