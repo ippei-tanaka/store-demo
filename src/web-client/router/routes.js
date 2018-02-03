@@ -10,7 +10,7 @@ export default [
         path: '/',
         async action() {
             return {
-                createComponent() {
+                createElement() {
                     return (
                         <App>
                             <CartContainer/>
@@ -27,7 +27,7 @@ export default [
         path: '/products/:id',
         async action({params}) {
             return {
-                createComponent() {
+                createElement() {
                     return (
                         <App>
                             <CartContainer/>
@@ -45,7 +45,7 @@ export default [
         path: '/checkout',
         async action() {
             return {
-                createComponent() {
+                createElement() {
                     return (
                         <App>
                             <h2>Check Out</h2>

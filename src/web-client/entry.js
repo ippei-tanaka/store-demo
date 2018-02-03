@@ -9,7 +9,7 @@ const render = async (location) => {
     const route = await router.resolve(location);
     ReactDOM.render(
         <Provider store={store}>
-            {route.createComponent()}
+            {route.createElement()}
         </Provider>,
         document.getElementById('App'),
     );
