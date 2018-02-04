@@ -21,7 +21,7 @@ const schema = new Schema({
         type: [String],
         required: true,
     },
-    hashed_password: {
+    hashedPassword: {
         required: true,
         type: String,
     },
@@ -31,6 +31,12 @@ schema.virtual('password').set(function(value) {
     this._password = value;
 }).get(function() {
     return this._password;
+});
+
+schema.virtual('oldPassword').set(function(value) {
+    this._oldPassword = value;
+}).get(function() {
+    return this._oldPassword;
 });
 
 const validatePassword = R.allPass([
@@ -45,17 +51,28 @@ const validatePassword = R.allPass([
 schema.pre('validate', async function(next) {
     const password = this.password;
     if (!password) return next();
-    if (!validatePassword(password)) return next(
-        new Error.ValidationError('wrong!'));
+    if (!validatePassword(password)) {
+        return next(new Error.ValidationError('Password is incorrect'));
+    }
+    if (!this.isNew)
+    {
+        const oldPassword = this.oldPassword;
+        if (!(await this.comparePassword(oldPassword)))
+        {
+            return next(new Error.ValidationError('Password is incorrect'));
+        }
+    }
     const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
-    this.hashed_password = await bcrypt.hash(password, salt);
+    this.hashedPassword = await bcrypt.hash(password, salt);
     next();
 });
 
 schema.methods.comparePassword = async function(candidatePassword) {
-    return bcrypt.compare(candidatePassword, this.hashed_password);
+    return bcrypt.compare(candidatePassword, this.hashedPassword);
 };
 
 schema.plugin(uniqueValidator);
 
-export default mongoose.model('User', schema);
+const UserModel = mongoose.model('User', schema);
+
+export default UserModel;

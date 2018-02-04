@@ -41,7 +41,7 @@ describe('findProductById', () => {
         const id = await createProduct({
             name: 'test item',
             price: 444,
-            description: 'This is a test item.'
+            description: 'This is a test item.',
         });
         const query = `{ findProductById (id: "${id}") { name, price } }`;
         const {data} = await graphql(adminSchema, query, adminResolvers);
@@ -64,12 +64,12 @@ describe('getAllProducts', () => {
         await createProduct({
             name: 'my item 1',
             price: 123,
-            description: 'This is Test Item 1.'
+            description: 'This is Test Item 1.',
         });
         await createProduct({
             name: 'my item 2',
             price: 456,
-            description: 'This is Test Item 2.'
+            description: 'This is Test Item 2.',
         });
         const query = '{ getAllProducts { name, price } }';
         const {data} = await graphql(adminSchema, query, adminResolvers);
@@ -92,12 +92,12 @@ describe('updateProduct', () => {
         const id = await createProduct({
             name: 'soap',
             price: 3,
-            description: 'This is Soap.'
+            description: 'This is Soap.',
         });
         const newProduct = {
             name: 'shampoo',
             price: 6,
-            description: 'This is Shampoo.'
+            description: 'This is Shampoo.',
         };
         const mutation = `
             mutation { 
@@ -128,7 +128,7 @@ describe('deleteProduct', () => {
         const id = await createProduct({
             name: 'coffee',
             price: 10,
-            description: 'This is coffee.'
+            description: 'This is coffee.',
         });
         const mutation = `
             mutation { 
@@ -273,6 +273,65 @@ describe('updateUser', () => {
                 name: newName,
             });
     });
+
+    it('should return null if the old password is not sent.', async () => {
+        const id = await createUser({
+            name: 'userA',
+            password: 'password1',
+        });
+        const mutation1 = `
+            mutation { 
+                updateUser (
+                    id : "${id}",
+                    input: {
+                        password: "newPassword"
+                    }
+                ) { id, name }
+            }
+        `;
+        const response = await graphql(adminSchema, mutation1, adminResolvers);
+        expect(response.data.updateUser).toBeNull();
+    });
+
+    it('should return null if the old password is wrong.', async () => {
+        const id = await createUser({
+            name: 'userA',
+            password: 'password1',
+        });
+        const mutation1 = `
+            mutation { 
+                updateUser (
+                    id : "${id}",
+                    input: {
+                        password: "newPassword",
+                        oldPassword: "wrongPassword"
+                    }
+                ) { id, name }
+            }
+        `;
+        const response = await graphql(adminSchema, mutation1, adminResolvers);
+        expect(response.data.updateUser).toBeNull();
+    });
+
+    it('should return a user if succeeding to update the password.', async () => {
+        const id = await createUser({
+            name: 'userA',
+            password: 'password1',
+        });
+        const mutation1 = `
+            mutation { 
+                updateUser (
+                    id : "${id}",
+                    input: {
+                        password: "newPassword",
+                        oldPassword: "password1"
+                    }
+                ) { id, name }
+            }
+        `;
+        const response = await graphql(adminSchema, mutation1, adminResolvers);
+        expect(response.data.updateUser).toEqual({id, name: 'userA'});
+    });
 });
 
 describe('deleteUser', () => {
@@ -296,3 +355,38 @@ describe('deleteUser', () => {
         expect(data.getAllUsers).toHaveLength(0);
     });
 });
+
+/*
+
+const createUpdatePasswordQuery = ({id, password, oldPassword}) => `
+                mutation { 
+                    updatePassword (
+                        id : "${id}",
+                        input: {
+                            password: "${password}",
+                            oldPassword: "${oldPassword}"
+                        }
+                    ) { id, name }
+                }
+            `;
+
+describe('updatePassword', () => {
+    it('should return the user if succeeding to change user\'s password',
+        async () => {
+            const id = await createUser({
+                name: 'my_name',
+                password: 'password1',
+            });
+            const {data: {updatePassword}} = await graphql(
+                adminSchema,
+                createUpdatePasswordQuery({
+                    id,
+                    password: 'password2',
+                    oldPassword: 'password1',
+                }),
+                adminResolvers);
+            expect(updatePassword.id).toBeTruthy();
+            expect(updatePassword.name).toBe('my_name');
+        });
+});
+*/

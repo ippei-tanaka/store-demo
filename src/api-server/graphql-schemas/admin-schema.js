@@ -57,6 +57,8 @@ const schema = graphql`
 
     input ExistingUserInput {
         name: String
+        password: String
+        oldPassword: String
         permissions: [Permission]
     }
 
