@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Text, Password} from 'react-form';
+import {Form, Text} from 'react-form';
 
 export default ({onSubmit}) => (
     <Form onSubmit={onSubmit}>

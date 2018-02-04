@@ -1,14 +1,14 @@
 import {
     LOGIN,
     LOGOUT,
-    ADD_TO_CART
+    ADD_TO_CART,
+    REMOVE_FROM_CART,
 } from '@/web-client/actions';
 
 const user = (state = null, {type, payload}) => {
     if (type === LOGIN) {
-        return {
-            name: payload.name,
-        };
+        const {name} = payload;
+        return {name};
     } else if (type === LOGOUT) {
         return null;
     }
@@ -20,19 +20,19 @@ const productList = (state = [
         name: 'Shampoo',
         id: 0,
         description: 'This product lets you clean your hair.',
-        price: 5.77
+        price: 5.77,
     },
     {
         name: 'Cutting Board',
         id: 1,
         description: 'This product lets you cut food with a knife.',
-        price: 40.43
+        price: 40.43,
     },
     {
         name: 'Tea',
         id: 2,
         description: 'Something to drink.',
-        price: 16.80
+        price: 16.80,
     },
 ], action) => {
     return state;
@@ -40,11 +40,38 @@ const productList = (state = [
 
 const cart = (state = {}, {type, payload}) => {
     if (type === ADD_TO_CART) {
-        const amount = state[payload.productId] || 0;
+        const {quantity, productId} = payload;
+
+        if (typeof quantity !== 'number' || isNaN(quantity)) {
+            return state;
+        }
+
+        const currentQuantity = state[productId] || 0;
         return {
             ...state,
-            [payload.productId]: amount + 1,
+            [productId]: currentQuantity + quantity,
         };
+    } else if (type === REMOVE_FROM_CART) {
+        const {quantity, productId} = payload;
+
+        if (typeof quantity !== 'number' || isNaN(quantity)) {
+            return state;
+        }
+
+        const currentQuantity = state[productId] || 0;
+        const newQuantity = currentQuantity - quantity;
+
+        if (newQuantity <= 0)
+        {
+            const newState = {...state};
+            delete newState[productId];
+            return newState;
+        } else {
+            return {
+                ...state,
+                [productId]: newQuantity,
+            };
+        }
     }
     return state;
 };

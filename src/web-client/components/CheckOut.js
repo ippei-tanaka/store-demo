@@ -1,5 +1,4 @@
 import React from 'react';
-import CheckoutContainer from '@/web-client/containers/CheckoutContainer';
 import LoginFormContainer from '@/web-client/containers/LoginFormContainer';
 
 export default (
@@ -16,17 +15,17 @@ export default (
                 <div>
                     <ul>
                         {productIds.map((id) => {
-                            const amount = cart[id];
+                            const quantity = cart[id];
                             const product = productList[id];
                             return (
-                                <li key={product.id}>{product.name} - {amount}</li>
+                                <li key={product.id}>{product.name} - {quantity}</li>
                             );
                         })}
                     </ul>
                     <p> Sum: ${productIds.reduce((memo, id) => {
-                        const amount = cart[id];
+                        const quantity = cart[id];
                         const product = productList[id];
-                        return memo + amount * product.price;
+                        return memo + quantity * product.price;
                     }, 0)}</p>
                     <button onClick={e => {
                         e.preventDefault();
