@@ -1,8 +1,10 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, {Schema} from 'mongoose';
 
 const schema = new Schema({
     name: String,
-    price: Number
+    price: Number,
+    description: String,
+    image: String,
 });
 
-export default mongoose.model("Product", schema);
+export default mongoose.model('Product', schema);

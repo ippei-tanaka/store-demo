@@ -1,13 +1,5 @@
-import {buildSchema} from "graphql";
-import {ADMIN, SHOP} from "@/api-server/permissions";
-import R from "ramda";
-
-const graphql = (...args) => {
-    const strings = R.dropLast(1, args[0]);
-    const variables = R.drop(1, args);
-    const string = strings.reduce((memory, value, index) => memory + value + variables[index], "") + R.last(args[0]);
-    return buildSchema(string);
-};
+import {ADMIN, SHOP} from '@/api-server/permissions';
+import {graphql} from '@/api-server/template-string-tag';
 
 const schema = graphql`
     type Query {
@@ -32,17 +24,23 @@ const schema = graphql`
     type Product {
         id: ID!
         name: String!
+        description: String!
         price: Int!
+        image: String
     }
 
     input NewProductInput {
         name: String!
+        description: String!
         price: Int!
+        image: String
     }
 
     input ExistingProductInput {
         name: String
+        description: String
         price: Int
+        image: String
     }
 
     type User {

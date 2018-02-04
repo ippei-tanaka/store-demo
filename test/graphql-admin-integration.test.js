@@ -1,9 +1,9 @@
-import {graphql} from "graphql";
-import adminSchema from "@/api-server/graphql-schemas/admin-schema";
-import adminResolvers from "@/api-server/resolvers/admin-resolvers";
-import {connect, disconnect, dropDatabase} from "@/api-server/mongo-db-driver";
+import {graphql} from 'graphql';
+import adminSchema from '@/api-server/graphql-schemas/admin-schema';
+import adminResolvers from '@/api-server/resolvers/admin-resolvers';
+import {connect, disconnect, dropDatabase} from '@/api-server/mongo-db-driver';
 
-const TEST_DB = "store-demo-graphql-admin-test";
+const TEST_DB = 'store-demo-graphql-admin-test';
 
 beforeAll(() => connect({dbName: TEST_DB}));
 beforeEach(() => dropDatabase());
@@ -12,11 +12,10 @@ afterAll(() => disconnect());
 
 jest.setTimeout(10000);
 
-const createProduct = async ({name, price}) =>
-{
+const createProduct = async ({name, price, description}) => {
     const query = `
         mutation { 
-            createProduct (input: {name: "${name}", price: ${price}})
+            createProduct (input: {name: "${name}", price: ${price}, description: "${description}"})
             { id }
         }
     `;
@@ -24,12 +23,11 @@ const createProduct = async ({name, price}) =>
     return response.data.createProduct.id;
 };
 
-describe("createProduct", () =>
-{
-    it("should create a product", async () => {
+describe('createProduct', () => {
+    it('should create a product', async () => {
         const query = `
             mutation { 
-                createProduct (input: {name: "my product", price: 12345})
+                createProduct (input: {name: "my product", price: 12345, description: "test"})
                 { id }
             }
         `;
@@ -38,82 +36,118 @@ describe("createProduct", () =>
     });
 });
 
-describe("findProductById", () =>
-{
-    it("should return a product", async () => {
-        const id = await createProduct({name: "test item", price: 444});
+describe('findProductById', () => {
+    it('should return a product', async () => {
+        const id = await createProduct({
+            name: 'test item',
+            price: 444,
+            description: 'This is a test item.'
+        });
         const query = `{ findProductById (id: "${id}") { name, price } }`;
         const {data} = await graphql(adminSchema, query, adminResolvers);
-        expect(data.findProductById).toEqual({name: "test item", price: 444});
+        expect(data.findProductById).
+            toEqual({
+                name: 'test item',
+                price: 444,
+            });
     });
 });
 
-describe("getAllProducts", () =>
-{
-    it("should return an empty array when db is clean", async () => {
-        const query = "{ getAllProducts { id } }";
+describe('getAllProducts', () => {
+    it('should return an empty array when db is clean', async () => {
+        const query = '{ getAllProducts { id } }';
         const {data} = await graphql(adminSchema, query, adminResolvers);
         expect(data.getAllProducts).toHaveLength(0);
     });
 
-    it("should return a list of products", async () => {
-        await createProduct({name: "my item 1", price: 123});
-        await createProduct({name: "my item 2", price: 456});
-        const query = "{ getAllProducts { name, price } }";
+    it('should return a list of products', async () => {
+        await createProduct({
+            name: 'my item 1',
+            price: 123,
+            description: 'This is Test Item 1.'
+        });
+        await createProduct({
+            name: 'my item 2',
+            price: 456,
+            description: 'This is Test Item 2.'
+        });
+        const query = '{ getAllProducts { name, price } }';
         const {data} = await graphql(adminSchema, query, adminResolvers);
         expect(data.getAllProducts).toHaveLength(2);
-        expect(data.getAllProducts[0]).toEqual({name: "my item 1", price: 123});
-        expect(data.getAllProducts[1]).toEqual({name: "my item 2", price: 456});
+        expect(data.getAllProducts[0]).
+            toEqual({
+                name: 'my item 1',
+                price: 123,
+            });
+        expect(data.getAllProducts[1]).
+            toEqual({
+                name: 'my item 2',
+                price: 456,
+            });
     });
 });
 
-describe("updateProduct", () =>
-{
-    it("should update a product", async () => {
-        const id = await createProduct({name: "soap", price: 3});
-        const newProduct =  {name: "shampoo", price: 6};
+describe('updateProduct', () => {
+    it('should update a product', async () => {
+        const id = await createProduct({
+            name: 'soap',
+            price: 3,
+            description: 'This is Soap.'
+        });
+        const newProduct = {
+            name: 'shampoo',
+            price: 6,
+            description: 'This is Shampoo.'
+        };
         const mutation = `
             mutation { 
                 updateProduct (
                     id : "${id}",
                     input: {name: "${newProduct.name}",
-                    price: ${newProduct.price}
-                }) { id, name, price }
+                    price: ${newProduct.price},
+                    description: "${newProduct.description}"
+                }) { id, name, price, description }
             }
         `;
-        const {data: {updateProduct}} = await graphql(adminSchema, mutation, adminResolvers);
+        const {data: {updateProduct}} = await graphql(adminSchema, mutation,
+            adminResolvers);
         expect(updateProduct.id).toBeTruthy();
         expect(updateProduct.name).toBe(newProduct.name);
         expect(updateProduct.price).toBe(newProduct.price);
+        expect(updateProduct.description).toBe(newProduct.description);
 
-        const query = `{ findProductById (id: "${id}") { name, price } }`;
-        const {data: {findProductById}} = await graphql(adminSchema, query, adminResolvers);
+        const query = `{ findProductById (id: "${id}") { name, price, description } }`;
+        const {data: {findProductById}} = await graphql(adminSchema, query,
+            adminResolvers);
         expect(findProductById).toEqual(newProduct);
     });
 });
 
-describe("deleteProduct", () =>
-{
-    it("should delete a product", async () => {
-        const id = await createProduct({name: "coffee", price: 10});
+describe('deleteProduct', () => {
+    it('should delete a product', async () => {
+        const id = await createProduct({
+            name: 'coffee',
+            price: 10,
+            description: 'This is coffee.'
+        });
         const mutation = `
             mutation { 
-                deleteProduct (id : "${id}") { id, name, price }
+                deleteProduct (id : "${id}") { id, name, price, description }
             }
         `;
-        const {data: {deleteProduct}} = await graphql(adminSchema, mutation, adminResolvers);
+        const {data: {deleteProduct}} = await graphql(adminSchema, mutation,
+            adminResolvers);
         expect(deleteProduct.id).toBeTruthy();
-        expect(deleteProduct.name).toBe("coffee");
+        expect(deleteProduct.name).toBe('coffee');
         expect(deleteProduct.price).toBe(10);
 
-        const query = "{ getAllProducts { id } }";
+        const query = '{ getAllProducts { id } }';
         const {data} = await graphql(adminSchema, query, adminResolvers);
         expect(data.getAllProducts).toHaveLength(0);
     });
 });
 
-const createUser = async ({name, password}) =>
-{
+const createUser = async ({name, password}) => {
     const query = `
         mutation { 
             createUser (input: {name: "${name}", password: "${password}"})
@@ -124,9 +158,8 @@ const createUser = async ({name, password}) =>
     return response.data.createUser.id;
 };
 
-describe("createUser", () =>
-{
-    it("should create a user", async () => {
+describe('createUser', () => {
+    it('should create a user', async () => {
         const query = `
             mutation { 
                 createUser (input: {name: "the+user", password: "password"})
@@ -137,7 +170,7 @@ describe("createUser", () =>
         expect(data.createUser.id).toBeTruthy();
     });
 
-    it("should fail when creating a user with a duplicated name", async () => {
+    it('should fail when creating a user with a duplicated name', async () => {
         const query = `
             mutation { 
                 createUser (input: {name: "the+user", password: "password"})
@@ -150,55 +183,74 @@ describe("createUser", () =>
     });
 });
 
-describe("findUserById", () =>
-{
-    it("should return a user", async () => {
-        const id = await createUser({name: "test&item", password: "thisispassword"});
+describe('findUserById', () => {
+    it('should return a user', async () => {
+        const id = await createUser({
+            name: 'test&item',
+            password: 'thisispassword',
+        });
         const query = `{ findUserById (id: "${id}") { name } }`;
-        const {data, errors} = await graphql(adminSchema, query, adminResolvers);
-        expect(data.findUserById).toEqual({name: "test&item"});
+        const {data, errors} = await graphql(adminSchema, query,
+            adminResolvers);
+        expect(data.findUserById).toEqual({name: 'test&item'});
         expect(errors).toBeFalsy();
     });
 
-    it("should not return a user with their password", async () => {
-        const id = await createUser({name: "test*item", password: "thisispassword"});
+    it('should not return a user with their password', async () => {
+        const id = await createUser({
+            name: 'test*item',
+            password: 'thisispassword',
+        });
         const query = `{ findUserById (id: "${id}") { name, password } }`;
         const {errors} = await graphql(adminSchema, query, adminResolvers);
         expect(errors).toBeTruthy();
     });
 });
 
-describe("findUserByName", () =>
-{
-    it("should return a user", async () => {
-        await createUser({name: "test&item", password: "thisispassword"});
-        const query = "{ findUserByName (name: \"test&item\") { name } }";
-        const {data, errors} = await graphql(adminSchema, query, adminResolvers);
-        expect(data.findUserByName).toEqual({name: "test&item"});
+describe('findUserByName', () => {
+    it('should return a user', async () => {
+        await createUser({
+            name: 'test&item',
+            password: 'thisispassword',
+        });
+        const query = '{ findUserByName (name: "test&item") { name } }';
+        const {data, errors} = await graphql(adminSchema, query,
+            adminResolvers);
+        expect(data.findUserByName).toEqual({name: 'test&item'});
         expect(errors).toBeFalsy();
     });
 });
 
-describe("getAllUsers", () =>
-{
-    it("should return a list of users", async () => {
-        await createUser({name: "user1", password: "password1"});
-        await createUser({name: "user2", password: "password2"});
-        await createUser({name: "user3", password: "password3"});
-        const query = "{ getAllUsers { name } }";
+describe('getAllUsers', () => {
+    it('should return a list of users', async () => {
+        await createUser({
+            name: 'user1',
+            password: 'password1',
+        });
+        await createUser({
+            name: 'user2',
+            password: 'password2',
+        });
+        await createUser({
+            name: 'user3',
+            password: 'password3',
+        });
+        const query = '{ getAllUsers { name } }';
         const response = await graphql(adminSchema, query, adminResolvers);
         expect(response.data.getAllUsers).toHaveLength(3);
-        expect(response.data.getAllUsers[0]).toEqual({name: "user1"});
-        expect(response.data.getAllUsers[1]).toEqual({name: "user2"});
-        expect(response.data.getAllUsers[2]).toEqual({name: "user3"});
+        expect(response.data.getAllUsers[0]).toEqual({name: 'user1'});
+        expect(response.data.getAllUsers[1]).toEqual({name: 'user2'});
+        expect(response.data.getAllUsers[2]).toEqual({name: 'user3'});
     });
 });
 
-describe("updateUser", () =>
-{
-    it("should update a user", async () => {
-        const id = await createUser({name: "userA", password: "password1"});
-        const newName = "userB";
+describe('updateUser', () => {
+    it('should update a user', async () => {
+        const id = await createUser({
+            name: 'userA',
+            password: 'password1',
+        });
+        const newName = 'userB';
         const mutation = `
             mutation { 
                 updateUser (
@@ -215,24 +267,31 @@ describe("updateUser", () =>
 
         const query = `{ findUserById (id: "${id}") { id, name } }`;
         const response2 = await graphql(adminSchema, query, adminResolvers);
-        expect(response2.data.findUserById).toEqual({id, name: newName});
+        expect(response2.data.findUserById).
+            toEqual({
+                id,
+                name: newName,
+            });
     });
 });
 
-describe("deleteUser", () =>
-{
-    it("should delete a user", async () => {
-        const id = await createUser({name: "my_name", password: "password1"});
+describe('deleteUser', () => {
+    it('should delete a user', async () => {
+        const id = await createUser({
+            name: 'my_name',
+            password: 'password1',
+        });
         const mutation = `
             mutation { 
                 deleteUser (id : "${id}") { id, name }
             }
         `;
-        const {data: {deleteUser}} = await graphql(adminSchema, mutation, adminResolvers);
+        const {data: {deleteUser}} = await graphql(adminSchema, mutation,
+            adminResolvers);
         expect(deleteUser.id).toBeTruthy();
-        expect(deleteUser.name).toBe("my_name");
+        expect(deleteUser.name).toBe('my_name');
 
-        const query = "{ getAllUsers { id } }";
+        const query = '{ getAllUsers { id } }';
         const {data} = await graphql(adminSchema, query, adminResolvers);
         expect(data.getAllUsers).toHaveLength(0);
     });

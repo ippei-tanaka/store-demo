@@ -1,6 +1,4 @@
-import {buildSchema} from "graphql";
-
-const graphql = strings => buildSchema(strings[0]);
+import {graphql} from '@/api-server/template-string-tag';
 
 const schema = graphql`
     type Query {
@@ -15,7 +13,7 @@ const schema = graphql`
         username: String!
         password: String!
     }
-    
+
     type Token {
         token: String
     }

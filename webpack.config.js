@@ -1,22 +1,22 @@
-const path = require("path");
+const path = require('path');
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
 
-    entry: "./src/web-client/entry",
+    entry: './src/web-client/entry',
 
     output: {
-        path: path.resolve(__dirname, "build/web-client/assets"),
-        filename: "app.js",
-        publicPath: "/"
+        path: path.resolve(__dirname, 'build/web-client/static'),
+        filename: 'app.js',
+        publicPath: '/',
     },
 
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
-                include: [path.resolve(__dirname, "src")],
-                loader: "babel-loader"
+                include: [path.resolve(__dirname, 'src')],
+                loader: 'babel-loader',
             },
             // {
             //     test: /\.html$/,
@@ -26,17 +26,17 @@ module.exports = {
             //         name: "[path][name].[ext]"
             //     }
             // }
-        ]
+        ],
     },
 
     resolve: {
-        extensions: [".js", ".json", ".jsx"],
+        extensions: ['.js', '.json', '.jsx'],
         alias: {
-            "@": path.resolve(__dirname, "src"),
-        }
+            '@': path.resolve(__dirname, 'src'),
+        },
     },
 
-    devtool: "source-map",
+    devtool: 'source-map',
 
     //target: "node",
 
@@ -49,9 +49,9 @@ module.exports = {
     // })],
 
     devServer: {
-        contentBase: path.join(__dirname, "src/web-client/assets"),
+        contentBase: path.join(__dirname, 'src/web-client/static'),
         // compress: true,
         port: 9000,
-        historyApiFallback: true
-    }
+        historyApiFallback: true,
+    },
 };

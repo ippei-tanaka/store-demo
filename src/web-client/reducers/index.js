@@ -1,14 +1,14 @@
 import {
-    LOGIN,
+    AUTHENTICATE,
     LOGOUT,
     ADD_TO_CART,
     REMOVE_FROM_CART,
 } from '@/web-client/actions';
 
 const user = (state = null, {type, payload}) => {
-    if (type === LOGIN) {
-        const {name} = payload;
-        return {name};
+    if (type === AUTHENTICATE) {
+        const {token} = payload;
+        return {token};
     } else if (type === LOGOUT) {
         return null;
     }

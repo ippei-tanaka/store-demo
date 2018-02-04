@@ -19,6 +19,7 @@
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "deep-equal": "^1.0.1",
     "express": "^4.16.2",
     "express-graphql": "^0.6.11",
@@ -41,7 +42,8 @@
     "redux-thunk": "^2.2.0",
     "universal-router": "^5.1.0",
     "url-parse": "^1.2.0",
-    "validator": "^9.4.0"
+    "validator": "^9.4.0",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

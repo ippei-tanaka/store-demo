@@ -1,5 +1,5 @@
-import ProductModel from "@/api-server/mongo-models/product";
-import UserModel from "@/api-server/mongo-models/user";
+import ProductModel from '@/api-server/mongo-models/product';
+import UserModel from '@/api-server/mongo-models/user';
 
 export default {
     findProductById: async ({id}) => {
@@ -52,5 +52,5 @@ export default {
     deleteUser: async ({id}) => {
         const user = await UserModel.findById(id);
         return user.remove();
-    }
+    },
 };
