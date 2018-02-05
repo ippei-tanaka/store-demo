@@ -5,6 +5,8 @@ import adminSchema from '@/api-server/graphql-schemas/admin-schema';
 import adminResolvers from '@/api-server/resolvers/admin-resolvers';
 import authSchema from '@/api-server/graphql-schemas/auth-schema';
 import authResolvers from '@/api-server/resolvers/auth-resolvers';
+import shopSchema from '@/api-server/graphql-schemas/shop-schema';
+import shopResolvers from '@/api-server/resolvers/shop-resolvers';
 import {pickBackReferences} from '@/api-server/regex-parser';
 import {verifyToken, findUserById} from '@/api-server/graphql-queries';
 import {ADMIN, SHOP} from '@/api-server/permissions';
@@ -39,13 +41,12 @@ router.use('/auth', graphqlHTTP(() => ({
     graphiql: true,
 })));
 
-/*
-router.use('/shop', identifyUser, authorize(SHOP), graphqlHTTP(() => ({
-    schema: authSchema,
-    rootValue: authResolvers,
+router.use('/shop', identifyUser, authorize(SHOP), graphqlHTTP((request) => ({
+    schema: shopSchema,
+    rootValue: shopResolvers,
+    context: {user: request.user},
     graphiql: true,
 })));
-*/
 
 router.use('/admin', identifyUser, authorize(ADMIN), graphqlHTTP((request) => ({
     schema: adminSchema,

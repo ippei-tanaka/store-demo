@@ -5,12 +5,14 @@ import {connect, disconnect, dropDatabase} from '@/api-server/mongo-db-driver';
 
 const TEST_DB = 'store-demo-graphql-admin-test';
 
-beforeAll(() => connect({dbName: TEST_DB}));
-beforeEach(() => dropDatabase());
-afterAll(() => dropDatabase());
-afterAll(() => disconnect());
+beforeAll(async () => await connect({dbName: TEST_DB}));
+beforeEach(async () => await dropDatabase());
+afterAll(async () => {
+    await dropDatabase();
+    await disconnect();
+});
 
-jest.setTimeout(10000);
+jest.setTimeout(30000);
 
 const createProduct = async ({name, price, description}) => {
     const query = `
@@ -355,38 +357,3 @@ describe('deleteUser', () => {
         expect(data.getAllUsers).toHaveLength(0);
     });
 });
-
-/*
-
-const createUpdatePasswordQuery = ({id, password, oldPassword}) => `
-                mutation { 
-                    updatePassword (
-                        id : "${id}",
-                        input: {
-                            password: "${password}",
-                            oldPassword: "${oldPassword}"
-                        }
-                    ) { id, name }
-                }
-            `;
-
-describe('updatePassword', () => {
-    it('should return the user if succeeding to change user\'s password',
-        async () => {
-            const id = await createUser({
-                name: 'my_name',
-                password: 'password1',
-            });
-            const {data: {updatePassword}} = await graphql(
-                adminSchema,
-                createUpdatePasswordQuery({
-                    id,
-                    password: 'password2',
-                    oldPassword: 'password1',
-                }),
-                adminResolvers);
-            expect(updatePassword.id).toBeTruthy();
-            expect(updatePassword.name).toBe('my_name');
-        });
-});
-*/

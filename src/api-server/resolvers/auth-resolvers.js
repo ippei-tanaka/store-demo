@@ -33,13 +33,12 @@ export default {
         };
     },
 
-    authenticate: async ({input}, context) => {
+    authenticate: async ({input}, context = {}) => {
         const {username, password} = input;
 
         const user = await UserModel.findOne({name: username});
         if (user && await user.comparePassword(password)) {
-            const _context = context || {};
-            const tokenOptions = _context.tokenOptions || {};
+            const tokenOptions = context.tokenOptions || {};
             return {
                 token: jwt.sign({id: user.id}, SECRET, tokenOptions),
             };

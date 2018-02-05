@@ -7,12 +7,14 @@ import {connect, disconnect, dropDatabase} from '@/api-server/mongo-db-driver';
 
 const TEST_DB = 'store-demo-graphql-auth-test';
 
-beforeAll(() => connect({dbName: TEST_DB}));
-beforeEach(() => dropDatabase());
-afterAll(() => dropDatabase());
-afterAll(() => disconnect());
+beforeAll(async () => await connect({dbName: TEST_DB}));
+beforeEach(async () => await dropDatabase());
+afterAll(async () => {
+    await dropDatabase();
+    await disconnect();
+});
 
-jest.setTimeout(10000);
+jest.setTimeout(30000);
 
 const createUser = async ({name, password}) => {
     const query = `
