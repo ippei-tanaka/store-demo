@@ -1,26 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+import store from '@/web-client/stores';
 import history from '@/web-client/history';
 import router from '@/web-client/router';
-import store from '@/web-client/stores';
-import {Provider} from 'react-redux';
 
-const renderElement = async (element) => {
+const render = async (location) => {
+    const element = await router.resolve(location);
     ReactDOM.render(
-        <Provider store={store}>{element}</Provider>,
+        <Provider store={store}>
+            {element}
+        </Provider>,
         document.getElementById('App'),
     );
 };
 
-const getElementBaseOnLocation = async (location) =>
-{
-    return await router.resolve(location);
-};
-
-const renderBasedOnCurrentLocation = async () =>
-{
-    renderElement(await getElementBaseOnLocation(history.location));
-};
-
-renderBasedOnCurrentLocation().then(() => {});
-history.listen(renderBasedOnCurrentLocation);
+render(history.location);
+history.listen(render);
