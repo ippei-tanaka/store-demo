@@ -4,12 +4,12 @@ import {Form, Text} from 'react-form';
 export default ({onSubmit}) => (
     <Form onSubmit={onSubmit}>
         {formApi => (
-            <form onSubmit={formApi.submitForm} id="form2">
+            <form onSubmit={formApi.submitForm}>
                 <label htmlFor="username">User Name</label>
-                <Text field="username" id="username"/>
+                <Text field="username" type="text"/>
                 <br/>
                 <label htmlFor="password">Password</label>
-                <Text field="password" id="password"/>
+                <Text field="password" type="password"/>
                 <br/>
                 <button type="submit">Login</button>
             </form>

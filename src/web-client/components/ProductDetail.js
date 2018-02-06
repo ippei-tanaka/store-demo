@@ -7,8 +7,8 @@ export default (
         onSubmit = () => {}
     }) => (
     <div>
-        <h1>{product.name}</h1>
-        <p><img src={product.image} /></p>
+        <h2>{product.name}</h2>
+        {/* <p><img src={product.image} /></p> */}
         <p>{product.description}</p>
         <p>${product.price}</p>
         <Form onSubmit={onSubmit}>

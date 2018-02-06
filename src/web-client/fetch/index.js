@@ -12,21 +12,19 @@ export const fetchFromPath = async ({path, options}) => {
 
     const url = config.fetch_base + path;
 
-    return fetch(url, options);
+    return await fetch(url, options);
 };
 
 export const fetchDataFromGraphQlPath = async ({path, query, token, options}) => {
-    const isMutation = /^\s*mutation/.test(query);
-
     const _options = Object.assign({
-        method: isMutation ? 'POST' : 'GET',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({query}),
     }, options);
 
-    const reqponse = fetchFromPath({
+    const reqponse = await fetchFromPath({
         path,
         options: _options,
     });

@@ -1,11 +1,11 @@
 import React from 'react';
-import HeaderContainer from '@/web-client/containers/HeaderContainer';
+import Header from '@/web-client/components/Header';
 import Footer from '@/web-client/components/Footer';
 
 export default ({children}) => (
-    <div>
-        <HeaderContainer/>
+    <div id="ShopRoot">
+        <Header />
         {children}
-        <Footer/>
+        <Footer />
     </div>
 );

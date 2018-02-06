@@ -1,4 +1,5 @@
 import {graphql} from '@/api-server/template-string-tag';
+import {ADMIN, SHOP} from '@/api-server/permissions';
 
 const schema = graphql`
     type Query {
@@ -24,7 +25,18 @@ const schema = graphql`
 
     type AuthorizationResult {
         isValid: Boolean!
-        userId: ID
+        user: User
+    }
+
+    type User {
+        id: ID!
+        name: String!
+        permissions: [Permission]!
+    }
+
+    enum Permission {
+        ${SHOP},
+        ${ADMIN}
     }
 `;
 

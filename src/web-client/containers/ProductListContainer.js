@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import ProductList from '@/web-client/components/ProuctList';
+import ProductList from '@/web-client/components/ProductList';
 
 const mapStateToProps = (state) => {
     return {

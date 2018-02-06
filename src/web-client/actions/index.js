@@ -6,7 +6,7 @@ export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 
 export const authenticate = async ({username, password}) => {
-    const {data} = await fetch({
+    const response = await fetch({
         path: '/auth',
         query: `
         mutation{
@@ -16,13 +16,48 @@ export const authenticate = async ({username, password}) => {
         }
         `
     });
+    return await verifyToken({
+        token: response.data.authenticate.token
+    });
+};
+
+export const verifyToken = async ({token}) => {
+    const response = await fetch({
+        path: '/auth',
+        query: `
+            query { 
+                verifyToken (input: {token: "${token}"})
+                { isValid, user { name, permissions } }
+            }
+        `
+    });
+    const {user, isValid} = response.data.verifyToken;
+    const _user = {name: null, permissions: [], ...user};
     return {
         type: AUTHENTICATE,
         payload: {
-            token: data.authenticate.token,
+            token: isValid ? token : null,
+            name: _user.name,
+            permissions: _user.permissions,
         },
     };
 };
+
+/*
+export const authorizeAs = async (permission) =>
+{
+    let state = store.getState();
+
+    if (state.user && state.user.token)
+    {
+        store.dispatch(await verifyToken({token: state.user.token}));
+    }
+
+    state = store.getState();
+
+    return state.user && (state.user.permissions.indexOf(permission) !== -1);
+};
+*/
 
 export const logout = async () => ({
     type: LOGOUT,

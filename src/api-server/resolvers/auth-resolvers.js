@@ -23,13 +23,13 @@ export default {
         if (!user) {
             return {
                 isValid: false,
-                userId: null,
+                user,
             };
         }
 
         return {
             isValid: true,
-            userId: id,
+            user,
         };
     },
 

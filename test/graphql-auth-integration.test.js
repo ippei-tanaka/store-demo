@@ -16,10 +16,13 @@ afterAll(async () => {
 
 jest.setTimeout(30000);
 
-const createUser = async ({name, password}) => {
+const createUser = async ({name, password, permissions = '[]'}) => {
     const query = `
         mutation { 
-            createUser (input: {name: "${name}", password: "${password}"})
+            createUser (input: {
+                name: "${name}", password: "${password}",
+                permissions: ${permissions}
+            })
             { id }
         }
     `;
@@ -121,12 +124,12 @@ describe('verifyToken', () => {
         const query = `
             query { 
                 verifyToken (input: {token: "${token}"})
-                { isValid, userId }
+                { isValid, user {id} }
             }
         `;
         const response = await graphql(authSchema, query, authResolvers);
         expect(response.data.verifyToken.isValid).toBe(true);
-        expect(response.data.verifyToken.userId).toBe(id);
+        expect(response.data.verifyToken.user.id).toBe(id);
     });
 
     it('should fail if the token is invalid', async () => {
@@ -134,18 +137,19 @@ describe('verifyToken', () => {
         const query = `
             query { 
                 verifyToken (input: {token: "${token}"})
-                { isValid, userId }
+                { isValid, user {id} }
             }
         `;
         const response = await graphql(authSchema, query, authResolvers);
         expect(response.data.verifyToken.isValid).toBe(false);
-        expect(response.data.verifyToken.userId).toBeNull();
+        expect(response.data.verifyToken.user).toBeNull();
     });
 
     it('should fail if the token is expired', async () => {
         const id = await createUser({
             name: 'my345',
             password: 'my-password',
+            permissions: '[SHOP]'
         });
         const token = await getToken({
             name: 'my345',
@@ -155,16 +159,19 @@ describe('verifyToken', () => {
         const query = `
             query { 
                 verifyToken (input: {token: "${token}"})
-                { isValid, userId }
+                { isValid, user {id, name, permissions} }
             }
         `;
         const response1 = await graphql(authSchema, query, authResolvers);
         expect(response1.data.verifyToken.isValid).toBe(true);
-        expect(response1.data.verifyToken.userId).toBe(id);
+        expect(response1.data.verifyToken.user.id).toBe(id);
+        expect(response1.data.verifyToken.user.name).toBe('my345');
+        expect(response1.data.verifyToken.user.permissions).toHaveLength(1);
+        expect(response1.data.verifyToken.user.permissions[0]).toBe('SHOP');
 
         await new Promise(resolve => setTimeout(resolve, 4500));
         const response2 = await graphql(authSchema, query, authResolvers);
         expect(response2.data.verifyToken.isValid).toBe(false);
-        expect(response2.data.verifyToken.userId).toBeNull();
+        expect(response2.data.verifyToken.user).toBeNull();
     });
 });

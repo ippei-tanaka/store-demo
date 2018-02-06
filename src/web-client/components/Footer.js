@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default () => (
-    <footer>
-        <p>copyright Store Demo</p>
+    <footer id="Footer">
+        <p>Store Demo</p>
     </footer>
 );

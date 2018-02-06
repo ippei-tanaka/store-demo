@@ -1,5 +1,6 @@
 import React from 'react';
 import LoginFormContainer from '@/web-client/containers/LoginFormContainer';
+import {permissions} from '@/web-client/auth';
 
 export default (
     {
@@ -9,9 +10,10 @@ export default (
         onOrderConfirmed = () => {},
     }) => {
     const productIds = Object.keys(cart);
+    const isShopper = user && user.permissions.indexOf(permissions.SHOP) !== -1;
     return (
         <div>
-            {user ? (
+            {isShopper ? (
                 <div>
                     <ul>
                         {productIds.map((id) => {
