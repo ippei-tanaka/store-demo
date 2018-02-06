@@ -3,9 +3,7 @@ import LogoutButtonContainer from '@/web-client/containers/LogoutButtonContainer
 
 export default () => (
     <div id="AdminHomePage">
-        <h1>Admin Home Page</h1>
-        <LogoutButtonContainer>
-            Logout
-        </LogoutButtonContainer>
+        <h2>Admin Home</h2>
+        <LogoutButtonContainer>Logout</LogoutButtonContainer>
     </div>
 );

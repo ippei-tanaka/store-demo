@@ -43,22 +43,6 @@ export const verifyToken = async ({token}) => {
     };
 };
 
-/*
-export const authorizeAs = async (permission) =>
-{
-    let state = store.getState();
-
-    if (state.user && state.user.token)
-    {
-        store.dispatch(await verifyToken({token: state.user.token}));
-    }
-
-    state = store.getState();
-
-    return state.user && (state.user.permissions.indexOf(permission) !== -1);
-};
-*/
-
 export const logout = async () => ({
     type: LOGOUT,
     payload: null,
