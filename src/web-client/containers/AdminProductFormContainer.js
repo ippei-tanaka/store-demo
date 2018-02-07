@@ -1,18 +1,23 @@
 import {connect} from 'react-redux';
 import AdminProductForm from '@/web-client/components/AdminProductForm';
-import {createProduct} from '@/web-client/actions/admin';
+import {createProduct, updateProduct} from '@/web-client/actions/admin';
 
-const mapStateToProps = ({admin}, props) => {
-    const product = admin.adminProductList.find((product) => product.id === props.id);
+const mapStateToProps = ({admin}, {id}) => {
+    const product = admin.adminProductList.find((product) => product.id === id);
     return {
         defaultValues: product
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, {id}) => {
     return {
         onSubmit: (formData) => {
-            dispatch(createProduct(formData));
+            if (!id)
+            {
+                dispatch(createProduct(formData));
+            } else {
+                dispatch(updateProduct(id, formData));
+            }
         },
     };
 };
