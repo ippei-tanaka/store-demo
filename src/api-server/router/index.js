@@ -1,6 +1,7 @@
 import path from 'path';
 import {Router} from 'express';
 import graphqlHTTP from 'express-graphql';
+import {GraphQLError} from 'graphql';
 import adminSchema from '@/api-server/graphql-schemas/admin-schema';
 import adminResolvers from '@/api-server/resolvers/admin-resolvers';
 import authSchema from '@/api-server/graphql-schemas/auth-schema';
@@ -17,9 +18,9 @@ const router = new Router();
 const identifyUser = async (request, response, next) => {
     const token = pickBackReferences(request.get('Authorization'),
         /Bearer (\S+)/)[0] || '';
-    const {isValid, userId} = await verifyToken(token);
-    if (isValid && userId) {
-        request.user = await findUserById(userId);
+    const {isValid, user} = await verifyToken(token);
+    if (isValid && user) {
+        request.user = await findUserById(user.id);
     }
     next();
 };
@@ -30,7 +31,17 @@ const authorize = (permission) => {
         if (user && user.id && R.contains(permission, user.permissions)) {
             next();
         } else {
-            response.json({errors: [new Error('Unauthorized')]});
+            const error = new Error('Unauthorized.');
+            response.json({
+                errors: [
+                    {
+                        message: error.message,
+                        locations: error.locations,
+                        stack: error.stack,
+                        path: error.path
+                    },
+                ],
+            });
         }
     };
 };
@@ -38,21 +49,21 @@ const authorize = (permission) => {
 router.use('/auth', graphqlHTTP(() => ({
     schema: authSchema,
     rootValue: authResolvers,
-    graphiql: true,
+    // graphiql: true,
 })));
 
 router.use('/shop', identifyUser, authorize(SHOP), graphqlHTTP((request) => ({
     schema: shopSchema,
     rootValue: shopResolvers,
     context: {user: request.user},
-    graphiql: true,
+    // graphiql: true,
 })));
 
 router.use('/admin', identifyUser, authorize(ADMIN), graphqlHTTP((request) => ({
     schema: adminSchema,
     rootValue: adminResolvers,
     context: {user: request.user},
-    graphiql: true,
+    // graphiql: true,
 })));
 
 export default router;

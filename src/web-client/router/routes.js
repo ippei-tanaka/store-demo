@@ -5,6 +5,7 @@ import HomePage from '@/web-client/components/HomePage';
 import ProductDetailPage from '@/web-client/components/ProductDetailPage';
 import CheckOutPage from '@/web-client/components/CheckOutPage';
 import AdminHomePage from '@/web-client/components/AdminHomePage';
+import AdminProductManagerPage from '@/web-client/components/AdminProductManagerPage';
 
 export default [
     {
@@ -45,13 +46,23 @@ export default [
                 <AdminRootContainer>{child}</AdminRootContainer>
             );
         },
-        children: [{
-            path: '',
-            async action() {
-                return (
-                    <AdminHomePage/>
-                );
+        children: [
+            {
+                path: '',
+                async action() {
+                    return (
+                        <AdminHomePage/>
+                    );
+                },
             },
-        }]
+            {
+                path: '/product-manager',
+                async action() {
+                    return (
+                        <AdminProductManagerPage/>
+                    );
+                },
+            },
+        ],
     },
 ];

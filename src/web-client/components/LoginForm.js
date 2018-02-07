@@ -2,7 +2,7 @@ import React from 'react';
 import {Form, Text} from 'react-form';
 
 export default ({onSubmit}) => (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit} defaultValues={{username:'store-owner', password:'password'}}>
         {formApi => (
             <form onSubmit={formApi.submitForm}>
                 <label htmlFor="username">User Name</label>

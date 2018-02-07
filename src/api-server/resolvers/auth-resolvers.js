@@ -3,6 +3,10 @@ import crypto from 'crypto';
 import UserModel from '@/api-server/mongo-models/user';
 
 const SECRET = crypto.randomBytes(24).toString('hex');
+const DEFAULT_TOKEN_OPTIONS = {
+    //expiresIn: '5s'
+    //expiresIn: '1h'
+};
 
 export default {
     verifyToken: async ({input}) => {
@@ -38,7 +42,7 @@ export default {
 
         const user = await UserModel.findOne({name: username});
         if (user && await user.comparePassword(password)) {
-            const tokenOptions = context.tokenOptions || {};
+            const tokenOptions = {...DEFAULT_TOKEN_OPTIONS, ...context.tokenOptions};
             return {
                 token: jwt.sign({id: user.id}, SECRET, tokenOptions),
             };

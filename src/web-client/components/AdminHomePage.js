@@ -1,9 +1,9 @@
 import React from 'react';
-import LogoutButtonContainer from '@/web-client/containers/LogoutButtonContainer';
+import Link from '@/web-client/components/Link';
 
 export default () => (
     <div id="AdminHomePage">
         <h2>Admin Home</h2>
-        <LogoutButtonContainer>Logout</LogoutButtonContainer>
+        <Link href="/admin/product-manager">Product Manager</Link>
     </div>
 );

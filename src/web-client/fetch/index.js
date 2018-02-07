@@ -24,6 +24,11 @@ export const fetchDataFromGraphQlPath = async ({path, query, token, options}) =>
         body: JSON.stringify({query}),
     }, options);
 
+    if (token)
+    {
+        _options.headers['Authorization'] = 'Bearer ' + token;
+    }
+
     const reqponse = await fetchFromPath({
         path,
         options: _options,

@@ -4,6 +4,7 @@ import promiseMiddleware from 'redux-promise';
 import {createStore, applyMiddleware} from 'redux';
 import {saveState, loadState} from '@/web-client/local-storage';
 import throttle from 'lodash/throttle';
+import loggerMiddleware from 'redux-logger';
 
 const persistedState = loadState();
 
@@ -13,7 +14,7 @@ const store = createStore(
     applyMiddleware(
         promiseMiddleware,
         //thunkMiddleware,
-        //loggerMiddleware // neat middleware that logs actions
+        loggerMiddleware
     ),
 );
 

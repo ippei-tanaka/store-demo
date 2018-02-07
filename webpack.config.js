@@ -18,14 +18,6 @@ module.exports = {
                 include: [path.resolve(__dirname, 'src')],
                 loader: 'babel-loader',
             },
-            // {
-            //     test: /\.html$/,
-            //     include: [path.resolve(__dirname, "src")],
-            //     loader: "file-loader",
-            //     options: {
-            //         name: "[path][name].[ext]"
-            //     }
-            // }
         ],
     },
 
@@ -37,16 +29,6 @@ module.exports = {
     },
 
     devtool: 'source-map',
-
-    //target: "node",
-
-    //context: path.resolve(__dirname, "src"),
-
-    // plugins: [new HtmlWebpackPlugin({
-    //     title: "Store Demo 343",
-    //     filename: path.resolve(__dirname, "src/web-client/assets/index.html"),
-    //     //template: path.resolve(__dirname, "src/client/index.html")
-    // })],
 
     devServer: {
         contentBase: path.join(__dirname, 'src/web-client/static'),

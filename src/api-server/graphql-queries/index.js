@@ -23,7 +23,7 @@ export const findUserById = async (id) => {
 };
 
 export const verifyToken = async (token) => {
-    const query = `query { verifyToken (input: {token: "${token}"}) { isValid, userId } }`;
-    const {data} = await graphql(authSchema, query, authResolvers);
-    return data.verifyToken;
+    const query = `query { verifyToken (input: {token: "${token}"}) { isValid, user { id } } }`;
+    const response = await graphql(authSchema, query, authResolvers);
+    return response.data.verifyToken;
 };

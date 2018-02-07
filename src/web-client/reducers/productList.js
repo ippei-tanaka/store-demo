@@ -1,4 +1,6 @@
-const productList = (state = [
+import {CREATE_PRODUCT, LOAD_PRODUCT_LIST} from '@/web-client/actions';
+
+const initialState = [
     {
         name: 'Shampoo',
         id: 0,
@@ -17,7 +19,18 @@ const productList = (state = [
         description: 'Something to drink.',
         price: 16.80,
     },
-], action) => {
+];
+
+const productList = (state = initialState, {type, payload}) => {
+    if (type === LOAD_PRODUCT_LIST)
+    {
+        return payload;
+    } else if (type === CREATE_PRODUCT)
+    {
+        const _state = Array.from(state);
+        _state.push(payload);
+        return _state;
+    }
     return state;
 };
 
