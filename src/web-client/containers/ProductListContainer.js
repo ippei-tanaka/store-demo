@@ -21,7 +21,7 @@ class ProductListContainer extends Component
 {
     componentDidMount ()
     {
-        //this.props.loadProductList();
+        this.props.loadProductList();
     }
 
     render ()

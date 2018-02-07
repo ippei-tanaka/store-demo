@@ -3,7 +3,7 @@ import {Form, Text} from 'react-form';
 
 export default (
     {
-        product,
+        product = {},
         onSubmit = () => {}
     }) => (
     <div>

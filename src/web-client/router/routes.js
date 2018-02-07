@@ -63,6 +63,14 @@ export default [
                     );
                 },
             },
+            {
+                path: '/products/:id',
+                async action({params}) {
+                    return (
+                        <AdminProductManagerPage id={params.id}/>
+                    );
+                },
+            },
         ],
     },
 ];
