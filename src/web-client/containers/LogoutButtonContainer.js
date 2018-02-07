@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import LogoutButton from '@/web-client/components/LogoutButton';
-import {logout} from '@/web-client/actions';
+import {logout} from '@/web-client/actions/auth';
 
 const mapDispatchToProps = (dispatch) => {
     return {

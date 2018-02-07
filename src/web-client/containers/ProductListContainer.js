@@ -1,11 +1,11 @@
 import {connect} from 'react-redux';
 import ProductList from '@/web-client/components/ProductList';
 import React, {Component} from 'react';
-import {loadProductList} from '@/web-client/actions';
+import {loadProductList} from '@/web-client/actions/shop';
 
 const mapStateToProps = (state) => {
     return {
-        productList: state.productList,
+        productList: state.shop.productList,
     };
 };
 
@@ -26,8 +26,9 @@ class ProductListContainer extends Component
 
     render ()
     {
+        const {productList} = this.props;
         return (
-            <ProductList {...this.props} />
+            <ProductList productList={productList} />
         );
     }
 }

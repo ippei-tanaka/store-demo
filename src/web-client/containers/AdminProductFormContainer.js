@@ -1,9 +1,9 @@
 import {connect} from 'react-redux';
 import AdminProductForm from '@/web-client/components/AdminProductForm';
-import {createProduct} from '@/web-client/actions';
+import {createProduct} from '@/web-client/actions/admin';
 
-const mapStateToProps = ({productList}, props) => {
-    const product = productList.find((product) => product.id === props.id);
+const mapStateToProps = ({admin}, props) => {
+    const product = admin.adminProductList.find((product) => product.id === props.id);
     return {
         defaultValues: product
     };

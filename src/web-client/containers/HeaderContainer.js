@@ -3,7 +3,7 @@ import Header from '@/web-client/components/Header';
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user,
+        userName: state.user.name,
     };
 };
 

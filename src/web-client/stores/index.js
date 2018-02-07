@@ -20,12 +20,7 @@ const store = createStore(
 
 store.subscribe(throttle(() => {
     const state = store.getState();
-    saveState(
-        {
-            cart: state.cart,
-            user: state.user
-        },
-    );
+    saveState(state);
 }, 1000));
 
 export default store;

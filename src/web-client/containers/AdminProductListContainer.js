@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import AdminProductList from '@/web-client/components/AdminProductList';
-import {loadAdminProductList} from '@/web-client/actions';
+import {loadAdminProductList} from '@/web-client/actions/admin';
 
 const mapStateToProps = (state) => {
     return {
-        productList: state.productList
+        productList: state.admin.adminProductList
     };
 };
 

@@ -1,9 +1,9 @@
-import user from '@/web-client/reducers/user';
-import cart from '@/web-client/reducers/cart';
-import productList from '@/web-client/reducers/productList';
+import auth from '@/web-client/reducers/auth';
+import admin from '@/web-client/reducers/admin';
+import shop from '@/web-client/reducers/shop';
 
 export default (state = {}, action) => ({
-    user: user(state.user, action),
-    productList: productList(state.productList, action),
-    cart: cart(state.cart, action),
+    auth: auth(state.auth, action),
+    admin: admin(state.admin, action),
+    shop: shop(state.shop, action),
 });

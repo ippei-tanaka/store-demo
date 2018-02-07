@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import Cart from '@/web-client/components/Cart';
-import {removeFromCart} from '@/web-client/actions';
+import {removeFromCart} from '@/web-client/actions/shop';
 
 const mapStateToProps = (state) => {
     return {

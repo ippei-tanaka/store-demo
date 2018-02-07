@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import AdminRoot from '@/web-client/components/AdminRoot';
-import {verifyToken} from '@/web-client/actions/auth';
-import {permissions} from '@/web-client/auth';
+import ShopRoot from '@/web-client/components/ShopRoot';
+// import {verifyToken} from '@/web-client/actions/auth';
+// import {permissions} from '@/web-client/auth';
 
 const mapStateToProps = ({auth}) => {
     return {

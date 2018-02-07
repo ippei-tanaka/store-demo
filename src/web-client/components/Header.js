@@ -5,14 +5,14 @@ import LogoutButtonContainer from '@/web-client/containers/LogoutButtonContainer
 
 const Header = (
     {
-        user
+        userName
     }) => {
     return (
         <header id="Header">
             <h1><Link href="/">Store Demo</Link></h1>
-            {user ? (
+            {userName ? (
                 <div>
-                    <p>Hello! {user.name}.</p>
+                    <p>Hello! {userName}.</p>
                     <LogoutButtonContainer>Logout</LogoutButtonContainer>
                 </div>
             ) : (
