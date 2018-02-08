@@ -1,25 +1,15 @@
 @import '../../styles/colors.css';
 
-.inputContainer {
-  display: table;
-  margin-bottom: 15px;
-}
-
-.inputElementSet {
-  display: table-row;
-}
-
-.inputElementPart {
-  display: table-cell;
-  padding: 5px;
-}
-
 .inputElement{
   font-size: 1rem;
   border-radius: 2px;
   border: 1px solid #ccc;
-  padding: 3px;
+  padding: 5px;
   background: #fff;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  margin-bottom: 10px;
 }
 
 .submitButton

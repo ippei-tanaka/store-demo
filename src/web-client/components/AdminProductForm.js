@@ -1,17 +1,14 @@
 import React, {Component} from 'react';
 import uniqueId from 'lodash/uniqueId';
 
-export default class AdminProductForm extends Component
-{
-    constructor (props)
-    {
+export default class AdminProductForm extends Component {
+    constructor(props) {
         super(props);
         this.formElements = {};
         this.uniqueId = uniqueId('AdminProductForm');
     }
 
-    render ()
-    {
+    render() {
         return (
             <form onSubmit={this.onSubmitForm.bind(this)}>
                 <label htmlFor={`${this.uniqueId}-Name`}>Product Name</label>
@@ -22,7 +19,8 @@ export default class AdminProductForm extends Component
                     ref={this.onReferenceElement.bind(this)}
                 />
                 <br/>
-                <label htmlFor={`${this.uniqueId}-Description`}>Description</label>
+                <label
+                    htmlFor={`${this.uniqueId}-Description`}>Description</label>
                 <input
                     name="description"
                     type="text"
@@ -43,17 +41,14 @@ export default class AdminProductForm extends Component
         );
     }
 
-    onSubmitForm (event)
-    {
+    onSubmitForm(event) {
         event.preventDefault();
         const {onSubmit} = this.props;
         const values = {};
-        for (let key of Object.keys(this.formElements))
-        {
+        for (let key of Object.keys(this.formElements)) {
             const element = this.formElements[key];
             let value = element.value;
-            if (element.getAttribute('type') === 'number')
-            {
+            if (element.getAttribute('type') === 'number') {
                 value = Number.parseInt(value);
             }
             values[key] = value;
@@ -61,11 +56,14 @@ export default class AdminProductForm extends Component
         onSubmit(values);
     }
 
-    onReferenceElement (element)
-    {
+    onReferenceElement(element) {
         if (!element) return;
         const name = element.getAttribute('name');
         this.formElements[name] = element;
-        element.value = this.props.defaultValues[name];
+
+        const {defaultValues = {}} = this.props;
+        if (defaultValues[name]) {
+            element.value = defaultValues[name];
+        }
     }
 }
