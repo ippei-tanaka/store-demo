@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import AdminRoot from '@/web-client/components/AdminRoot';
-import {verifyToken} from '@/web-client/actions/auth';
 import {permissions} from '@/web-client/auth';
 
 const mapStateToProps = ({auth}) => {
@@ -10,21 +9,8 @@ const mapStateToProps = ({auth}) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        verifyToken: () => {
-            dispatch(verifyToken());
-        },
-    };
-};
-
 class AdminRootContainer extends Component
 {
-    componentDidMount ()
-    {
-        this.props.verifyToken();
-    }
-
     render ()
     {
         const {auth, children} = this.props;
@@ -38,5 +24,5 @@ class AdminRootContainer extends Component
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminRootContainer);
+export default connect(mapStateToProps, null)(AdminRootContainer);
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import ShopRoot from '@/web-client/components/ShopRoot';
+import AppRootContainer from '@/web-client/containers/AppRootContainer';
+import ShopRootContainer from '@/web-client/containers/ShopRootContainer';
 import AdminRootContainer from '@/web-client/containers/AdminRootContainer';
 import HomePage from '@/web-client/components/HomePage';
 import ProductDetailPage from '@/web-client/components/ProductDetailPage';
@@ -9,67 +10,89 @@ import AdminProductManagerPage from '@/web-client/components/AdminProductManager
 
 export default [
     {
-        path: '/',
-        async action() {
-            return (
-                <ShopRoot>
-                    <HomePage/>
-                </ShopRoot>
-            );
-        },
-    },
-    {
-        path: '/products/:id',
-        async action({params}) {
-            return (
-                <ShopRoot>
-                    <ProductDetailPage id={params.id}/>
-                </ShopRoot>
-            );
-        },
-    },
-    {
-        path: '/checkout',
-        async action() {
-            return (
-                <ShopRoot>
-                    <CheckOutPage/>
-                </ShopRoot>
-            );
-        },
-    },
-    {
-        path: '/admin',
+        path: '',
         async action({next}) {
-            const child = await next();
+            const children = await next();
             return (
-                <AdminRootContainer>{child}</AdminRootContainer>
+                <AppRootContainer>
+                    {children}
+                </AppRootContainer>
             );
         },
         children: [
             {
+                path: '/admin',
+                async action({next}) {
+                    const children = await next();
+                    return (
+                        <AdminRootContainer>
+                            {children}
+                        </AdminRootContainer>
+                    );
+                },
+                children: [
+                    {
+                        path: '',
+                        async action() {
+                            return (
+                                <AdminHomePage/>
+                            );
+                        },
+                    },
+                    {
+                        path: '/product-manager',
+                        async action() {
+                            return (
+                                <AdminProductManagerPage/>
+                            );
+                        },
+                    },
+                    {
+                        path: '/products/:id',
+                        async action({params}) {
+                            return (
+                                <AdminProductManagerPage id={params.id}/>
+                            );
+                        },
+                    },
+                ],
+            },
+            {
                 path: '',
-                async action() {
+                async action({next}) {
+                    const children = await next();
                     return (
-                        <AdminHomePage/>
+                        <ShopRootContainer>
+                            {children}
+                        </ShopRootContainer>
                     );
                 },
-            },
-            {
-                path: '/product-manager',
-                async action() {
-                    return (
-                        <AdminProductManagerPage/>
-                    );
-                },
-            },
-            {
-                path: '/products/:id',
-                async action({params}) {
-                    return (
-                        <AdminProductManagerPage id={params.id}/>
-                    );
-                },
+                children: [
+                    {
+                        path: '',
+                        async action() {
+                            return (
+                                <HomePage/>
+                            );
+                        },
+                    },
+                    {
+                        path: '/products/:id',
+                        async action({params}) {
+                            return (
+                                <ProductDetailPage id={params.id}/>
+                            );
+                        },
+                    },
+                    {
+                        path: '/checkout',
+                        async action() {
+                            return (
+                                <CheckOutPage/>
+                            );
+                        },
+                    },
+                ],
             },
         ],
     },
