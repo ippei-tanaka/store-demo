@@ -1,12 +1,13 @@
 @import '../../styles/colors.css';
 
-.inputElement{
+.select{
   font-size: 1rem;
   border-radius: 2px;
   border: 1px solid #ccc;
   padding: 5px;
   background: #fff;
   width: 100%;
+  height: 40px;
   display: block;
   box-sizing: border-box;
   margin-bottom: 10px;

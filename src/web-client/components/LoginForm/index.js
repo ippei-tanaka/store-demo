@@ -1,47 +1,5 @@
 import React, {Component} from 'react';
-//import {Form, Text} from 'react-form';
 import styles from '@/web-client/components/LoginForm/style.css';
-//import uniqueId from 'lodash/uniqueId';
-
-/*
-export default ({onSubmit}) => (
-    <Form
-        onSubmit={onSubmit}
-        defaultValues={{
-            username: 'store-owner',
-            password: 'password',
-        }}
-    >
-        {formApi => (
-            <form
-                onSubmit={formApi.submitForm}
-            >
-                <div className={styles.inputContainer}>
-                    <div className={styles.inputElementSet}>
-                        <span className={styles.inputElementPart}>
-                            <label htmlFor="username">User Name</label>
-                        </span>
-                        <span className={styles.inputElementPart}>
-                            <Text className={styles.inputElement} field="username" type="text"/>
-                        </span>
-                    </div>
-                    <div className={styles.inputElementSet}>
-                        <span className={styles.inputElementPart}>
-                            <label htmlFor="password">Password</label>
-                        </span>
-                        <span className={styles.inputElementPart}>
-                            <Text className={styles.inputElement} field="password" type="password"/>
-                        </span>
-                    </div>
-                </div>
-                <div>
-                    <button className={styles.submitButton} type="submit">Login</button>
-                </div>
-            </form>
-        )}
-    </Form>
-);
-*/
 
 export default class LoginForm extends Component
 {
@@ -55,23 +13,32 @@ export default class LoginForm extends Component
     {
         return (
             <form onSubmit={this.onSubmitForm.bind(this)}>
-                <input
+                <select
+                    className={styles.select}
+                    ref={this.referenceElement.bind(this)}
                     name="username"
-                    type="text"
-                    className={styles.inputElement}
-                    ref={this.onReferenceElement.bind(this)}
-                    placeholder="User Name"
-                />
+                    onChange={this.onChangeUsernameSelect.bind(this)}
+                >
+                    <option value="">Select User</option>
+                    <option value="shopper" password="shopperpassword">Shopper</option>
+                    <option value="store-owner" password="password">Store Owner</option>
+                </select>
                 <input
+                    type="hidden"
                     name="password"
-                    type="password"
-                    className={styles.inputElement}
-                    ref={this.onReferenceElement.bind(this)}
-                    placeholder="Password"
+                    ref={this.referenceElement.bind(this)}
                 />
                 <button className={styles.submitButton} type="submit">Login</button>
             </form>
         );
+    }
+
+    onChangeUsernameSelect (event)
+    {
+        const selectElement = event.currentTarget;//.querySelector('opt');
+        const value = selectElement.value;
+        const optionElement = selectElement.querySelector(`option[value="${value}"]`);
+        this.formElements.password.value = optionElement.getAttribute('password');
     }
 
     onSubmitForm (event)
@@ -92,11 +59,15 @@ export default class LoginForm extends Component
         onSubmit(values);
     }
 
-    onReferenceElement (element)
+    referenceElement (element)
     {
         if (!element) return;
         const name = element.getAttribute('name');
         this.formElements[name] = element;
-        //element.value = this.props.defaultValues[name];
+
+        const {defaultValues = {}} = this.props;
+        if (defaultValues[name]) {
+            element.value = defaultValues[name];
+        }
     }
 }
