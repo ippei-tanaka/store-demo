@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import uniqueId from 'lodash/uniqueId';
+import styles from '@/web-client/components/AdminProductForm/style.css';
 
 export default class AdminProductForm extends Component {
     constructor(props) {

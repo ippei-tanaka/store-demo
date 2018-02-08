@@ -1,7 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import AdminProductList from '@/web-client/components/AdminProductList';
-import {loadAdminProductList} from '@/web-client/actions/admin';
+import {
+    createProduct,
+    loadAdminProductList,
+    updateProduct,
+    deleteProduct
+} from '@/web-client/actions/admin';
 
 const mapStateToProps = (state) => {
     return {
@@ -13,6 +18,18 @@ const mapDispatchToProps = (dispatch) => {
     return {
         loadProductList: () => {
             dispatch(loadAdminProductList());
+        },
+
+        createProduct: (formData) => {
+            dispatch(createProduct(formData));
+        },
+
+        updateProduct: (id, formData) => {
+            dispatch(updateProduct(id, formData));
+        },
+
+        deleteProduct: (id) => {
+            dispatch(deleteProduct(id));
         },
     };
 };
@@ -26,9 +43,19 @@ class AdminProductListContainer extends Component
 
     render ()
     {
-        const {productList} = this.props;
+        const {
+            productList,
+            createProduct,
+            updateProduct,
+            deleteProduct
+        } = this.props;
         return (
-            <AdminProductList productList={productList} />
+            <AdminProductList
+                productList={productList}
+                onCreateProduct={createProduct}
+                onUpdateProduct={updateProduct}
+                onDeleteProduct={deleteProduct}
+            />
         );
     }
 }

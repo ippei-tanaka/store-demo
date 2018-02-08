@@ -1,5 +1,5 @@
 .container {
-  //background: #dfdfdf;
+  font-family: 'Lato', Helvetica, Arial, sans-serif;
 }
 
 .list {
@@ -21,6 +21,7 @@
   border: 0;
   width: 100%;
   background: #f3f3f3;
+  font-family: inherit;
 
   &:hover {
     background: #ffffff;

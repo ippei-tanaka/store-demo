@@ -1,5 +1,6 @@
+@import "../../styles/colors.css";
+
 .container {
-  font-family: 'Lato', sans-serif;
   background: #f0f0f0;
   height: 100%;
   position: absolute;
@@ -14,36 +15,47 @@
 
 .headerContainer {
   width: 100%;
-  background: red;
 }
 
 .bodyContainer {
-  background: green;
   display: flex;
   flex-grow: 1;
 }
 
 .navContainer {
+  min-width: 210px;
   width: 210px;
-  transition: width 0.3s;
+  transition: min-width 0.3s, width 0.3s;
   overflow-x: hidden;
   background: #e7e7e7;
+  border-right: 1px solid #cccccc;
+  box-sizing: border-box;
 
   &.hidden {
+    min-width: 0;
     width: 0;
   }
 }
 
-.navInnerContainer {
-  position: relative;
-  left: 0;
-  transition: left 0.3s;
-}
-
-.hidden .navInnerContainer {
-  //left: -210px;
-}
-
 .mainContentContainer {
+  flex-grow: 1;
+  padding: 40px;
+  line-height: 1.4;
+  color: #333;
+  background: #ffffff;
+  overflow: auto;
+  box-sizing: border-box;
 
+  & h1 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+
+  & p {
+    margin-bottom: 30px;
+  }
+
+  & a {
+    color: var(--link-color);
+  }
 }

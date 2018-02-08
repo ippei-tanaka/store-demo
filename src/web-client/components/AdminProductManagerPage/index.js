@@ -3,9 +3,9 @@ import AdminProductFormContainer from '@/web-client/containers/AdminProductFormC
 import AdminProductListContainer from '@/web-client/containers/AdminProductListContainer';
 
 export default ({id} = {}) => (
-    <div id="AdminHomePage">
-        <h2>Admin Product Manager</h2>
-        <AdminProductFormContainer id={id} />
+    <div>
+        <h1>Admin Product Manager</h1>
+        {/* <AdminProductFormContainer id={id} /> */}
         <AdminProductListContainer />
     </div>
 );

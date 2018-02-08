@@ -29,9 +29,7 @@ export default class AdminRoot extends Component
                         </div>
                         <div className={styles.bodyContainer}>
                             <div className={styles.navContainer + ' ' + (this.state.isNavVisible ? '' : styles.hidden)}>
-                                <div className={styles.navInnerContainer}>
-                                    <AdminNavigation/>
-                                </div>
+                                <AdminNavigation/>
                             </div>
                             <div className={styles.mainContentContainer}>
                                 {children}
