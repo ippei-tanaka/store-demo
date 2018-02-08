@@ -1,0 +1,36 @@
+@import '../../styles/colors.css';
+
+.inputContainer {
+  display: table;
+  margin-bottom: 15px;
+}
+
+.inputElementSet {
+  display: table-row;
+}
+
+.inputElementPart {
+  display: table-cell;
+  padding: 5px;
+}
+
+.inputElement{
+  font-size: 1rem;
+  border-radius: 2px;
+  border: 1px solid #ccc;
+  padding: 3px;
+  background: #fff;
+}
+
+.submitButton
+{
+  display: block;
+  border: 0;
+  background: var(--proceed-button-backgound-color);
+  color: var(--proceed-button-base-text-color);
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 1rem;
+}

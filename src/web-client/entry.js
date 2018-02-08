@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import store from '@/web-client/stores';
 import history from '@/web-client/history';
 import router from '@/web-client/router';
+import '@/web-client/styles/base.css';
 
 const render = async (location) => {
     const element = await router.resolve(location);

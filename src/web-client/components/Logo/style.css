@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  align-items: center;
+}
+
+.iconContainer {
+  font-size: 3rem;
+  margin-right: 15px;
+}
+
+.text {
+  font-size: 2.5rem;
+  font-family: 'Fjalla One', sans-serif;
+}

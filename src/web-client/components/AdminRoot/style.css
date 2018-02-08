@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One|Lato');
+
+.container {
+  font-family: 'Lato', sans-serif;
+  background: #f0f0f0;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.logoContainer {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
