@@ -36,6 +36,18 @@ describe('createProduct', () => {
         const {data} = await graphql(adminSchema, query, adminResolvers);
         expect(data.createProduct.id).toBeTruthy();
     });
+
+    it('should fail if the price is negative', async () => {
+        const query = `
+            mutation { 
+                createProduct (input: {name: "my product", price: -19, description: "test"})
+                { id }
+            }
+        `;
+        const {errors, data} = await graphql(adminSchema, query, adminResolvers);
+        expect(errors).toBeTruthy();
+        expect(data.createProduct).toBeFalsy();
+    });
 });
 
 describe('findProductById', () => {
