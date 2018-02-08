@@ -4,5 +4,5 @@ import routes from '@/web-client/router/routes';
 export const basename = '';
 
 export default new UniversalRouter(routes, {
-    baseUrl: basename,
+    baseUrl: basename
 });

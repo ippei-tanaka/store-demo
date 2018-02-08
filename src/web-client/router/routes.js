@@ -7,6 +7,7 @@ import ProductDetailPage from '@/web-client/components/ProductDetailPage';
 import CheckOutPage from '@/web-client/components/CheckOutPage';
 import AdminHomePage from '@/web-client/components/AdminHomePage';
 import AdminProductManagerPage from '@/web-client/components/AdminProductManagerPage';
+import AdminUserManagerPage from '@/web-client/components/AdminUserManagerPage';
 
 export default [
     {
@@ -48,13 +49,13 @@ export default [
                         },
                     },
                     {
-                        path: '/products/:id',
-                        async action({params}) {
+                        path: '/user-manager',
+                        async action() {
                             return (
-                                <AdminProductManagerPage id={params.id}/>
+                                <AdminUserManagerPage/>
                             );
                         },
-                    },
+                    }
                 ],
             },
             {
