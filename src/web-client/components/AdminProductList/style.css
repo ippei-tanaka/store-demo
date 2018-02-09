@@ -79,11 +79,6 @@
   {
     border-color: var(--link-color);
   }
-
-  &:active
-  {
-    border-color: color(var(--link-color) lightness(50%));
-  }
 }
 
 .saveButton

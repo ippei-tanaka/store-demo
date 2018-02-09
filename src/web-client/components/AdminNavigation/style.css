@@ -1,3 +1,5 @@
+@import "../../styles/colors.css";
+
 .container {
   font-family: 'Lato', Helvetica, Arial, sans-serif;
 }
@@ -22,9 +24,15 @@
   width: 100%;
   background: #f3f3f3;
   font-family: inherit;
+  box-sizing: border-box;
+  outline: 0;
 
   &:hover {
     background: #ffffff;
+  }
+
+  &:focus {
+    border-right: 1px solid var(--link-color);
   }
 }
 
