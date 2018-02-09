@@ -3,10 +3,16 @@ import adminSchema from '@/api-server/graphql-schemas/admin-schema';
 import adminResolvers from '@/api-server/resolvers/admin-resolvers';
 import authSchema from '@/api-server/graphql-schemas/auth-schema';
 import authResolvers from '@/api-server/resolvers/auth-resolvers';
-import {ADMIN} from '@/api-server/permissions';
+import {ADMIN, SHOP} from '@/api-server/permissions';
 
 export const createAdmin = async ({name, password}) => {
-    const query = `mutation { createUser (input: {name: "${name}", password: "${password}", permissions:[${ADMIN}]}) { id } }`;
+    const query = `
+        mutation { 
+        createUser (input: {
+            name: "${name}", 
+            password: "${password}", 
+            permissions:[${ADMIN},${SHOP}]
+        }) { id } }`;
     await graphql(adminSchema, query, adminResolvers);
 };
 
