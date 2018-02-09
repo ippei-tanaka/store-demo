@@ -1,6 +1,6 @@
 import {
     LOAD_PRODUCT_LIST
-} from '@/web-client/actions/shop';
+} from '@/web-client/actions/constants';
 
 const initialState = [];
 

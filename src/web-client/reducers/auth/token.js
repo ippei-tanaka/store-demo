@@ -2,7 +2,7 @@ import {
     AUTHENTICATE,
     LOGOUT,
     VERIFY_TOKEN,
-} from '@/web-client/actions/auth';
+} from '@/web-client/actions/constants';
 
 const token = (state = null, {type, payload}) => {
     if (type === AUTHENTICATE

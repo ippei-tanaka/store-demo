@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest -c ./.jestconfig.json",
+    "test": "npm-run-all test:*",
+    "test:integration": "jest -c ./.jestconfig-integration.json",
+    "test:unit": "jest -c ./.jestconfig-unit.json",
     "dev-api-server": "babel-node scripts/run-dev-api-server.js",
     "prd-server": "NODE_ENV=production node scripts/run-prd-api-server.js",
     "dev-web-client-server": "webpack-dev-server",

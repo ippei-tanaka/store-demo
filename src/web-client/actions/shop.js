@@ -1,9 +1,6 @@
 import {fetchDataFromGraphQlPath as fetch} from '@/web-client/fetch';
+import {LOAD_PRODUCT_LIST, ADD_TO_CART, REMOVE_FROM_CART} from '@/web-client/actions/constants';
 import store from '@/web-client/stores';
-
-export const ADD_TO_CART = 'ADD_TO_CART';
-export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
-export const LOAD_PRODUCT_LIST = 'LOAD_PRODUCT_LIST';
 
 export const loadProductList = async () => {
     const state = store.getState();

@@ -1,10 +1,11 @@
 import {fetchDataFromGraphQlPath as fetch} from '@/web-client/fetch';
+import {
+    LOAD_ADMIN_PRODUCT_LIST,
+    CREATE_PRODUCT,
+    UPDATE_PRODUCT,
+    DELETE_PRODUCT
+} from '@/web-client/actions/constants';
 import store from '@/web-client/stores';
-
-export const LOAD_ADMIN_PRODUCT_LIST = 'LOAD_ADMIN_PRODUCT_LIST';
-export const CREATE_PRODUCT = 'CREATE_PRODUCT';
-export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
-export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 
 export const loadAdminProductList = async () => {
     const state = store.getState();

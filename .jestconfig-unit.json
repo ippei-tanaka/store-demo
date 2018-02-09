@@ -1,0 +1,9 @@
+{
+  "verbose": false,
+  "testMatch": [
+    "**/?(*.)(spec|test).js?(x)"
+  ],
+  "roots": [
+    "<rootDir>/test/unit-tests"
+  ]
+}

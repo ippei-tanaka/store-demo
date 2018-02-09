@@ -1,9 +1,6 @@
 import {fetchDataFromGraphQlPath as fetch} from '@/web-client/fetch';
+import {AUTHENTICATE, VERIFY_TOKEN, LOGOUT} from '@/web-client/actions/constants';
 import store from '@/web-client/stores';
-
-export const AUTHENTICATE = 'AUTHENTICATE';
-export const VERIFY_TOKEN = 'VERIFY_TOKEN';
-export const LOGOUT = 'LOGOUT';
 
 export const authenticate = async ({username, password}) => {
     const response1 = await fetch({

@@ -1,7 +1,7 @@
 import {
     ADD_TO_CART,
     REMOVE_FROM_CART,
-} from '@/web-client/actions/shop';
+} from '@/web-client/actions/constants';
 
 const cart = (state = {}, {type, payload}) => {
     if (type === ADD_TO_CART) {
