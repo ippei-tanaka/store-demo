@@ -3,6 +3,9 @@ export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 
+export const OPEN_ADMIN_NAV = 'OPEN_ADMIN_NAV';
+export const CLOSE_ADMIN_NAV = 'CLOSE_ADMIN_NAV';
+
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const VERIFY_TOKEN = 'VERIFY_TOKEN';
 export const LOGOUT = 'LOGOUT';

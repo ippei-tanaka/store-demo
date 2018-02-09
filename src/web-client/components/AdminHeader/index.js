@@ -8,6 +8,7 @@ export default ({onClickToggle = () => {}}) => {
                 <button
                     className={styles.toggleButton}
                     onClick={e => {e.preventDefault(); onClickToggle();}}
+                    title="Toggle Navigation"
                 >
                     <span className={styles.showIconContainer}><i
                         className="fas fa-bars"></i></span>
