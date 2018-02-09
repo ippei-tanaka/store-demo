@@ -4,13 +4,39 @@ import {
     VERIFY_TOKEN,
 } from '@/web-client/actions/constants';
 
-const token = (state = null, {type, payload}) => {
+import {
+    cond,
+    constant,
+    isPlainObject,
+    negate,
+    stubTrue,
+    flow,
+    get,
+    isString,
+    identity
+} from 'lodash/fp';
+
+const initialState = null;
+
+const tokenProcessor =
+    flow([
+        cond([
+            [negate(isPlainObject), constant({})],
+            [stubTrue, identity]
+        ]),
+        get('token'),
+        cond([
+            [negate(isString), constant(initialState)],
+            [stubTrue, identity]
+        ]),
+    ]);
+
+const token = (state = initialState, {type, payload}) => {
     if (type === AUTHENTICATE
         || type === VERIFY_TOKEN) {
-        const {token} = payload;
-        return typeof token === 'string' && token !== '' ? token : null;
+        return tokenProcessor(payload);
     } else if (type === LOGOUT) {
-        return null;
+        return initialState;
     }
     return state;
 };

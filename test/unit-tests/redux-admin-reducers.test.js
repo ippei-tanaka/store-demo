@@ -4,7 +4,11 @@ import {
     CREATE_PRODUCT,
     UPDATE_PRODUCT, DELETE_PRODUCT,
 } from '@/web-client/actions/constants';
-import _ from 'lodash/fp';
+import {
+    dropRight,
+    map,
+    omit
+} from 'lodash/fp';
 
 jest.setTimeout(30000);
 
@@ -82,8 +86,8 @@ describe('adminProductList', () => {
                 type: LOAD_ADMIN_PRODUCT_LIST,
                 payload: products,
             });
-            const decentProducts = _.dropRight(1)(
-                _.map(_.omit(['extra']))(products));
+            const decentProducts = dropRight(1)(
+                map(omit(['extra']))(products));
             expect(newState).toEqual(decentProducts);
         });
 
