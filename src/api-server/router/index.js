@@ -1,13 +1,15 @@
-import path from 'path';
+//import path from 'path';
 import {Router} from 'express';
 import graphqlHTTP from 'express-graphql';
-import {GraphQLError} from 'graphql';
+//import {GraphQLError} from 'graphql';
 import adminSchema from '@/api-server/graphql-schemas/admin-schema';
 import adminResolvers from '@/api-server/resolvers/admin-resolvers';
 import authSchema from '@/api-server/graphql-schemas/auth-schema';
 import authResolvers from '@/api-server/resolvers/auth-resolvers';
-import shopSchema from '@/api-server/graphql-schemas/shop-schema';
-import shopResolvers from '@/api-server/resolvers/shop-resolvers';
+import productSchema from '@/api-server/graphql-schemas/product-schema';
+import productResolvers from '@/api-server/resolvers/product-resolvers';
+import accountSchema from '@/api-server/graphql-schemas/account-schema';
+import accountResolvers from '@/api-server/resolvers/account-resolvers';
 import {pickBackReferences} from '@/api-server/regex-parser';
 import {verifyToken, findUserById} from '@/api-server/graphql-queries';
 import {ADMIN, SHOP} from '@/api-server/permissions';
@@ -46,15 +48,21 @@ const authorize = (permission) => {
     };
 };
 
+router.use('/product', graphqlHTTP(() => ({
+    schema: productSchema,
+    rootValue: productResolvers,
+    // graphiql: true,
+})));
+
 router.use('/auth', graphqlHTTP(() => ({
     schema: authSchema,
     rootValue: authResolvers,
     // graphiql: true,
 })));
 
-router.use('/shop', identifyUser, authorize(SHOP), graphqlHTTP((request) => ({
-    schema: shopSchema,
-    rootValue: shopResolvers,
+router.use('/account', identifyUser, authorize(SHOP), graphqlHTTP((request) => ({
+    schema: accountSchema,
+    rootValue: accountResolvers,
     context: {user: request.user},
     // graphiql: true,
 })));

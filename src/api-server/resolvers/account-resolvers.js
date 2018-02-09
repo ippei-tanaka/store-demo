@@ -1,19 +1,10 @@
-import ProductModel from '@/api-server/mongo-models/product';
 import UserModel from '@/api-server/mongo-models/user';
 import OrderModel from '@/api-server/mongo-models/order';
 import {Types} from 'mongoose';
 
 export default {
-    getViewer: async (params, context = {user: {}}) => {
+    getMyself: async (params, context = {user: {}}) => {
         return UserModel.findById(context.user.id);
-    },
-
-    findProductById: async ({id}) => {
-        return ProductModel.findById(id);
-    },
-
-    getAllProducts: () => {
-        return ProductModel.find();
     },
 
     findOrderById: async ({id}) => {

@@ -1,11 +1,11 @@
 import {graphql} from 'graphql';
 import adminSchema from '@/api-server/graphql-schemas/admin-schema';
 import adminResolvers from '@/api-server/resolvers/admin-resolvers';
-import shopSchema from '@/api-server/graphql-schemas/shop-schema';
-import shopResolvers from '@/api-server/resolvers/shop-resolvers';
+import accountSchema from '@/api-server/graphql-schemas/account-schema';
+import accountResolvers from '@/api-server/resolvers/account-resolvers';
 import {connect, disconnect, dropDatabase} from '@/api-server/mongo-db-driver';
 
-const TEST_DB = 'store-demo-graphql-shop-test';
+const TEST_DB = 'store-demo-graphql-account-test';
 
 beforeAll(async () => await connect({dbName: TEST_DB}));
 beforeEach(async () => await dropDatabase());
@@ -54,7 +54,7 @@ describe('placeOrder', () => {
                 placeOrder (input : [{productId: "${product.id}", quantity: 3}]) { id }
             }
         `;
-        const response = await graphql(shopSchema, mutation, shopResolvers, {user});
+        const response = await graphql(accountSchema, mutation, accountResolvers, {user});
         expect(response.data.placeOrder.id).toBeTruthy();
     });
 
@@ -73,7 +73,7 @@ describe('placeOrder', () => {
                 placeOrder (input : [{productId: "${product.id}", quantity: 0}]) { id }
             }
         `;
-        const response1 = await graphql(shopSchema, query1, shopResolvers, {user});
+        const response1 = await graphql(accountSchema, query1, accountResolvers, {user});
         expect(response1.data.placeOrder).toBeNull();
         expect(response1.errors).toBeTruthy();
         const query2 = `
@@ -81,13 +81,13 @@ describe('placeOrder', () => {
                 placeOrder (input : [{productId: "", quantity: 3}]) { id }
             }
         `;
-        const response2 = await graphql(shopSchema, query2, shopResolvers, {user});
+        const response2 = await graphql(accountSchema, query2, accountResolvers, {user});
         expect(response2.data.placeOrder).toBeNull();
         expect(response2.errors).toBeTruthy();
     });
 });
 
-describe('getViewer', () => {
+describe('getMyself', () => {
     it('should return the viewer.', async () => {
         const user = await createUser({
             name: 'my_name',
@@ -95,76 +95,12 @@ describe('getViewer', () => {
         });
         const query = `
             query { 
-                getViewer { id, name }
+                getMyself { id, name }
             }
         `;
-        const response = await graphql(shopSchema, query, shopResolvers, {user});
-        expect(response.data.getViewer.id).toBeTruthy();
-        expect(response.data.getViewer.name).toBe('my_name');
-    });
-});
-
-describe('findProductById', () => {
-    it('should return a corresponding product.', async () => {
-        const user = await createUser({
-            name: 'my_name',
-            password: 'password1',
-        });
-        const product1 = await createProduct({
-            name: 'Glasses',
-            price: 120,
-            description: 'You\'ll be able to see better.',
-        });
-        const product2 = await createProduct({
-            name: 'Light',
-            price: 20,
-            description: 'You\'ll get a brighter room.',
-        });
-        const query1 = `
-            query { 
-                findProductById (id: "${product1.id}") { id, name }
-            }
-        `;
-        const response1 = await graphql(shopSchema, query1, shopResolvers, {user});
-        expect(response1.data.findProductById.id).toBe(product1.id);
-        expect(response1.data.findProductById.name).toBe(product1.name);
-        const query2 = `
-            query { 
-                findProductById (id: "${product2.id}") { id, name }
-            }
-        `;
-        const response2 = await graphql(shopSchema, query2, shopResolvers, {user});
-        expect(response2.data.findProductById.id).toBe(product2.id);
-        expect(response2.data.findProductById.name).toBe(product2.name);
-    });
-});
-
-describe('getAllProducts', () => {
-    it('should return a list of products.', async () => {
-        const user = await createUser({
-            name: 'my_name',
-            password: 'password1',
-        });
-        const product1 = await createProduct({
-            name: 'Glasses',
-            price: 120,
-            description: 'You\'ll be able to see better.',
-        });
-        const product2 = await createProduct({
-            name: 'Light',
-            price: 20,
-            description: 'You\'ll get a brighter room.',
-        });
-        const query = `
-            query { 
-                getAllProducts { id, name }
-            }
-        `;
-        const response = await graphql(shopSchema, query, shopResolvers, {user});
-        expect(response.data.getAllProducts[0].id).toBe(product1.id);
-        expect(response.data.getAllProducts[0].name).toBe(product1.name);
-        expect(response.data.getAllProducts[1].id).toBe(product2.id);
-        expect(response.data.getAllProducts[1].name).toBe(product2.name);
+        const response = await graphql(accountSchema, query, accountResolvers, {user});
+        expect(response.data.getMyself.id).toBeTruthy();
+        expect(response.data.getMyself.name).toBe('my_name');
     });
 });
 
@@ -192,7 +128,7 @@ describe('findOrderById', () => {
                 ]) { id }
             }
         `;
-        const response1 = await graphql(shopSchema, query1, shopResolvers, {user});
+        const response1 = await graphql(accountSchema, query1, accountResolvers, {user});
         const orderId = response1.data.placeOrder.id;
         const query2 = `
             query { 
@@ -205,7 +141,7 @@ describe('findOrderById', () => {
                 }
             }
         `;
-        const response2 = await graphql(shopSchema, query2, shopResolvers, {user});
+        const response2 = await graphql(accountSchema, query2, accountResolvers, {user});
         expect(response2.data.findOrderById.id).toBe(orderId);
         expect(response2.data.findOrderById.items[0].productId).toBe(product1.id);
         expect(response2.data.findOrderById.items[0].quantity).toBe(2);
@@ -237,7 +173,7 @@ describe('getAllOrders', () => {
                 ]) { id }
             }
         `;
-        const response1 = await graphql(shopSchema, query1, shopResolvers, {user});
+        const response1 = await graphql(accountSchema, query1, accountResolvers, {user});
         const orderId1 = response1.data.placeOrder.id;
         const query2 = `
             mutation { 
@@ -247,7 +183,7 @@ describe('getAllOrders', () => {
                 ]) { id }
             }
         `;
-        const response2 = await graphql(shopSchema, query2, shopResolvers, {user});
+        const response2 = await graphql(accountSchema, query2, accountResolvers, {user});
         const orderId2 = response2.data.placeOrder.id;
 
         const user2 = await createUser({
@@ -261,7 +197,7 @@ describe('getAllOrders', () => {
                 ]) { id }
             }
         `;
-        const response3 = await graphql(shopSchema, query3, shopResolvers, {user: user2});
+        const response3 = await graphql(accountSchema, query3, accountResolvers, {user: user2});
         const orderId3 = response3.data.placeOrder.id;
 
         const query4 = `
@@ -269,7 +205,7 @@ describe('getAllOrders', () => {
                 getAllOrders {id}
             }
         `;
-        const response4 = await graphql(shopSchema, query4, shopResolvers, {user});
+        const response4 = await graphql(accountSchema, query4, accountResolvers, {user});
         expect(response4.data.getAllOrders[0].id).toBe(orderId1);
         expect(response4.data.getAllOrders[1].id).toBe(orderId2);
         expect(response4.data.getAllOrders).toHaveLength(2);
@@ -279,7 +215,7 @@ describe('getAllOrders', () => {
                 getAllOrders {id}
             }
         `;
-        const response5 = await graphql(shopSchema, query5, shopResolvers, {user: user2});
+        const response5 = await graphql(accountSchema, query5, accountResolvers, {user: user2});
         expect(response5.data.getAllOrders[0].id).toBe(orderId3);
         expect(response5.data.getAllOrders).toHaveLength(1);
     });

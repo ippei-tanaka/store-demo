@@ -3,9 +3,7 @@ import {graphql} from '@/api-server/template-string-tag';
 
 const schema = graphql`
     type Query {
-        getViewer: User
-        findProductById(id: ID!): Product
-        getAllProducts: [Product!]
+        getMyself: User
         findOrderById(id: ID!): Order
         getAllOrders: [Order!]
     }
@@ -13,14 +11,6 @@ const schema = graphql`
     type Mutation {
         placeOrder(input: [OrderItemInput!]): Order
         updateUser(input: ExistingUserInput!): User
-    }
-
-    type Product {
-        id: ID!
-        name: String!
-        description: String!
-        price: Int!
-        image: String
     }
 
     type Order {
