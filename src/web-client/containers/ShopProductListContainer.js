@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import ProductList from '@/web-client/components/ProductList';
+import ShopProductList from '@/web-client/components/ShopProductList';
 import React, {Component} from 'react';
 import {loadProductList} from '@/web-client/actions/product';
 
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-class ProductListContainer extends Component
+class ShopProductListContainer extends Component
 {
     componentDidMount ()
     {
@@ -28,10 +28,10 @@ class ProductListContainer extends Component
     {
         const {productList} = this.props;
         return (
-            <ProductList productList={productList} />
+            <ShopProductList productList={productList} />
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductListContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ShopProductListContainer);
 

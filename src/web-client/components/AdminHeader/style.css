@@ -6,9 +6,8 @@
 }
 
 .toggleButton {
-  display: block;
   width: 100%;
-  padding: 10px 15px;
+  padding: 0 15px;
   background: #f3f3f3;
   cursor: pointer;
   text-align: left;
@@ -16,7 +15,13 @@
   font-size: 0.8rem;
   box-sizing: border-box;
   border: 1px solid #cccccc;
+  border-left: 0;
+  border-right: 0;
   outline: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
 
   &:hover {
     background: #fefefe;
@@ -29,4 +34,20 @@
 
 .toggleText {
   display: none;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.logoIconContainer {
+  font-size: 1.5rem;
+  margin-right: 8px;
+}
+
+.logoText {
+  font-size: 1.1rem;
+  font-family: 'Fjalla One', sans-serif;
 }

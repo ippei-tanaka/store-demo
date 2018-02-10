@@ -11,7 +11,7 @@ export default ({focusable = true}) => {
                     <li className={styles.listItem}>
                         <Link href="/admin" className={styles.link} tabIndex={focusable ? '0' : '-1'}>
                             <span className={styles.linkIconContainer}><i className="fas fa-home"></i></span>
-                            <span className={styles.linkText}>Home</span>
+                            <span className={styles.linkText}>Admin Home</span>
                         </Link>
                     </li>
                     <li className={styles.listItem}>
@@ -24,6 +24,12 @@ export default ({focusable = true}) => {
                         <Link href="/admin/user-manager" className={styles.link} tabIndex={focusable ? '0' : '-1'}>
                             <span className={styles.linkIconContainer}><i className="fas fa-user"></i></span>
                             <span className={styles.linkText}>User Manager</span>
+                        </Link>
+                    </li>
+                    <li className={styles.listItem}>
+                        <Link href="/" className={styles.link} tabIndex={focusable ? '0' : '-1'}>
+                            <span className={styles.linkIconContainer}><i className="fas fa-link"></i></span>
+                            <span className={styles.linkText}>Shop Home</span>
                         </Link>
                     </li>
                     <li className={styles.listItem}>
