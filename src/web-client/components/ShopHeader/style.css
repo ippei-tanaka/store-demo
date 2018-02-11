@@ -1,0 +1,111 @@
+@import '../../styles/media.css';
+@import './variables.css';
+
+.container {
+  padding: 20px 30px  20px 20px;
+  height: var(--header-height);
+  box-sizing: border-box;
+  background: #97cd15;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  position: fixed;
+}
+
+@media (--small-screen) {
+  .container {
+    padding: 20px 20px  20px 10px;
+    position: static;
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+  }
+}
+
+.logoLink {
+  color: #ffff00;
+  text-decoration: none;
+  padding: 15px;
+  outline: 0;
+  border-radius: 4px;
+  display: flex;
+  white-space: nowrap;
+
+  &:hover, &:focus {
+    background: #668815;
+  }
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logoIconContainer {
+  font-size: 2.5rem;
+  margin-right: 15px;
+}
+
+.logoText {
+  font-size: 2.1rem;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (--small-screen) {
+  .menu {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.menuItem {
+  margin-left: 5px;
+  display: flex;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+@media (--small-screen) {
+  .menuItem {
+    margin-left: 0;
+  }
+}
+
+.menuButton {
+  cursor: pointer;
+  font-size: 1.3rem;
+  border: 0;
+  background: transparent;
+  color: #5f810e;
+  padding: 15px;
+  outline: 0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+  &:hover, &:focus {
+    background: #668815;
+    color: #fff;
+  }
+}
+
+@media (--small-screen) {
+  .menuButton {
+    font-size: 1.1rem;
+  }
+}
+
+.menuButtonText {
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-left: 5px;
+}
