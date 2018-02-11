@@ -19,6 +19,9 @@
   .header {
     padding: 20px 25px  20px 10px;
     position: static;
+    flex-direction: column;
+    height: auto;
+    align-items: center;
   }
 }
 
@@ -42,7 +45,7 @@
 }
 
 .menuItem {
-  margin-left: 10px;
+  margin-left: 5px;
   display: flex;
 
   &:first-child {
@@ -50,15 +53,9 @@
   }
 }
 
-@media (width <= 500px) {
-  .menuItem {
-    margin-left: 5px;
-  }
-}
-
 .menuButton {
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   border: 0;
   background: transparent;
   color: #5f810e;
@@ -77,8 +74,14 @@
 
 @media (width <= 500px) {
   .menuButton {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
   }
+}
+
+.menuButtonText {
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-left: 5px;
 }
 
 .bodyContent {
