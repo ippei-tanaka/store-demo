@@ -2,8 +2,8 @@ import React from 'react';
 import AppRootContainer from '@/web-client/containers/AppRootContainer';
 import ShopRootContainer from '@/web-client/containers/ShopRootContainer';
 import AdminRootContainer from '@/web-client/containers/AdminRootContainer';
-import HomePage from '@/web-client/components/HomePage';
-import ProductDetailPage from '@/web-client/components/ProductDetailPage';
+import ShopHomePage from '@/web-client/components/ShopHomePage';
+import ShopProductDetailPage from '@/web-client/components/ShopProductDetailPage';
 import CheckOutPage from '@/web-client/components/CheckOutPage';
 import AdminHomePage from '@/web-client/components/AdminHomePage';
 import AdminProductManagerPage from '@/web-client/components/AdminProductManagerPage';
@@ -73,15 +73,15 @@ export default [
                         path: '',
                         async action() {
                             return (
-                                <HomePage/>
+                                <ShopHomePage/>
                             );
                         },
                     },
                     {
-                        path: '/products/:id',
+                        path: '/products/:productId',
                         async action({params}) {
                             return (
-                                <ProductDetailPage id={params.id}/>
+                                <ShopProductDetailPage productId={params.productId}/>
                             );
                         },
                     },
