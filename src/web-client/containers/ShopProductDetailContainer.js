@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import ShopProductDetail from '@/web-client/components/ShopProductDetail';
 import React, {Component} from 'react';
-import {loadProductList} from '@/web-client/actions/product';
+import {loadProductList, addToCart} from '@/web-client/actions/shop';
 
 const mapStateToProps = (state) => {
     return {
@@ -14,6 +14,9 @@ const mapDispatchToProps = (dispatch) => {
         loadProductList: () => {
             dispatch(loadProductList());
         },
+        addToCart: ({productId, quantity}) => {
+            dispatch(addToCart({productId, quantity}));
+        }
     };
 };
 
@@ -26,10 +29,13 @@ class ShopProductDetailContainer extends Component
 
     render ()
     {
-        const {productId, productList} = this.props;
+        const {productId, productList, addToCart} = this.props;
         const product = productList.find(product => product.id === productId);
         return (
-            <ShopProductDetail product={product} />
+            <ShopProductDetail
+                product={product}
+                onSubmit={({quantity}) => addToCart({productId, quantity})}
+            />
         );
     }
 }

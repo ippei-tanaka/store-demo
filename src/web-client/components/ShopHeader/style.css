@@ -15,10 +15,9 @@
 
 @media (--small-screen) {
   .container {
-    padding: 20px 20px  20px 10px;
-    position: static;
+    padding: 8px;
     flex-direction: column;
-    height: auto;
+    height: var(--header-height-small-screen);
     align-items: center;
   }
 }
@@ -37,6 +36,12 @@
   }
 }
 
+@media (--small-screen) {
+  .logoLink {
+    padding: 5px;
+  }
+}
+
 .logoContainer {
   display: flex;
   align-items: center;
@@ -47,9 +52,20 @@
   margin-right: 15px;
 }
 
+@media (--small-screen) {
+  .logoIconContainer {
+    font-size: 1.5rem;
+  }
+}
 .logoText {
   font-size: 2.1rem;
   font-family: 'Fjalla One', sans-serif;
+}
+
+@media (--small-screen) {
+  .logoText {
+    font-size: 1.2rem;
+  }
 }
 
 .menu {
@@ -59,7 +75,6 @@
 
 @media (--small-screen) {
   .menu {
-    flex-wrap: wrap;
     justify-content: center;
   }
 }
@@ -67,6 +82,7 @@
 .menuItem {
   margin-left: 5px;
   display: flex;
+  position: relative;
 
   &:first-child {
     margin-left: 0;
@@ -100,7 +116,8 @@
 
 @media (--small-screen) {
   .menuButton {
-    font-size: 1.1rem;
+    padding: 8px;
+    font-size: 1.0rem;
   }
 }
 
@@ -108,4 +125,35 @@
   font-size: 0.9rem;
   display: inline-block;
   margin-left: 5px;
+  white-space: nowrap;
+}
+
+@media (--small-screen) {
+  .menuButton {
+    font-size: 0.8rem;
+  }
+}
+
+.bubbleContainer {
+  display: inline-block;
+  position: absolute;
+  top: 60px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  z-index: 10;
+  opacity: 1;
+  transition: opacity 0.4s, top 0.4s;
+  color: #fff;
+
+  &.bubbleHidden {
+    top: 30px;
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+@media (--small-screen) {
+  .bubbleContainer {
+    top: 50px;
+  }
 }

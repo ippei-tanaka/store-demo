@@ -1,5 +1,5 @@
 import rootReducer from '../reducers';
-//import thunkMiddleware from 'redux-thunk';
+import thunkMiddleware from 'redux-thunk';
 import promiseMiddleware from 'redux-promise';
 import {createStore, applyMiddleware} from 'redux';
 import {saveState, loadState} from '@/web-client/local-storage';
@@ -13,7 +13,7 @@ const store = createStore(
     persistedState,
     applyMiddleware(
         promiseMiddleware,
-        //thunkMiddleware,
+        thunkMiddleware,
         loggerMiddleware
     ),
 );

@@ -7,12 +7,17 @@
 }
 
 .bodyContent {
-  padding: calc(var(--header-height) + 20px) 35px 70px 35px;
+  padding: calc(var(--header-height) + 30px) 35px 100px;
+  display: flex;
+  flex-direction: row;
+  max-width: 900px;
+  margin: 0 auto;
+  justify-content: center;
 }
 
 @media (--small-screen) {
   .bodyContent {
-    padding-top: 20px;
+    padding-top: calc(var(--header-height-small-screen) + 30px);
   }
 }
 

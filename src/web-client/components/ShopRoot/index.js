@@ -1,12 +1,12 @@
 import React from 'react';
-import ShopHeader from '@/web-client/components/ShopHeader';
+import ShopHeaderContainer from '@/web-client/containers/ShopHeaderContainer';
 import styles from '@/web-client/components/ShopRoot/style.css';
 
 export default ({children}) => {
     return (
         <div>
             <header>
-                <ShopHeader />
+                <ShopHeaderContainer />
             </header>
             <div className={styles.bodyContent}>
                 {children}

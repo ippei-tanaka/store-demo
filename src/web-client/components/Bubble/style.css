@@ -1,0 +1,28 @@
+.speechBubble {
+  background: #6dc200;
+  border-radius: 0.4em;
+  display: inline-block;
+  padding: 10px 15px;
+  position: relative;
+}
+
+@media (--small-screen) {
+  .speechBubble {
+    top: 50px;
+  }
+}
+
+.speechBubble:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: 8px solid transparent;
+  border-bottom-color: #6dc200;
+  border-top: 0;
+  border-left: 0;
+  margin-left: -4px;
+  margin-top: -8px;
+}
