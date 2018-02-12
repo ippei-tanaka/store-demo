@@ -12,7 +12,7 @@ const OrderItemSchema = new Schema({
             validator: (v) => v === Number.parseInt(v) && v > 0,
         },
     },
-});
+}, { _id : false });
 
 const schema = new Schema({
     userId: {
@@ -21,7 +21,10 @@ const schema = new Schema({
     },
     items: {
         type: [OrderItemSchema],
-        require: true
+        require: true,
+        validate: {
+            validator: (items) => Array.isArray(items) && items.length > 0,
+        },
     },
 });
 

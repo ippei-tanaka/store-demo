@@ -4,6 +4,7 @@ import {
     REMOVE_FROM_CART,
     LOAD_PRODUCT_LIST,
     REMOVE_BUBBLE_TEXT_ON_CART_BUTTON,
+    PLACE_ORDER,
 } from '@/web-client/actions/constants';
 
 export const addToCart = async ({productId, quantity}) => (dispatch, getState) => {
@@ -24,6 +25,25 @@ export const removeFromCart = async ({productId, quantity}) => ({
         quantity,
     },
 });
+
+export const placeOrder = async () => async (dispatch, getState) => {
+    const {shop:{cart}, auth: {token}} = getState();
+    const orderString = Object.keys(cart).map(productId => `{productId: "${productId}", quantity: ${cart[productId]}}`).join(',');
+    const response = await fetch({
+        path: '/account',
+        query: `
+            mutation {
+                placeOrder (input: [${orderString}]) { id }
+            }
+        `,
+        token: token,
+    });
+    dispatch({
+        type: PLACE_ORDER,
+        orderId: response.data.placeOrder.id
+    });
+};
+
 
 export const removeBubbleTextOnCartButton = async () => ({
     type: REMOVE_BUBBLE_TEXT_ON_CART_BUTTON,

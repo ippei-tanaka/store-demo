@@ -58,10 +58,10 @@ export default class ShopHeader extends Component {
                         </button>
                     </li>
                     <li className={styles.menuItem}>
-                        <button className={styles.menuButton} title="Cart">
+                        <Link href="/cart" className={styles.menuButton} title="Cart">
                             <i className="fas fa-shopping-cart"></i>
                             <span className={styles.menuButtonText}>Cart</span>
-                        </button>
+                        </Link>
                         <span
                             ref={e => {
                                 this.bubble = e;

@@ -1,11 +1,13 @@
 import {
     ADD_TO_CART,
     REMOVE_FROM_CART,
+    PLACE_ORDER,
 } from '@/web-client/actions/constants';
 
 const cart = (state = {}, {type, payload}) => {
     if (type === ADD_TO_CART) {
-        const {quantity, productId} = payload;
+        const {quantity, product} = payload;
+        const productId = product.id;
 
         if (typeof quantity !== 'number' || isNaN(quantity)) {
             return state;
@@ -17,7 +19,8 @@ const cart = (state = {}, {type, payload}) => {
             [productId]: currentQuantity + quantity,
         };
     } else if (type === REMOVE_FROM_CART) {
-        const {quantity, productId} = payload;
+        const {quantity, product} = payload;
+        const productId = product.id;
 
         if (typeof quantity !== 'number' || isNaN(quantity)) {
             return state;
@@ -36,6 +39,8 @@ const cart = (state = {}, {type, payload}) => {
                 [productId]: newQuantity,
             };
         }
+    } else if (type === PLACE_ORDER) {
+        return {};
     }
     return state;
 };

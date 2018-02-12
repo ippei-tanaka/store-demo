@@ -23,7 +23,6 @@ const initialState = {
 
 const ui = (state = initialState, {type, payload}) => {
     if (type === ADD_TO_CART) {
-        console.log(payload);
         return Object.assign({}, state, {bubbleTextOnCartButton: constructMessage(payload)});
     } else if (type === REMOVE_BUBBLE_TEXT_ON_CART_BUTTON)
     {

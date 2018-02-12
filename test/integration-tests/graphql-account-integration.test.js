@@ -84,6 +84,14 @@ describe('placeOrder', () => {
         const response2 = await graphql(accountSchema, query2, accountResolvers, {user});
         expect(response2.data.placeOrder).toBeNull();
         expect(response2.errors).toBeTruthy();
+        const query3 = `
+            mutation { 
+                placeOrder (input : []) { id }
+            }
+        `;
+        const response3 = await graphql(accountSchema, query3, accountResolvers, {user});
+        expect(response3.data.placeOrder).toBeNull();
+        expect(response3.errors).toBeTruthy();
     });
 });
 

@@ -4,7 +4,7 @@ import ShopRootContainer from '@/web-client/containers/ShopRootContainer';
 import AdminRootContainer from '@/web-client/containers/AdminRootContainer';
 import ShopHomePage from '@/web-client/components/ShopHomePage';
 import ShopProductDetailPage from '@/web-client/components/ShopProductDetailPage';
-import CheckOutPage from '@/web-client/components/CheckOutPage';
+import ShopCartPage from '@/web-client/components/ShopCartPage';
 import AdminHomePage from '@/web-client/components/AdminHomePage';
 import AdminProductManagerPage from '@/web-client/components/AdminProductManagerPage';
 import AdminUserManagerPage from '@/web-client/components/AdminUserManagerPage';
@@ -86,10 +86,10 @@ export default [
                         },
                     },
                     {
-                        path: '/checkout',
+                        path: '/cart',
                         async action() {
                             return (
-                                <CheckOutPage/>
+                                <ShopCartPage/>
                             );
                         },
                     },

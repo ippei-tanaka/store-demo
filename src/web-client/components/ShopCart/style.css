@@ -1,0 +1,67 @@
+@import '../../styles/media.css';
+
+.tableContainer {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-color: rgba(255, 255, 255, 0.60);
+  margin-bottom: 10px;
+}
+
+.table {
+  width: 100%;
+  font-size: 1rem;
+
+  & td {
+    padding: 8px;
+  }
+
+  & thead td {
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.60);
+  }
+
+  & tbody tr:nth-child(2n+1) td {
+    background: rgba(255, 255, 255, 0.20);
+  }
+}
+
+.nameLink {
+  font-weight: bold;
+  outline: 0;
+  text-decoration: none;
+  color: #333;
+
+  &:hover, &:focus {
+    text-decoration: underline;
+  }
+}
+
+.totalContainer {
+  padding: 8px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.orderButton {
+  vertical-align: middle;
+  display: inline-block;
+  border-radius: 5px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  background: #15aa10;
+  border: 1px solid #0e700b;
+  cursor: pointer;
+  outline: 0;
+  color: #fff;
+
+  &:hover, &:focus {
+    color: #fff;
+    background: #094507;
+  }
+}
+
+.thankYouPane {
+  color: #ffff00;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
