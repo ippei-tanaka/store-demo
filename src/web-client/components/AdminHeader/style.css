@@ -5,8 +5,14 @@
   background: #e9e9e9;
 }
 
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .toggleButton {
-  width: 100%;
+  width: 210px;
   padding: 0 15px;
   background: #f3f3f3;
   cursor: pointer;
@@ -16,7 +22,6 @@
   box-sizing: border-box;
   border: 1px solid #cccccc;
   border-left: 0;
-  border-right: 0;
   outline: 0;
   display: flex;
   justify-content: space-between;
@@ -30,24 +35,38 @@
   &:focus {
     border-color: var(--link-color);
   }
+
+  &.hidden {
+    visibility: hidden;
+  }
 }
 
 .toggleText {
   display: none;
 }
 
-.logoContainer {
+.linkContainer {
   display: flex;
   align-items: center;
   font-size: 1.2rem;
+  padding: 0 23px;
+  height: 50px;
+  box-sizing: border-box;
+  text-decoration: none;
+  color: #333;
+  outline: 0;
+
+  &:hover, &:focus {
+    color: green;
+  }
 }
 
-.logoIconContainer {
-  font-size: 1.5rem;
-  margin-right: 8px;
-}
-
-.logoText {
+.linkIconContainer {
   font-size: 1.1rem;
-  font-family: 'Fjalla One', sans-serif;
+  margin-right: 10px;
+}
+
+.linkText {
+  font-size: 0.9rem;
+  //font-family: 'Fjalla One', sans-serif;
 }

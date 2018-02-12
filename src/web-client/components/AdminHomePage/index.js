@@ -6,7 +6,7 @@ export default () => {
         <div>
             <h1>Admin Home Page</h1>
             <p>Thank you for coming to Store Demo.</p>
-            <p>Please check out <Link href="/">the shop site</Link> as well.</p>
+            <p>Please check out <Link href="/">the shopping site</Link> as well.</p>
         </div>
     );
 }

@@ -11,13 +11,20 @@ export default ({children, isAdmin, openNav, onClickToggleButton, isLoggedIn}) =
     if (!isLoggedIn)
     {
         return (
-            <div className={styles.loginPanelContainer}>
-                <div className={styles.loginPane}>
-                    <h1 className={styles.logoContainer}>
-                        <span className={styles.logoIconContainer}><i className="fas fa-bolt"></i></span>
-                        <span className={styles.logoText}>Store Demo</span>
-                    </h1>
-                    <LoginFormContainer/>
+            <div className={styles.container}>
+                <div className={styles.headerContainer}>
+                    <AdminHeader
+                        isLoggedIn={isLoggedIn}
+                        onClickToggle={() => onClickToggleButton(!openNav)}/>
+                </div>
+                <div className={styles.loginPanelContainer}>
+                    <div className={styles.loginPane}>
+                        <h1 className={styles.logoContainer}>
+                            <span className={styles.logoIconContainer}><i className="fas fa-bolt"></i></span>
+                            <span className={styles.logoText}>Store Demo</span>
+                        </h1>
+                        <LoginFormContainer/>
+                    </div>
                 </div>
             </div>
         );
@@ -44,6 +51,7 @@ export default ({children, isAdmin, openNav, onClickToggleButton, isLoggedIn}) =
         <div className={styles.container}>
             <div className={styles.headerContainer}>
                 <AdminHeader
+                    isLoggedIn={isLoggedIn}
                     onClickToggle={() => onClickToggleButton(!openNav)}/>
             </div>
             <div className={styles.bodyContainer}>

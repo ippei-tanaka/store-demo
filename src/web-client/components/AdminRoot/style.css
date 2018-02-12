@@ -63,7 +63,6 @@
 .loginPanelContainer {
   background: #f0f0f0;
   height: 100%;
-  position: absolute;
   width: 100%;
   top: 0;
   left: 0;
@@ -71,7 +70,7 @@
   justify-content: center;
   align-content: center;
   align-items: center;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 .loginPane {
