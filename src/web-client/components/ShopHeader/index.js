@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Link from '@/web-client/components/Link';
+import LogoutButtonContainer from '@/web-client/containers/LogoutButtonContainer';
 import styles from '@/web-client/components/ShopHeader/style.css';
 import Bubble from '@/web-client/components/Bubble';
 import debounce from 'lodash/debounce';
@@ -39,7 +40,8 @@ export default class ShopHeader extends Component {
     {
         const {
             bubbleTextOnCartButton = '',
-            onBubbleTextDisappear = () => {}
+            onBubbleTextDisappear = () => {},
+            isLoggedIn
         } = this.props;
 
         return (
@@ -51,12 +53,14 @@ export default class ShopHeader extends Component {
                     </span>
                 </Link>
                 <menu className={styles.menu}>
-                    <li className={styles.menuItem}>
-                        <button className={styles.menuButton} title="Login">
-                            <i className="fas fa-user"></i>
-                            <span className={styles.menuButtonText}>Login</span>
-                        </button>
-                    </li>
+                    {isLoggedIn ? (
+                        <li className={styles.menuItem}>
+                            <LogoutButtonContainer className={styles.menuButton}>
+                                <i className="fas fa-sign-out-alt"></i>
+                                <span className={styles.menuButtonText}>Logout</span>
+                            </LogoutButtonContainer>
+                        </li>
+                    ) : null}
                     <li className={styles.menuItem}>
                         <Link href="/cart" className={styles.menuButton} title="Cart">
                             <i className="fas fa-shopping-cart"></i>

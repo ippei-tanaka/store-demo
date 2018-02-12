@@ -5,33 +5,20 @@ import {
     removeBubbleTextOnCartButton,
 } from '@/web-client/actions/shop';
 
-const mapStateToProps = (state) => {
-    return {
-        bubbleTextOnCartButton: state.shop.ui.bubbleTextOnCartButton,
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        removeBubbleTextOnCartButton: () => {
-            dispatch(removeBubbleTextOnCartButton());
-        }
-    };
-};
-
 class ShopHeaderContainer extends Component
 {
     render ()
     {
-        const {bubbleTextOnCartButton, removeBubbleTextOnCartButton} = this.props;
+        const {shop, dispatch, auth}  = this.props;
         return (
             <ShopHeader
-                bubbleTextOnCartButton={bubbleTextOnCartButton}
-                onBubbleTextDisappear={removeBubbleTextOnCartButton}
+                bubbleTextOnCartButton={shop.ui.bubbleTextOnCartButton}
+                onBubbleTextDisappear={() => dispatch(removeBubbleTextOnCartButton())}
+                isLoggedIn={!!auth.token}
             />
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShopHeaderContainer);
+export default connect(s => s, dispatch => ({dispatch}))(ShopHeaderContainer);
 
