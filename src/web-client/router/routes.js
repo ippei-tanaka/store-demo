@@ -5,6 +5,7 @@ import AdminRootContainer from '@/web-client/containers/AdminRootContainer';
 import ShopHomePage from '@/web-client/components/ShopHomePage';
 import ShopProductDetailPage from '@/web-client/components/ShopProductDetailPage';
 import ShopCartPage from '@/web-client/components/ShopCartPage';
+import ThankYouPage from '@/web-client/components/ThankYouPage';
 import AdminHomePage from '@/web-client/components/AdminHomePage';
 import AdminProductManagerPage from '@/web-client/components/AdminProductManagerPage';
 import AdminUserManagerPage from '@/web-client/components/AdminUserManagerPage';
@@ -90,6 +91,14 @@ export default [
                         async action() {
                             return (
                                 <ShopCartPage/>
+                            );
+                        },
+                    },
+                    {
+                        path: '/thank-you',
+                        async action() {
+                            return (
+                                <ThankYouPage/>
                             );
                         },
                     },

@@ -5,24 +5,12 @@ import styles from '@/web-client/components/ShopCart/style.css';
 
 export default class ShopHeader extends Component {
 
-    constructor (props)
-    {
-        super(props);
-        this.state = {
-            orderPlaced: false
-        };
-    }
-
-    componentDidMount ()
-    {
-        this.setState({orderPlaced: false});
-    }
-
     render ()
     {
         const {
             order = [],
             onOrderConfirmed = () => {},
+            onClickRemoveButton = () => {},
             isLoggedIn
         } = this.props;
 
@@ -30,13 +18,14 @@ export default class ShopHeader extends Component {
         {
             return (
                 <div>
+                    <p className={styles.loginMessage}>Please login to check out.</p>
                     <LoginFormContainer/>
                 </div>
             );
         }
 
-        return !this.state.orderPlaced ? (
-            <div>
+        return (
+            <form onSubmit={(e) => {e.preventDefault(); onOrderConfirmed();}}>
                 <div className={styles.tableContainer}>
                     <table className={styles.table}>
                         <thead>
@@ -45,6 +34,7 @@ export default class ShopHeader extends Component {
                                 <td>Price</td>
                                 <td>Quantity</td>
                                 <td>Subtotal</td>
+                                <td>Remove</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -55,6 +45,15 @@ export default class ShopHeader extends Component {
                                         <td>${product.price}</td>
                                         <td>{quantity}</td>
                                         <td>${product.price * quantity}</td>
+                                        <td>
+                                            <button
+                                                className={styles.removeButton}
+                                                onClick={e => {
+                                                    e.preventDefault();
+                                                    onClickRemoveButton({productId: product.id, quantity});
+                                                }}
+                                            ><i className="fas fa-trash-alt"></i></button>
+                                        </td>
                                     </tr>
                                 );
                             })}
@@ -62,17 +61,8 @@ export default class ShopHeader extends Component {
                     </table>
                 </div>
                 <div className={styles.totalContainer}> Total: ${order.reduce((memo, {product, quantity}) => memo + quantity * product.price, 0)}</div>
-                <button className={styles.orderButton} onClick={e => {
-                    e.preventDefault();
-                    onOrderConfirmed();
-                    this.setState({orderPlaced: true});
-                }}>Make Order
-                </button>
-            </div>
-        ) : (
-            <div className={styles.thankYouPane}>
-                Thank you for shopping!
-            </div>
+                <button type="submit" className={styles.orderButton} disabled={order.length === 0}>Make Order</button>
+            </form>
         );
     }
 }

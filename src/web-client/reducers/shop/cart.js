@@ -19,8 +19,7 @@ const cart = (state = {}, {type, payload}) => {
             [productId]: currentQuantity + quantity,
         };
     } else if (type === REMOVE_FROM_CART) {
-        const {quantity, product} = payload;
-        const productId = product.id;
+        const {quantity, productId} = payload;
 
         if (typeof quantity !== 'number' || isNaN(quantity)) {
             return state;

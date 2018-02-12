@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import ShopCart from '@/web-client/components/ShopCart';
-import {placeOrder} from '@/web-client/actions/shop';
+import {placeOrder, removeFromCart} from '@/web-client/actions/shop';
 import {verifyToken} from '@/web-client/actions/auth';
+import history from '@/web-client/history';
 
 class ShopCartContainer extends Component {
 
@@ -24,6 +25,10 @@ class ShopCartContainer extends Component {
                 order={order}
                 onOrderConfirmed={async () => {
                     dispatch(placeOrder());
+                    history.push('/thank-you');
+                }}
+                onClickRemoveButton={({productId, quantity}) => {
+                    dispatch(removeFromCart({productId, quantity}));
                 }}
                 isLoggedIn={isLoggedIn}
             />

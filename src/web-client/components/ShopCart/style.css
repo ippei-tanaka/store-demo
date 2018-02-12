@@ -1,5 +1,10 @@
 @import '../../styles/media.css';
 
+.loginMessage {
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
 .tableContainer {
   border-top: 1px solid;
   border-bottom: 1px solid;
@@ -58,10 +63,26 @@
     color: #fff;
     background: #094507;
   }
+
+  &:disabled {
+    color: #555;
+    background: #aaa;
+    border: 1px solid #999;
+  }
 }
 
-.thankYouPane {
-  color: #ffff00;
-  font-weight: bold;
-  font-size: 1.3rem;
+.removeButton {
+  color: #ff6e7a;
+  background: transparent;
+  border: #ccc;
+  border-radius: 5px;
+  padding: 6px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  outline: 0;
+
+  &:hover, &:focus {
+    color: #fff;
+    background: #ff6e7a;
+  }
 }
