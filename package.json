@@ -10,11 +10,11 @@
     "dev-api-server": "babel-node scripts/run-dev-api-server.js",
     "prd-server": "NODE_ENV=production node scripts/run-prd-api-server.js",
     "dev-web-client-server": "webpack-dev-server",
-    "prd-web-client-server": "babel-node scripts/run-prd-web-client-server.js",
-    "build-server": "npm-run-all build-server:*",
-    "build-server:clear": "rimraf ./build",
-    "build-server:build": "babel ./src --out-dir ./build --ignore ./src/client --copy-files",
-    "build-client": "webpack"
+    "prd-web-client-server": "NODE_ENV=production node scripts/run-prd-web-client-server.js",
+    "build": "npm-run-all build:*",
+    "build:clean": "rimraf ./build",
+    "build:server": "babel ./src --out-dir ./build --copy-files",
+    "build:client": "webpack"
   },
   "author": "",
   "license": "MIT",
