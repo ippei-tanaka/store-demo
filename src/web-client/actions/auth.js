@@ -16,7 +16,8 @@ const setTimeoutForVerifyingToken = (token, dispatch) =>
         timeoutID = null;
     }
 
-    const {exp} = jwtDecode(token);
+    const decodedToken = jwtDecode(token);
+    const {exp} = decodedToken;
     const current = Date.now() / 1000;
     const diff = (exp - current) * 1000;
     timeoutID = setTimeout(() => dispatch(verifyToken()), Math.max(diff, 0));
