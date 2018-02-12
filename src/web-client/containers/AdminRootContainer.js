@@ -2,39 +2,27 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import AdminRoot from '@/web-client/components/AdminRoot';
 import {permissions} from '@/web-client/auth';
-import {
-    openNav,
-    closeNav,
-} from '@/web-client/actions/admin';
+import {verifyToken} from '@/web-client/actions/auth';
+import {openNav, closeNav} from '@/web-client/actions/admin';
 
-const mapStateToProps = ({auth, admin}) => {
-    return {
-        auth: auth,
-        admin: admin,
-    };
-};
+class AdminRootContainer extends Component
+{
+    componentDidMount ()
+    {
+        const {dispatch} = this.props;
+        dispatch(verifyToken());
+    }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        openNav: () => {
-            dispatch(openNav());
-        },
-
-        closeNav: () => {
-            dispatch(closeNav());
-        },
-    };
-};
-
-class AdminRootContainer extends Component {
     render() {
-        const {auth, children, admin, openNav, closeNav} = this.props;
-        const isAdmin = auth.token && auth.user.permissions.indexOf(permissions.ADMIN) !== -1;
+        const {auth, children, admin, dispatch} = this.props;
+        const isLoggedIn = auth.token;
+        const isAdmin = isLoggedIn && auth.user.permissions.indexOf(permissions.ADMIN) !== -1;
         const isNavOpen = admin.ui.isNavOpen;
         return (
             <AdminRoot
                 openNav={isNavOpen}
-                onClickToggleButton={openIt => (openIt ? openNav : closeNav)()}
+                onClickToggleButton={openIt => dispatch(openIt ? openNav() : closeNav())}
+                isLoggedIn={isLoggedIn}
                 isAdmin={isAdmin}
                 children={children}
             />
@@ -42,5 +30,5 @@ class AdminRootContainer extends Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminRootContainer);
+export default connect(s => s, dispatch => ({dispatch}))(AdminRootContainer);
 

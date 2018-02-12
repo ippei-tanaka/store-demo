@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Link from '@/web-client/components/Link';
+import LoginFormContainer from '@/web-client/containers/LoginFormContainer';
 import styles from '@/web-client/components/ShopCart/style.css';
 
 export default class ShopHeader extends Component {
@@ -21,8 +22,18 @@ export default class ShopHeader extends Component {
     {
         const {
             order = [],
-            onOrderConfirmed = () => {}
+            onOrderConfirmed = () => {},
+            isLoggedIn
         } = this.props;
+
+        if (!isLoggedIn)
+        {
+            return (
+                <div>
+                    <LoginFormContainer/>
+                </div>
+            );
+        }
 
         return !this.state.orderPlaced ? (
             <div>

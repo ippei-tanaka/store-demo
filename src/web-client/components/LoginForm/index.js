@@ -19,8 +19,7 @@ export default class LoginForm extends Component
                     name="username"
                     onChange={this.onChangeUsernameSelect.bind(this)}
                 >
-                    <option value="">Select User</option>
-                    <option value="shopper" password="shopperpassword">Shopper</option>
+                    <option value="">- Select User -</option>
                     <option value="store-owner" password="password">Store Owner</option>
                 </select>
                 <input

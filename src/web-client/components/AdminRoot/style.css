@@ -59,3 +59,69 @@
     color: var(--link-color);
   }
 }
+
+.loginPanelContainer {
+  background: #f0f0f0;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.loginPane {
+  margin-bottom: 30px;
+}
+
+.logoContainer {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoIconContainer {
+  font-size: 2.5rem;
+  margin-right: 11px;
+  margin-left: 5px;
+}
+
+.logoText {
+  font-size: 2.1rem;
+  font-family: 'Fjalla One', sans-serif;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.noPermissionMessageContainer {
+  padding: 50px;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.noPermissionMessage {
+  margin-bottom: 40px;
+}
+
+.noPermissionMenu {
+  padding-left: auto;
+  list-style-type: disc;
+}
+
+.noPermissionMenuItem {
+  margin-bottom: 30px;
+}
+
+.noPermissionLogoutButton {
+  font-size: 1rem;
+  border-color: #ccc;
+  background: #f0f0f0;
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+}

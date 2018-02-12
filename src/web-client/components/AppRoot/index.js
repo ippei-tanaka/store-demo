@@ -1,7 +1,8 @@
-import React from 'react';
-import LoginFormContainer from '@/web-client/containers/LoginFormContainer';
-import styles from '@/web-client/components/AppRoot/style.css';
+//import React from 'react';
+//import LoginFormContainer from '@/web-client/containers/LoginFormContainer';
+//import styles from '@/web-client/components/AppRoot/style.css';
 
+/*
 export default ({children, isLoggedin}) => {
     return (
         <div>
@@ -18,4 +19,8 @@ export default ({children, isLoggedin}) => {
             ) : children}
         </div>
     );
+}
+*/
+export default ({children}) => {
+    return children;
 }

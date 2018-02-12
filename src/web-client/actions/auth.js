@@ -1,8 +1,28 @@
 import {fetchDataFromGraphQlPath as fetch} from '@/web-client/fetch';
 import {AUTHENTICATE, VERIFY_TOKEN, LOGOUT} from '@/web-client/actions/constants';
-import store from '@/web-client/stores';
+import jwtDecode from 'jwt-decode';
 
-export const authenticate = async ({username, password}) => {
+let timeoutID = null;
+
+const setTimeoutForVerifyingToken = (token, dispatch) =>
+{
+    if (typeof token !== 'string') {
+        return;
+    }
+
+    if (timeoutID)
+    {
+        clearTimeout(timeoutID);
+        timeoutID = null;
+    }
+
+    const {exp} = jwtDecode(token);
+    const current = Date.now() / 1000;
+    const diff = (exp - current) * 1000;
+    timeoutID = setTimeout(() => dispatch(verifyToken()), Math.max(diff, 0));
+};
+
+export const authenticate = async ({username, password}) => async (dispatch) => {
     const response1 = await fetch({
         path: '/auth',
         query: `
@@ -24,18 +44,19 @@ export const authenticate = async ({username, password}) => {
         `,
     });
     const {isValid, user} = response2.data.verifyToken;
-    return {
+    setTimeoutForVerifyingToken(token, dispatch);
+    dispatch({
         type: AUTHENTICATE,
         payload: {
             token: isValid ? token : null,
             name: user && user.name,
             permissions: user && user.permissions,
         },
-    };
+    });
 };
 
-export const verifyToken = async () => {
-    const state = store.getState();
+export const verifyToken = async () => async (dispatch, getState) => {
+    const state = getState();
     const token = state.auth.token;
     const response = await fetch({
         path: '/auth',
@@ -47,14 +68,15 @@ export const verifyToken = async () => {
         `,
     });
     const {isValid, user} = response.data.verifyToken;
-    return {
+    setTimeoutForVerifyingToken(token, dispatch);
+    dispatch({
         type: VERIFY_TOKEN,
         payload: {
             token: isValid ? token : null,
             name: user && user.name,
             permissions: user && user.permissions,
         },
-    };
+    });
 };
 
 export const logout = async () => ({

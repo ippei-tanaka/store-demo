@@ -29,6 +29,7 @@
     "graphql": "^0.12.3",
     "history": "^4.7.2",
     "jsonwebtoken": "^8.1.1",
+    "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
     "mongoose": "^5.0.1",
     "mongoose-unique-validator": "^2.0.0",
