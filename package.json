@@ -15,7 +15,7 @@
     "build:clean": "rimraf ./build",
     "build:server": "NODE_ENV=production babel ./src --out-dir ./build --copy-files",
     "build:client": "NODE_ENV=production webpack",
-    "build:config": "copyfiles -u 1 config-files/**/config.json build"
+    "build:config": "copyfiles -u 1 'config-files/**/config.json' build"
   },
   "author": "",
   "license": "MIT",
