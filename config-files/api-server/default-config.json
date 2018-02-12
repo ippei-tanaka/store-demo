@@ -1,0 +1,8 @@
+{
+  "http_port": 3000,
+  "database_name": "store-demo",
+  "default_user": {
+    "name": "store-owner",
+    "password": "password"
+  }
+}

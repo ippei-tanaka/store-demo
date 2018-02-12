@@ -13,14 +13,16 @@
     "prd-web-client-server": "NODE_ENV=production node scripts/run-prd-web-client-server.js",
     "build": "npm-run-all build:*",
     "build:clean": "rimraf ./build",
-    "build:server": "babel ./src --out-dir ./build --copy-files",
-    "build:client": "webpack"
+    "build:server": "NODE_ENV=production babel ./src --out-dir ./build --copy-files",
+    "build:client": "NODE_ENV=production webpack",
+    "build:config": "copyfiles -u 1 config-files/**/config.json build"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
+    "copyfiles": "^1.2.0",
     "cors": "^2.8.4",
     "cssnano": "^3.10.0",
     "deep-equal": "^1.0.1",
