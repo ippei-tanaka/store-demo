@@ -1,6 +1,6 @@
 import mongoose, {Schema, Error} from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import validator from 'validator';
 import R from 'ramda';
 

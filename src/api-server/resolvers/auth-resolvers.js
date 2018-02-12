@@ -4,7 +4,7 @@ import UserModel from '@/api-server/mongo-models/user';
 
 const SECRET = crypto.randomBytes(24).toString('hex');
 const DEFAULT_TOKEN_OPTIONS = {
-    expiresIn: '10s'
+    //expiresIn: '10s'
     //expiresIn: '1h'
 };
 
