@@ -4,3 +4,4 @@ mongodb-data/
 .DS_Store
 build/
 config-files/**/config.json
+npm-debug.log

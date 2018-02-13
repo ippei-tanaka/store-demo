@@ -24,9 +24,14 @@ export const start = async (
     const config = JSON.parse(await readFile(configFilePath));
 
     const app = express();
-    app.use('/', express.static(
-        path.resolve(path.dirname(configFilePath), config.static_directory),
-    ));
+
+    const staticDir = path.resolve(path.dirname(configFilePath), config.static_directory);
+
+    app.use('/', express.static(staticDir));
+
+    app.use('*', (request, response) => {
+        response.sendFile(path.resolve(staticDir, 'index.html'));
+    });
 
     await new Promise((resolve) => {
         server = app.listen(config.http_port, resolve);
