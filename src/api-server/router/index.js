@@ -1,7 +1,5 @@
-//import path from 'path';
 import {Router} from 'express';
 import graphqlHTTP from 'express-graphql';
-//import {GraphQLError} from 'graphql';
 import adminSchema from '@/api-server/graphql-schemas/admin-schema';
 import adminResolvers from '@/api-server/resolvers/admin-resolvers';
 import authSchema from '@/api-server/graphql-schemas/auth-schema';
@@ -13,7 +11,6 @@ import accountResolvers from '@/api-server/resolvers/account-resolvers';
 import {pickBackReferences} from '@/api-server/regex-parser';
 import {verifyToken, findUserById} from '@/api-server/graphql-queries';
 import {ADMIN, SHOP} from '@/api-server/permissions';
-import R from 'ramda';
 
 const router = new Router();
 
@@ -30,7 +27,7 @@ const identifyUser = async (request, response, next) => {
 const authorize = (permission) => {
     return (request, response, next) => {
         const user = request.user;
-        if (user && user.id && R.contains(permission, user.permissions)) {
+        if (user && user.id && permission.indexOf(user.permissions) !== -1) {
             next();
         } else {
             const error = new Error('Unauthorized.');

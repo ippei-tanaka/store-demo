@@ -1,7 +1,7 @@
-import {graphql} from '@/api-server/template-string-tag';
+import {buildSchema} from 'graphql';
 import {ADMIN, SHOP} from '@/api-server/permissions';
 
-const schema = graphql`
+const schemaString = `
     type Query {
         verifyToken(input: TokenInput): AuthorizationResult
     }
@@ -40,4 +40,4 @@ const schema = graphql`
     }
 `;
 
-export default schema;
+export default buildSchema(schemaString);

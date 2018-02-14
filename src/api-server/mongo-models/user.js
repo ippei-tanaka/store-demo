@@ -2,7 +2,7 @@ import mongoose, {Schema, Error} from 'mongoose';
 import uniqueValidator from 'mongoose-unique-validator';
 import bcrypt from 'bcryptjs';
 import validator from 'validator';
-import R from 'ramda';
+import overEvery from 'lodash/overEvery';
 
 const SALT_WORK_FACTOR = 10;
 
@@ -39,7 +39,7 @@ schema.virtual('oldPassword').set(function(value) {
     return this._oldPassword;
 });
 
-const validatePassword = R.allPass([
+const validatePassword = overEvery([
     (v) => typeof v === 'string',
     (v) => validator.isLength(v, {
         min: 8,

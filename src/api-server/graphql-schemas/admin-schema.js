@@ -1,7 +1,7 @@
 import {ADMIN, SHOP} from '@/api-server/permissions';
-import {graphql} from '@/api-server/template-string-tag';
+import {buildSchema} from 'graphql';
 
-const schema = graphql`
+const schemaString = `
     type Query {
         findProductById(id: ID!): Product
         getAllProducts: [Product]
@@ -68,4 +68,4 @@ const schema = graphql`
     }
 `;
 
-export default schema;
+export default buildSchema(schemaString);
