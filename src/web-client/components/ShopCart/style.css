@@ -5,45 +5,43 @@
   line-height: 1.4;
 }
 
-.tableContainer {
-  border-top: 1px solid;
-  border-bottom: 1px solid;
-  border-color: rgba(255, 255, 255, 0.60);
-  margin-bottom: 10px;
+.orderList {
+  width: 220px;
 }
 
-.table {
-  width: 100%;
-  font-size: 1rem;
+.orderListItem {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #fff;
+}
 
-  & td {
-    padding: 8px;
-  }
+.productSpecList {
+  margin-bottom: 20px;
+}
 
-  & thead td {
-    font-size: 0.9rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.60);
-  }
+.productSpecName {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 4px;
+}
 
-  & tbody tr:nth-child(2n+1) td {
-    background: rgba(255, 255, 255, 0.20);
-  }
+.productSpecValue {
+  margin-bottom: 15px;
 }
 
 .nameLink {
   font-weight: bold;
   outline: 0;
-  text-decoration: none;
+  text-decoration: underline;
   color: #333;
 
   &:hover, &:focus {
-    text-decoration: underline;
+    color: #398522;
   }
 }
 
 .totalContainer {
-  padding: 8px;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   font-weight: bold;
 }
 
@@ -73,13 +71,14 @@
 
 .removeButton {
   color: #ff6e7a;
-  background: transparent;
-  border: #ccc;
+  background: #fff;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  padding: 6px;
+  padding: 3px;
   font-size: 1.2rem;
   cursor: pointer;
   outline: 0;
+  display: inline-block;
 
   &:hover, &:focus {
     color: #fff;

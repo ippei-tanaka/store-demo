@@ -1,3 +1,5 @@
+@import '../../styles/media.css';
+
 .productList {
   display: flex;
   flex-direction: row;
@@ -10,6 +12,14 @@
   margin: 30px;
 }
 
+@media (--small-screen)
+{
+  .productListItem {
+    width: 100%;
+    margin: 0 0 50px 0;
+  }
+}
+
 .imageLinkContainer {
   margin-bottom: 15px;
   text-align: center;
@@ -20,9 +30,13 @@
   outline: 0;
   border-radius: 20px;
   overflow: hidden;
-  display: inline-block;
+  display: block;
   box-sizing: border-box;
   border: 1px solid #ccc;
+  height: 240px;
+  width: 240px;
+  position: relative;
+  margin: 0 auto;
 
   &:hover, &:focus {
     border-color: #15aa10;
@@ -54,12 +68,12 @@
 }
 
 .noImagePane {
-  height: 320px;
-  width: 240px;
   background: #eee;
   display: flex;
   align-items: center;
   align-content: center;
   justify-content: center;
   color: #777;
+  height: 100%;
+  width: 100%;
 }
