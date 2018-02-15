@@ -14,14 +14,13 @@
 .toggleButton {
   width: 210px;
   padding: 0 15px;
-  background: #f3f3f3;
+  background: transparent;
   cursor: pointer;
   text-align: left;
   color: #555555;
   font-size: 0.8rem;
   box-sizing: border-box;
-  border: 1px solid #cccccc;
-  border-left: 0;
+  border: 0;
   outline: 0;
   display: flex;
   justify-content: space-between;

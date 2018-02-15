@@ -1,4 +1,5 @@
 @import "../../styles/colors.css";
+@import "../../styles/media.css";
 
 .container {
   background: #f0f0f0;
@@ -22,6 +23,12 @@
   flex-grow: 1;
 }
 
+@media (--small-screen) {
+  .bodyContainer {
+    display: block;
+  }
+}
+
 .navContainer {
   min-width: 210px;
   width: 210px;
@@ -34,6 +41,17 @@
   &.hidden {
     min-width: 0;
     width: 0;
+  }
+}
+
+@media (--small-screen) {
+  .navContainer {
+    width: 100%;
+    transition: none;
+
+    &.hidden {
+      height: 0;
+    }
   }
 }
 
