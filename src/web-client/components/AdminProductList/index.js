@@ -1,6 +1,25 @@
 import React, {Component} from 'react';
 import styles from '@/web-client/components/AdminProductList/style.css';
+import {verifyProductName, verifyProductPrice, verifyProductDescription} from '@/validator';
+import {Form, Text} from 'react-form';
 import isNaN from 'lodash/isNaN';
+import compact from 'lodash/compact';
+
+const errorValidator = (values) => {
+    return {
+        name: verifyProductName(values.name) || null,
+        description: verifyProductDescription(values.description) || null,
+        price: verifyProductPrice(values.price) || null,
+    };
+};
+
+const preValidate = (values) => {
+    let price = Number.parseFloat(values.price);
+    price = isNaN(price) ? '' : price;
+    return Object.assign({}, values, {price});
+};
+
+const newItemId = Symbol('new-item');
 
 export default class AdminProductList extends Component {
 
@@ -8,8 +27,7 @@ export default class AdminProductList extends Component {
     {
         super(props);
         this.state = {
-            editedProductId: null,
-            validationErrors: {}
+            editedProductId: null
         };
         this.formElements = {};
     }
@@ -19,70 +37,15 @@ export default class AdminProductList extends Component {
         event.preventDefault();
         const productId = event.currentTarget.getAttribute('productid');
         this.setState({
-            editedProductId: productId,
-            validationErrors: {},
-            creatingNewProduct: false,
+            editedProductId: productId
         });
-    }
-
-    onClickSaveButton (event)
-    {
-        event.preventDefault();
-        const data = {};
-        const errors = {};
-        for (let key of Object.keys(this.formElements))
-        {
-            const element = this.formElements[key];
-            const value = element.getAttribute('type') === 'number'
-                ? Number.parseInt(element.value) : element.value;
-
-            if (typeof value !== 'string' && typeof value !== 'number')
-            {
-                errors[key] = true;
-                continue;
-            }
-
-            if (value === '' || isNaN(value) || value <= 0)
-            {
-                errors[key] = true;
-                continue;
-            }
-
-            data[key] = value;
-        }
-
-        if (Object.keys(errors).length === 0)
-        {
-            if (this.state.editedProductId)
-            {
-                this.props.onUpdateProduct(
-                    this.state.editedProductId,
-                    data
-                );
-            } else {
-                this.props.onCreateProduct(
-                    data
-                );
-            }
-            this.setState({
-                editedProductId: null,
-                validationErrors: {},
-                creatingNewProduct: false
-            });
-        } else {
-            this.setState({
-                validationErrors: errors
-            });
-        }
     }
 
     onClickCancelButton (event)
     {
         event.preventDefault();
         this.setState({
-            editedProductId: null,
-            validationErrors: {},
-            creatingNewProduct: false
+            editedProductId: null
         });
     }
 
@@ -92,9 +55,7 @@ export default class AdminProductList extends Component {
         const productId = event.currentTarget.getAttribute('productid');
         this.props.onDeleteProduct(productId);
         this.setState({
-            editedProductId: null,
-            validationErrors: {},
-            creatingNewProduct: false
+            editedProductId: null
         });
     }
 
@@ -102,152 +63,160 @@ export default class AdminProductList extends Component {
     {
         event.preventDefault();
         this.setState({
-            editedProductId: null,
-            validationErrors: {},
-            creatingNewProduct: true
+            editedProductId: newItemId
         });
+    }
+
+    onSubmitNewItemForm (product, event, {errors})
+    {
+        if (compact(Object.values(errors)).length === 0)
+        {
+            this.props.onCreateProduct(product);
+            this.setState({editedProductId: null});
+        }
+    }
+
+    onSubmitExistingItemForm (product, event, {errors})
+    {
+        if (compact(Object.values(errors)).length === 0)
+        {
+            this.props.onUpdateProduct(product.id, product);
+            this.setState({editedProductId: null});
+        }
     }
 
     render ()
     {
         const {productList} = this.props;
-        const {editedProductId, validationErrors, creatingNewProduct} = this.state;
+        const {editedProductId} = this.state;
         return (
             <div>
-                <table className={styles.table}>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <td className={styles.valueColumn}>Name</td>
-                            <td className={styles.valueColumn}>Description</td>
-                            <td className={styles.valueColumn}>Price</td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {productList.map((product, index) => {
-                            return product.id !== editedProductId ? (
-                                <tr key={product.id}>
-                                    <th>{index + 1}</th>
-                                    <td>{product.name}</td>
-                                    <td>{product.description}</td>
-                                    <td>${product.price}</td>
-                                    <td>
-                                        <button
-                                            onClick={this.onClickEditButton.bind(this)}
-                                            productid={product.id}
-                                            className={styles.editButton}
-                                            title="Edit"
-                                        ><i className="fas fa-pencil-alt"></i></button>
-                                        <button
-                                            onClick={this.onClickDeleteButton.bind(this)}
-                                            productid={product.id}
-                                            className={styles.deleteButton}
-                                            title="Delete"
-                                        ><i className="fas fa-trash"></i></button>
-                                    </td>
-                                </tr>
-                            ) : (
-                                <tr key={product.id} className={styles.editedProductRow}>
-                                    <th>{index + 1}</th>
-                                    <td>
-                                        <input
-                                            type="text"
-                                            name="name"
-                                            defaultValue={product.name}
-                                            className={styles.input + ' ' + (validationErrors.name ? styles.inputError : '')}
-                                            ref={i => this.formElements.name = i}
-                                        />
-                                    </td>
-                                    <td>
-                                        <input
-                                            type="text"
-                                            name="description"
-                                            defaultValue={product.description}
-                                            className={styles.input + ' ' + (validationErrors.description ? styles.inputError : '')}
-                                            ref={i => this.formElements.description = i}
-                                        />
-                                    </td>
-                                    <td>
-                                        <input
-                                            type="number"
-                                            name="price"
-                                            defaultValue={product.price}
-                                            className={styles.input + ' ' + (validationErrors.price ? styles.inputError : '')}
-                                            ref={i => this.formElements.price = i}
-                                        />
-                                    </td>
-                                    <td>
+                {editedProductId === newItemId && (
+                    <div className={styles.newItemFormContainer} onClick={() => this.setState({editedProductId: null})}>
+                        <Form
+                            onSubmit={this.onSubmitNewItemForm.bind(this)}
+                            validateError={errorValidator}
+                            preValidate={preValidate}
+                            validateOnSubmit={true}
+                            dontValidateOnMount={true}
+                        >
+                            {({submitForm, errors}) => (
+                                <form onSubmit={submitForm} className={styles.newItemForm} onClick={(e) => e.stopPropagation()}>
+                                    <dl className={styles.productSpecList}>
+                                        <dt className={styles.productSpecName}>Name</dt>
+                                        <dd className={styles.productSpecValue}>
+                                            <Text className={styles.input + ' ' + (errors.name && styles.inputError)} field="name" />
+                                            {errors.name && <span className={styles.errorMessage}>{errors.name.message}</span>}
+                                        </dd>
+                                        <dt className={styles.productSpecName}>Description</dt>
+                                        <dd className={styles.productSpecValue}>
+                                            <Text className={styles.input + ' ' + (errors.description && styles.inputError)} field="description" />
+                                            {errors.description && <span className={styles.errorMessage}>{errors.description.message}</span>}
+                                        </dd>
+                                        <dt className={styles.productSpecName}>Price</dt>
+                                        <dd className={styles.productSpecValue}>
+                                            <Text className={styles.input + ' ' + (errors.price && styles.inputError)} type="number" field="price" />
+                                            {errors.price && <span className={styles.errorMessage}>{errors.price.message}</span>}
+                                        </dd>
+                                    </dl>
+                                    <div>
                                         <button
                                             onClick={this.onClickCancelButton.bind(this)}
-                                            productid={product.id}
                                             className={styles.cancelButton}
                                             title="Cancel"
                                         ><i className="fas fa-times-circle"></i></button>
                                         <button
-                                            onClick={this.onClickSaveButton.bind(this)}
-                                            productid={product.id}
                                             className={styles.saveButton}
                                             title="Save"
+                                            type="submit"
                                         ><i className="fas fa-save"></i></button>
-                                    </td>
-                                </tr>
-                            );
-                        })}
-                        {creatingNewProduct ? (
-                            <tr key="newProduct" className={styles.editedProductRow}>
-                                <th>?</th>
-                                <td>
-                                    <input
-                                        type="text"
-                                        name="name"
-                                        className={styles.input + ' ' + (validationErrors.name ? styles.inputError : '')}
-                                        ref={i => this.formElements.name = i}
-                                    />
-                                </td>
-                                <td>
-                                    <input
-                                        type="text"
-                                        name="description"
-                                        className={styles.input + ' ' + (validationErrors.description ? styles.inputError : '')}
-                                        ref={i => this.formElements.description = i}
-                                    />
-                                </td>
-                                <td>
-                                    <input
-                                        type="number"
-                                        name="price"
-                                        className={styles.input + ' ' + (validationErrors.price ? styles.inputError : '')}
-                                        ref={i => this.formElements.price = i}
-                                    />
-                                </td>
-                                <td>
-                                    <button
-                                        onClick={this.onClickCancelButton.bind(this)}
-                                        className={styles.cancelButton}
-                                        title="Cancel"
-                                    ><i className="fas fa-times-circle"></i></button>
-                                    <button
-                                        onClick={this.onClickSaveButton.bind(this)}
-                                        className={styles.saveButton}
-                                        title="Save"
-                                    ><i className="fas fa-save"></i></button>
-                                </td>
-                            </tr>
-                        ) : null}
-                        <tr>
-                            <td colSpan="5">
-                                <div className={styles.showCreateButtonContainer}>
-                                    <button
-                                        onClick={this.onClickShowCreateButton.bind(this)}
-                                        className={styles.showCreateButton}
-                                        title="Add a New Product"
-                                    ><i className="fas fa-plus"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                    </div>
+                                </form>
+                            )}
+                        </Form>
+                    </div>
+                )}
+                <div className={styles.addButtonContainer}>
+                    <button
+                        onClick={this.onClickShowCreateButton.bind(this)}
+                        className={styles.showCreateButton}
+                        title="Add a New Product"
+                    ><i className="fas fa-plus"></i></button>
+                </div>
+                <ul className={styles.productList}>
+                    {productList.map((product, index) => product.id !== editedProductId ? (
+                        <li className={styles.productListItem} key={product.id}>
+                            <span className={styles.productNumber}>#{index + 1}</span>
+                            <dl className={styles.productSpecList}>
+                                <dt className={styles.productSpecName}>Name</dt>
+                                <dd className={styles.productSpecValue}>{product.name}</dd>
+                                <dt className={styles.productSpecName}>Description</dt>
+                                <dd className={styles.productSpecValue}>{product.description}</dd>
+                                <dt className={styles.productSpecName}>Price</dt>
+                                <dd className={styles.productSpecValue}>${product.price}</dd>
+                            </dl>
+                            <div>
+                                <button
+                                    onClick={this.onClickEditButton.bind(this)}
+                                    productid={product.id}
+                                    className={styles.editButton}
+                                    title="Edit"
+                                ><i className="fas fa-pencil-alt"></i></button>
+                                <button
+                                    onClick={this.onClickDeleteButton.bind(this)}
+                                    productid={product.id}
+                                    className={styles.deleteButton}
+                                    title="Delete"
+                                ><i className="fas fa-trash"></i></button>
+                            </div>
+                        </li>
+                    ) : (
+                        <li className={styles.productListItem} key={product.id}>
+                            <Form
+                                defaultValues={product}
+                                onSubmit={this.onSubmitExistingItemForm.bind(this)}
+                                validateError={errorValidator}
+                                preValidate={preValidate}
+                                validateOnSubmit={true}
+                            >
+                                {({submitForm, errors}) => (
+                                    <form onSubmit={submitForm}>
+                                        <span className={styles.productNumber}>#{index + 1}</span>
+                                        <dl className={styles.productSpecList}>
+                                            <dt className={styles.productSpecName}>Name</dt>
+                                            <dd className={styles.productSpecValue}>
+                                                <Text className={styles.input + ' ' + (errors.name && styles.inputError)} field="name" />
+                                                {errors.name && <span className={styles.errorMessage}>{errors.name.message}</span>}
+                                            </dd>
+                                            <dt className={styles.productSpecName}>Description</dt>
+                                            <dd className={styles.productSpecValue}>
+                                                <Text className={styles.input + ' ' + (errors.description && styles.inputError)} field="description" />
+                                                {errors.description && <span className={styles.errorMessage}>{errors.description.message}</span>}
+                                            </dd>
+                                            <dt className={styles.productSpecName}>Price</dt>
+                                            <dd className={styles.productSpecValue}>
+                                                <Text className={styles.input + ' ' + (errors.price && styles.inputError)} type="number" field="price" />
+                                                {errors.price && <span className={styles.errorMessage}>{errors.price.message}</span>}
+                                            </dd>
+                                        </dl>
+                                        <div>
+                                            <button
+                                                onClick={this.onClickCancelButton.bind(this)}
+                                                className={styles.cancelButton}
+                                                title="Cancel"
+                                            ><i className="fas fa-times-circle"></i></button>
+                                            <button
+                                                className={styles.saveButton}
+                                                title="Save"
+                                                type="submit"
+                                            ><i className="fas fa-save"></i></button>
+                                        </div>
+                                    </form>
+                                )}
+                            </Form>
+                        </li>
+                    ))}
+                </ul>
             </div>
         );
     }

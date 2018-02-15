@@ -25,21 +25,21 @@ const schemaString = `
         id: ID!
         name: String!
         description: String!
-        price: Int!
+        price: Float!
         image: String
     }
 
     input NewProductInput {
         name: String!
         description: String!
-        price: Int!
+        price: Float!
         image: String
     }
 
     input ExistingProductInput {
         name: String
         description: String
-        price: Int
+        price: Float
         image: String
     }
 

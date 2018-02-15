@@ -1,4 +1,4 @@
-import adminProductList from '../../src/web-client/reducers/admin/adminProductList';
+import adminProductList from '@/web-client/reducers/admin/adminProductList';
 import {
     LOAD_ADMIN_PRODUCT_LIST,
     CREATE_PRODUCT,

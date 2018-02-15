@@ -29,7 +29,7 @@ describe('createProduct', () => {
     it('should create a product', async () => {
         const query = `
             mutation { 
-                createProduct (input: {name: "my product", price: 12345, description: "test"})
+                createProduct (input: {name: "my product", price: 12345.05, description: "test"})
                 { id }
             }
         `;
@@ -44,7 +44,8 @@ describe('createProduct', () => {
                 { id }
             }
         `;
-        const {errors, data} = await graphql(adminSchema, query, adminResolvers);
+        const {errors, data} = await graphql(adminSchema, query,
+            adminResolvers);
         expect(errors).toBeTruthy();
         expect(data.createProduct).toBeFalsy();
     });
@@ -327,12 +328,13 @@ describe('updateUser', () => {
         expect(response.data.updateUser).toBeNull();
     });
 
-    it('should return a user if succeeding to update the password.', async () => {
-        const id = await createUser({
-            name: 'userA',
-            password: 'password1',
-        });
-        const mutation1 = `
+    it('should return a user if succeeding to update the password.',
+        async () => {
+            const id = await createUser({
+                name: 'userA',
+                password: 'password1',
+            });
+            const mutation1 = `
             mutation { 
                 updateUser (
                     id : "${id}",
@@ -343,9 +345,14 @@ describe('updateUser', () => {
                 ) { id, name }
             }
         `;
-        const response = await graphql(adminSchema, mutation1, adminResolvers);
-        expect(response.data.updateUser).toEqual({id, name: 'userA'});
-    });
+            const response = await graphql(adminSchema, mutation1,
+                adminResolvers);
+            expect(response.data.updateUser).
+                toEqual({
+                    id,
+                    name: 'userA',
+                });
+        });
 });
 
 describe('deleteUser', () => {

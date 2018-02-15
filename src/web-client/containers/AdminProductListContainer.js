@@ -8,57 +8,38 @@ import {
     deleteProduct
 } from '@/web-client/actions/admin';
 
-const mapStateToProps = (state) => {
-    return {
-        productList: state.admin.adminProductList
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        loadProductList: () => {
-            dispatch(loadAdminProductList());
-        },
-
-        createProduct: (formData) => {
-            dispatch(createProduct(formData));
-        },
-
-        updateProduct: (id, formData) => {
-            dispatch(updateProduct(id, formData));
-        },
-
-        deleteProduct: (id) => {
-            dispatch(deleteProduct(id));
-        },
-    };
-};
-
 class AdminProductListContainer extends Component
 {
     componentDidMount ()
     {
-        this.props.loadProductList();
+        this.props.dispatch(loadAdminProductList());
     }
 
     render ()
     {
         const {
-            productList,
-            createProduct,
-            updateProduct,
-            deleteProduct
+            admin: {adminProductList},
+            dispatch
         } = this.props;
         return (
             <AdminProductList
-                productList={productList}
-                onCreateProduct={createProduct}
-                onUpdateProduct={updateProduct}
-                onDeleteProduct={deleteProduct}
+                productList={adminProductList}
+
+                onCreateProduct={(formData) => {
+                    dispatch(createProduct(formData));
+                }}
+
+                onUpdateProduct={(id, formData) => {
+                    dispatch(updateProduct(id, formData));
+                }}
+
+                onDeleteProduct={(id) => {
+                    dispatch(deleteProduct(id));
+                }}
             />
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminProductListContainer);
+export default connect(s => s, dispatch => ({dispatch}))(AdminProductListContainer);
 

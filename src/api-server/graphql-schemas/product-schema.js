@@ -10,7 +10,7 @@ const schemaString = `
         id: ID!
         name: String!
         description: String!
-        price: Int!
+        price: Float!
         image: String
     }
 `;

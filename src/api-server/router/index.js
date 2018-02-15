@@ -27,7 +27,7 @@ const identifyUser = async (request, response, next) => {
 const authorize = (permission) => {
     return (request, response, next) => {
         const user = request.user;
-        if (user && user.id && permission.indexOf(user.permissions) !== -1) {
+        if (user && user.id && user.permissions.indexOf(permission) !== -1) {
             next();
         } else {
             const error = new Error('Unauthorized.');

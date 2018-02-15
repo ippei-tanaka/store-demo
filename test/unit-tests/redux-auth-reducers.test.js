@@ -1,5 +1,5 @@
-import token from '../../src/web-client/reducers/auth/token';
-import user from '../../src/web-client/reducers/auth/user';
+import token from '@/web-client/reducers/auth/token';
+import user from '@/web-client/reducers/auth/user';
 
 import {
     AUTHENTICATE,
