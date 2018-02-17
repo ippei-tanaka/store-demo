@@ -1,9 +1,9 @@
-//const PRODUCTION = process.env.NODE_ENV === 'production';
+const PRODUCTION = process.env.NODE_ENV === 'production';
 
 module.exports = {
     webpack : {
-        devServer: {
-            port: 9001
+        devServer: !PRODUCTION && {
+            port: 9001,
         }
     }
 };
