@@ -1,7 +1,12 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const config = require('./build.config');
 
-module.exports = {
+const PRODUCTION = process.env.NODE_ENV === 'production';
+
+module.exports = merge({
 
     entry: './src/web-client/entry',
 
@@ -28,17 +33,25 @@ module.exports = {
                             options: {
                                 importLoaders: 1,
                                 modules: true,
-                                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                                localIdentName: '[name]--[local]--[hash:base64:5]',
+                                sourceMap: !PRODUCTION,
+                                minimize: PRODUCTION
                             },
                         },
                         'postcss-loader',
-                    ]
+                    ],
                 }),
             },
         ],
     },
 
-    plugins: [
+    plugins: PRODUCTION ? [
+        new ExtractTextPlugin('styles.css'),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production'),
+        }),
+        new webpack.optimize.UglifyJsPlugin(),
+    ] : [
         new ExtractTextPlugin('styles.css'),
     ],
 
@@ -48,4 +61,12 @@ module.exports = {
             '@': path.resolve(__dirname, 'src'),
         },
     },
-};
+
+    devtool: !PRODUCTION && 'inline-source-map',
+
+    devServer: !PRODUCTION && {
+        contentBase: path.join(__dirname, 'src/web-client/static'),
+        port: 9000,
+        historyApiFallback: true,
+    },
+}, config.webpack);
