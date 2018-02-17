@@ -3,8 +3,8 @@ import styles from '@/web-client/components/AdminRoot/style.css';
 import AdminNavigation from '@/web-client/components/AdminNavigation';
 import AdminHeader from '@/web-client/components/AdminHeader';
 import Link from '@/web-client/components/Link';
-import LoginFormContainer from '@/web-client/containers/LoginFormContainer';
-import LogoutButtonContainer from '@/web-client/containers/LogoutButtonContainer';
+import LoginFormContainer from '@/web-client/components/LoginFormContainer';
+import LogoutButtonContainer from '@/web-client/components/LogoutButtonContainer';
 
 const AdminRoot = ({children, isAdmin, openNav, onClickToggleButton, isLoggedIn}) => {
 

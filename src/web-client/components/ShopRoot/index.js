@@ -1,5 +1,5 @@
 import React from 'react';
-import ShopHeaderContainer from '@/web-client/containers/ShopHeaderContainer';
+import ShopHeaderContainer from '@/web-client/components/ShopHeaderContainer';
 import styles from '@/web-client/components/ShopRoot/style.css';
 
 const ShopRoot = ({children}) => {

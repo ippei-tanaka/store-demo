@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductDetailContainer from '@/web-client/containers/ShopProductDetailContainer';
+import ProductDetailContainer from '@/web-client/components/ShopProductDetailContainer';
 import styles from '@/web-client/components/ShopProductDetailPage/style.css'
 
 const ShopProductDetailPage = ({productId}) => (

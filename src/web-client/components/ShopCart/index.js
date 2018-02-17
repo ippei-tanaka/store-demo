@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Link from '@/web-client/components/Link';
-import LoginFormContainer from '@/web-client/containers/LoginFormContainer';
+import LoginFormContainer from '@/web-client/components/LoginFormContainer';
 import styles from '@/web-client/components/ShopCart/style.css';
 
 export default class ShopHeader extends Component {
