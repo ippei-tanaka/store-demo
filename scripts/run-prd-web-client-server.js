@@ -1,4 +1,4 @@
-const server = require("../build/web-client/server");
+const server = require('../build/web-client/server');
 
 server.start().catch((e) => {
     console.error(e);

@@ -1,4 +1,4 @@
-const server = require("../build/api-server/app");
+const server = require('../build/api-server/app');
 
 server.start().catch((e) => {
     console.error(e);
