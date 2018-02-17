@@ -10,12 +10,13 @@ const createOnClickAnchor = (callback) => {
     };
 };
 
-export default ({href, onClick = () => {}, children, ...rest}) => (
+const Link = ({href, onClick = () => {}, children, ...rest}) => (
     <a
         href={basename + href}
         onClick={createOnClickAnchor(onClick)}
-        {...rest}
-    >
+        {...rest}>
         {children}
     </a>
 );
+
+export default Link;

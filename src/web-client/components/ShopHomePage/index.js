@@ -1,6 +1,8 @@
 import React from 'react';
 import ShopProductListContainer from '@/web-client/containers/ShopProductListContainer';
 
-export default () => (
+const ShopHomePage = () => (
     <ShopProductListContainer/>
 );
+
+export default ShopHomePage;

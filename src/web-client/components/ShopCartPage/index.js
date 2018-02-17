@@ -2,7 +2,7 @@ import React from 'react';
 import ShopCartContainer from '@/web-client/containers/ShopCartContainer';
 import styles from '@/web-client/components/ShopCartPage/style.css';
 
-export default () =>
+const ShopCartPage = () =>
 {
     return (
         <div className={styles.container}>
@@ -11,3 +11,5 @@ export default () =>
         </div>
     );
 };
+
+export default ShopCartPage;

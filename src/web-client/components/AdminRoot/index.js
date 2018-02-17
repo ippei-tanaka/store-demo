@@ -6,7 +6,7 @@ import Link from '@/web-client/components/Link';
 import LoginFormContainer from '@/web-client/containers/LoginFormContainer';
 import LogoutButtonContainer from '@/web-client/containers/LogoutButtonContainer';
 
-export default ({children, isAdmin, openNav, onClickToggleButton, isLoggedIn}) => {
+const AdminRoot = ({children, isAdmin, openNav, onClickToggleButton, isLoggedIn}) => {
 
     if (!isLoggedIn)
     {
@@ -65,4 +65,6 @@ export default ({children, isAdmin, openNav, onClickToggleButton, isLoggedIn}) =
             </div>
         </div>
     );
-}
+};
+
+export default AdminRoot;

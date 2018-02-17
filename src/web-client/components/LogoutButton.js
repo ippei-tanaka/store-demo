@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default ({onClick, children, ...rest}) => (
+const LogoutButton = ({onClick, children, ...rest}) => (
     <button
         onClick={e => {
             e.preventDefault();
@@ -9,3 +9,5 @@ export default ({onClick, children, ...rest}) => (
         {...rest}
     >{children}</button>
 );
+
+export default LogoutButton;

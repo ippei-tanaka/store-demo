@@ -12,11 +12,10 @@ const errorValidator = (values) => {
     };
 };
 
-export default (
-    {
-        product = {},
-        onSubmit = () => {}
-    }) => {
+const ShopProductDetail = ({
+    product = {},
+    onSubmit = () => {}
+}) => {
     const idPrefix = uniqueId('ShopProductDetail');
     return (
         <div className={styles.container}>
@@ -34,13 +33,11 @@ export default (
                     const _values = clone(values);
                     _values.quantity = Number.parseInt(_values.quantity);
                     return _values;
-                }}
-            >
+                }}>
                 {formApi => (
                     <form
                         onSubmit={formApi.submitForm}
-                        className={styles.form}
-                    >
+                        className={styles.form}>
                         <div>
                             <label className={styles.label} htmlFor={idPrefix + 'quantity'}>Quantity</label>
                             <Text
@@ -57,4 +54,6 @@ export default (
             </Form>
         </div>
     );
-}
+};
+
+export default ShopProductDetail;

@@ -3,7 +3,7 @@ import Link from '@/web-client/components/Link';
 import styles from '@/web-client/components/AdminNavigation/style.css';
 import LogoutButtonContainer from '@/web-client/containers/LogoutButtonContainer';
 
-export default ({focusable = true}) => {
+const AdminNavigation = ({focusable = true}) => {
     return (
         <div className={styles.container}>
             <nav className={styles.navigation}>
@@ -36,4 +36,6 @@ export default ({focusable = true}) => {
             </nav>
         </div>
     );
-}
+};
+
+export default AdminNavigation;

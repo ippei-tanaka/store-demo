@@ -2,7 +2,7 @@ import React from 'react';
 import ShopHeaderContainer from '@/web-client/containers/ShopHeaderContainer';
 import styles from '@/web-client/components/ShopRoot/style.css';
 
-export default ({children}) => {
+const ShopRoot = ({children}) => {
     return (
         <div>
             <header>
@@ -17,3 +17,5 @@ export default ({children}) => {
         </div>
     );
 };
+
+export default ShopRoot;

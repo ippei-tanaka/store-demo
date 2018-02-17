@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '@/web-client/components/ThankYouPage/style.css';
 
-export default () =>
+const ThankYouPage = () =>
 {
     return (
         <div className={styles.container}>
@@ -9,3 +9,5 @@ export default () =>
         </div>
     );
 };
+
+export default ThankYouPage;

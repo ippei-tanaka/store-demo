@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '@/web-client/components/AdminHeader/style.css';
 import Link from '@/web-client/components/Link';
 
-export default ({onClickToggle = () => {}, isLoggedIn}) => {
+const AdminHeader = ({onClickToggle = () => {}, isLoggedIn}) => {
     return (
         <div className={styles.container}>
             <header className={styles.header}>
@@ -23,4 +23,6 @@ export default ({onClickToggle = () => {}, isLoggedIn}) => {
             </header>
         </div>
     );
-}
+};
+
+export default AdminHeader;

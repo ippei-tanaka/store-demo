@@ -29,7 +29,6 @@ export default class AdminProductList extends Component {
         this.state = {
             editedProductId: null
         };
-        this.formElements = {};
     }
 
     onClickEditButton (event)

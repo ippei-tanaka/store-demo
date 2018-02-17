@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '@/web-client/components/Link';
 
-export default () => {
+const AdminHomePage = () => {
     return (
         <div>
             <h1>Admin Home Page</h1>
@@ -9,4 +9,6 @@ export default () => {
             <p>Please check out <Link href="/">the shopping site</Link> as well.</p>
         </div>
     );
-}
+};
+
+export default AdminHomePage;
