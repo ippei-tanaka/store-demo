@@ -1,7 +1,9 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 
 let config;
 try {
@@ -10,27 +12,48 @@ try {
     config = require('./build.config.default');
 }
 
+const SRC_DIR = path.resolve(__dirname, './src');
+const MODULES_DIR = path.resolve(__dirname, './node_modules');
 const PRODUCTION = process.env.NODE_ENV === 'production';
 
 module.exports = merge({
 
-    entry: './src/web-client/entry',
+    entry: {
+        app: SRC_DIR + '/web-client/entry',
+        vendor: [
+            'deep-equal',
+            'history',
+            'react',
+            'react-dom',
+            'react-form',
+            'react-redux',
+            'redux',
+            'redux-promise',
+            'redux-thunk',
+            'universal-router',
+            'url-parse',
+            'validator',
+            'whatwg-fetch'
+        ],
+    },
 
     output: {
         path: path.resolve(__dirname, 'build/web-client/static'),
-        filename: 'app.js',
         publicPath: '/',
+        chunkFilename: '[name].[chunkhash].js',
+        filename: '[name].[chunkhash].js'
     },
 
     module: {
         rules: [
             {
                 test: /\.jsx?$/,
-                include: [path.resolve(__dirname, 'src')],
+                include: [SRC_DIR],
                 loader: 'babel-loader',
             },
             {
                 test: /\.css$/,
+                include: [SRC_DIR],
                 use: ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: [
@@ -51,18 +74,27 @@ module.exports = merge({
         ],
     },
 
-    plugins: PRODUCTION ? [
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'Caching and Code Splitting',
+            template: SRC_DIR + '/web-client/static/index.html'
+        }),
+        new webpack.HashedModuleIdsPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+            name:'vendor'
+        }),
         new ExtractTextPlugin('styles.css'),
+    ].concat(PRODUCTION ? [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production'),
         }),
         new webpack.optimize.UglifyJsPlugin(),
     ] : [
-        new ExtractTextPlugin('styles.css'),
-    ],
+    ]),
 
     resolve: {
         extensions: ['.js', '.json', '.jsx'],
+        modules: [SRC_DIR, MODULES_DIR],
         alias: {
             '@': path.resolve(__dirname, 'src'),
         },
