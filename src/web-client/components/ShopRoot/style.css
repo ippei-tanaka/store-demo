@@ -1,5 +1,5 @@
-@import '../../styles/media.css';
-@import '../ShopHeader/variables.css';
+@import '~@/web-client/styles/media.css';
+@import '~@/web-client/components/ShopHeader/variables.css';
 
 :root {
   min-height: 100%;

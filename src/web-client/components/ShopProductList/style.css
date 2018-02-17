@@ -1,4 +1,4 @@
-@import '../../styles/media.css';
+@import '~@/web-client/styles/media.css';
 
 .productList {
   display: flex;

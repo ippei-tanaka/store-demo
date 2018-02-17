@@ -35,7 +35,7 @@ module.exports = merge({
                                 modules: true,
                                 localIdentName: '[name]--[local]--[hash:base64:5]',
                                 sourceMap: !PRODUCTION,
-                                minimize: PRODUCTION
+                                minimize: PRODUCTION,
                             },
                         },
                         'postcss-loader',

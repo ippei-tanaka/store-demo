@@ -1,5 +1,5 @@
-@import "../../styles/colors.css";
-@import "../../styles/media.css";
+@import '~@/web-client/styles/colors.css';
+@import '~@/web-client/styles/media.css';
 
 .container {
   background: #f0f0f0;

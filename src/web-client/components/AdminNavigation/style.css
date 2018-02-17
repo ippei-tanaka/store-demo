@@ -1,4 +1,4 @@
-@import "../../styles/colors.css";
+@import '~@/web-client/styles/colors.css';
 
 .container {
   font-family: 'Lato', Helvetica, Arial, sans-serif;

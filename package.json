@@ -66,6 +66,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.9",
+    "enhanced-resolve": "^4.0.0-beta.4",
     "eslint": "^4.16.0",
     "eslint-plugin-jest": "^21.7.0",
     "eslint-plugin-react": "^7.6.0",

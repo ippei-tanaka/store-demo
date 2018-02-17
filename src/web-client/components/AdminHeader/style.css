@@ -1,5 +1,3 @@
-@import "../../styles/colors.css";
-
 .container {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: #e9e9e9;
@@ -27,12 +25,8 @@
   align-items: center;
   height: 50px;
 
-  &:hover {
+  &:hover, &:focus {
     background: #fefefe;
-  }
-
-  &:focus {
-    border-color: var(--link-color);
   }
 
   &.hidden {

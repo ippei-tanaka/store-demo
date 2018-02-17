@@ -1,5 +1,5 @@
-@import '../../styles/media.css';
-@import './variables.css';
+@import '~@/web-client/styles/media.css';
+@import '~@/web-client/components/ShopHeader/variables.css';
 
 .container {
   padding: 20px 30px  20px 20px;

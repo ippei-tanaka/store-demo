@@ -1,4 +1,4 @@
-@import "../../styles/colors.css";
+@import '~@/web-client/styles/colors.css';
 
 .addButtonContainer {
   margin-bottom: 20px;
