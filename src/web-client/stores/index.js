@@ -10,7 +10,7 @@ const persistedState = loadState();
 let middleware = [promiseMiddleware, thunkMiddleware];
 if (process.env.NODE_ENV !== 'production') {
     let loggerMiddleware = require('redux-logger');
-    middleware = [...middleware, loggerMiddleware];
+    middleware = [...middleware, loggerMiddleware.default];
 }
 
 const store = createStore(

@@ -6,12 +6,6 @@
   position: relative;
 }
 
-@media (--small-screen) {
-  .speechBubble {
-    top: 50px;
-  }
-}
-
 .speechBubble:after {
   content: '';
   position: absolute;
