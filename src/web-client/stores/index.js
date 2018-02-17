@@ -4,18 +4,19 @@ import promiseMiddleware from 'redux-promise';
 import {createStore, applyMiddleware} from 'redux';
 import {saveState, loadState} from '@/web-client/local-storage';
 import throttle from 'lodash/throttle';
-import loggerMiddleware from 'redux-logger';
 
 const persistedState = loadState();
+
+let middleware = [promiseMiddleware, thunkMiddleware];
+if (process.env.NODE_ENV !== 'production') {
+    let loggerMiddleware = require('redux-logger');
+    middleware = [...middleware, loggerMiddleware];
+}
 
 const store = createStore(
     rootReducer,
     persistedState,
-    applyMiddleware(
-        promiseMiddleware,
-        thunkMiddleware,
-        loggerMiddleware
-    ),
+    applyMiddleware(...middleware),
 );
 
 store.subscribe(throttle(() => {

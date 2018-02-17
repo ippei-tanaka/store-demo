@@ -9,12 +9,12 @@
     "test:unit": "jest -c ./.jestconfig-unit.json",
     "dev-api-server": "babel-node scripts/run-dev-api-server.js",
     "prd-server": "NODE_ENV=production node scripts/run-prd-api-server.js",
-    "dev-web-client-server": "webpack-dev-server",
+    "dev-web-client-server": "webpack-dev-server --open --config webpack.development.config.js",
     "prd-web-client-server": "NODE_ENV=production node scripts/run-prd-web-client-server.js",
     "build": "npm-run-all build:*",
     "build:clean": "rimraf ./build",
     "build:server": "NODE_ENV=production babel ./src --out-dir ./build --copy-files",
-    "build:client": "NODE_ENV=production webpack",
+    "build:client": "webpack --config webpack.production.config.js",
     "build:config": "copyfiles -u 1 'config-files/**/config.json' build"
   },
   "author": "",
@@ -52,6 +52,7 @@
     "universal-router": "^5.1.0",
     "url-parse": "^1.2.0",
     "validator": "^9.4.0",
+    "webpack-merge": "^4.1.1",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {

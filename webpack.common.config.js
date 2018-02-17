@@ -40,14 +40,5 @@ module.exports = {
         alias: {
             '@': path.resolve(__dirname, 'src'),
         },
-    },
-
-    devtool: 'source-map',
-
-    devServer: {
-        contentBase: path.join(__dirname, 'src/web-client/static'),
-        // compress: true,
-        port: 9000,
-        historyApiFallback: true,
-    },
+    }
 };
