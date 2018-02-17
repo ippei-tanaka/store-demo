@@ -2,7 +2,13 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const config = require('./build.config');
+
+let config;
+try {
+    config = require('./build.config');
+} catch (e) {
+    config = require('./build.config.default');
+}
 
 const PRODUCTION = process.env.NODE_ENV === 'production';
 
@@ -69,4 +75,5 @@ module.exports = merge({
         port: 9000,
         historyApiFallback: true,
     },
+
 }, config.webpack);
