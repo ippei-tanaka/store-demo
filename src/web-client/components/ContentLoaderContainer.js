@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class ContentLoaderContainer extends Component
 {
@@ -42,5 +43,11 @@ class ContentLoaderContainer extends Component
         return children({content});
     }
 }
+
+ContentLoaderContainer.propTypes = {
+    children: PropTypes.func.isRequired,
+    loadingContent: PropTypes.element,
+    contentPromise: PropTypes.instanceOf(Promise).isRequired
+};
 
 export default ContentLoaderContainer;
