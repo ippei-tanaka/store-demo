@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import ShopCart from '@/web-client/components/ShopCart';
+import ShopCartLoginPane from '@/web-client/components/ShopCartLoginPane';
 import {placeOrder, removeFromCart} from '@/web-client/actions/shop';
 import {verifyToken} from '@/web-client/actions/auth';
 import history from '@/web-client/history';
@@ -20,7 +21,9 @@ class ShopCartContainer extends Component {
             product: productList.find(p => p.id === productId),
             quantity: cart[productId],
         }));
-        return (
+        return !isLoggedIn ? (
+            <ShopCartLoginPane />
+        ) : (
             <ShopCart
                 order={order}
                 onOrderConfirmed={async () => {
@@ -30,7 +33,6 @@ class ShopCartContainer extends Component {
                 onClickRemoveButton={({productId, quantity}) => {
                     dispatch(removeFromCart({productId, quantity}));
                 }}
-                isLoggedIn={isLoggedIn}
             />
         );
     }

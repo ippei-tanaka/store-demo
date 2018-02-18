@@ -1,14 +1,9 @@
 import React from 'react';
 import AppRootContainer from '@/web-client/components/AppRootContainer';
-import ShopRootContainer from '@/web-client/components/ShopRootContainer';
 import AdminRootContainer from '@/web-client/components/AdminRootContainer';
-import ShopHomePage from '@/web-client/components/ShopHomePage';
-import ShopProductDetailPage from '@/web-client/components/ShopProductDetailPage';
-import ShopCartPage from '@/web-client/components/ShopCartPage';
-import ThankYouPage from '@/web-client/components/ThankYouPage';
-import AdminHomePage from '@/web-client/components/AdminHomePage';
-import AdminProductManagerPage from '@/web-client/components/AdminProductManagerPage';
-import AdminUserManagerPage from '@/web-client/components/AdminUserManagerPage';
+import ShopRootContainer from '@/web-client/components/ShopRootContainer';
+import ContentLoaderContainer from '@/web-client/components/ContentLoaderContainer';
+import LoadingPane from '@/web-client/components/LoadingPane';
 
 export default [
     {
@@ -25,17 +20,21 @@ export default [
             {
                 path: '/admin',
                 async action({next}) {
-                    const children = await next();
                     return (
-                        <AdminRootContainer>
-                            {children}
-                        </AdminRootContainer>
+                        <ContentLoaderContainer contentPromise={next()} loadingContent={<LoadingPane />}>
+                            {({content}) => (
+                                <AdminRootContainer>
+                                    {content}
+                                </AdminRootContainer>
+                            )}
+                        </ContentLoaderContainer>
                     );
                 },
                 children: [
                     {
                         path: '',
                         async action() {
+                            const AdminHomePage = await import('@/web-client/components/AdminHomePage');
                             return (
                                 <AdminHomePage/>
                             );
@@ -44,6 +43,7 @@ export default [
                     {
                         path: '/product-manager',
                         async action() {
+                            const AdminProductManagerPage = await import('@/web-client/components/AdminProductManagerPage');
                             return (
                                 <AdminProductManagerPage/>
                             );
@@ -52,6 +52,7 @@ export default [
                     {
                         path: '/user-manager',
                         async action() {
+                            const AdminUserManagerPage = await import('@/web-client/components/AdminUserManagerPage');
                             return (
                                 <AdminUserManagerPage/>
                             );
@@ -62,17 +63,21 @@ export default [
             {
                 path: '',
                 async action({next}) {
-                    const children = await next();
                     return (
-                        <ShopRootContainer>
-                            {children}
-                        </ShopRootContainer>
+                        <ContentLoaderContainer contentPromise={next()} loadingContent={<LoadingPane />}>
+                            {({content}) => (
+                                <ShopRootContainer>
+                                    {content}
+                                </ShopRootContainer>
+                            )}
+                        </ContentLoaderContainer>
                     );
                 },
                 children: [
                     {
                         path: '',
                         async action() {
+                            const ShopHomePage = await import('@/web-client/components/ShopHomePage');
                             return (
                                 <ShopHomePage/>
                             );
@@ -81,6 +86,7 @@ export default [
                     {
                         path: '/products/:productId',
                         async action({params}) {
+                            const ShopProductDetailPage = await import('@/web-client/components/ShopProductDetailPage');
                             return (
                                 <ShopProductDetailPage productId={params.productId}/>
                             );
@@ -89,6 +95,7 @@ export default [
                     {
                         path: '/cart',
                         async action() {
+                            const ShopCartPage = await import('@/web-client/components/ShopCartPage');
                             return (
                                 <ShopCartPage/>
                             );
@@ -97,6 +104,7 @@ export default [
                     {
                         path: '/thank-you',
                         async action() {
+                            const ThankYouPage = await import('@/web-client/components/ThankYouPage');
                             return (
                                 <ThankYouPage/>
                             );

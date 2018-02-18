@@ -1,0 +1,20 @@
+@import '~@/web-client/styles/colors.css';
+
+.contentWrapper {
+  padding: 40px;
+  line-height: 1.4;
+  color: #333;
+
+  & h1 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+  }
+
+  & p {
+    margin-bottom: 30px;
+  }
+
+  & a {
+    color: var(--link-color);
+  }
+}

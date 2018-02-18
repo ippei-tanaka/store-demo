@@ -33,7 +33,7 @@ module.exports = merge({
             'universal-router',
             'url-parse',
             'validator',
-            'whatwg-fetch'
+            'whatwg-fetch',
         ],
     },
 
@@ -83,7 +83,10 @@ module.exports = merge({
         new webpack.optimize.CommonsChunkPlugin({
             name:'vendor'
         }),
-        new ExtractTextPlugin('styles.css'),
+        new ExtractTextPlugin({
+            filename: '[name].[contenthash].css',
+            allChunks: true
+        }),
     ].concat(PRODUCTION ? [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production'),

@@ -1,0 +1,6 @@
+@import '~@/web-client/styles/media.css';
+
+.loginMessage {
+  margin-bottom: 10px;
+  line-height: 1.4;
+}

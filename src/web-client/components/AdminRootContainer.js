@@ -4,6 +4,9 @@ import AdminRoot from '@/web-client/components/AdminRoot';
 import {permissions} from '@/web-client/auth';
 import {verifyToken} from '@/web-client/actions/auth';
 import {openNav, closeNav} from '@/web-client/actions/admin';
+import AdminLoginPane from '@/web-client/components/AdminLoginPane';
+import AdminNoPermissionPane from '@/web-client/components/AdminNoPermissionPane';
+import AdminContentWrapper from '@/web-client/components/AdminContentWrapper';
 
 class AdminRootContainer extends Component
 {
@@ -14,17 +17,16 @@ class AdminRootContainer extends Component
     }
 
     render() {
-        const {auth, children, admin, dispatch} = this.props;
+        const {auth, admin, dispatch, children} = this.props;
         const isLoggedIn = auth.token;
         const isAdmin = isLoggedIn && auth.user.permissions.indexOf(permissions.ADMIN) !== -1;
         const isNavOpen = admin.ui.isNavOpen;
         return (
             <AdminRoot
-                openNav={isNavOpen}
+                isNavOpen={isAdmin && isNavOpen}
                 onClickToggleButton={openIt => dispatch(openIt ? openNav() : closeNav())}
-                isLoggedIn={isLoggedIn}
-                isAdmin={isAdmin}
-                children={children}
+                showHeaderToggleButton={isAdmin}
+                children={!isLoggedIn ? <AdminLoginPane /> : !isAdmin ? <AdminNoPermissionPane/> : <AdminContentWrapper>{children}</AdminContentWrapper>}
             />
         );
     }

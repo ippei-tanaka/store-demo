@@ -2,17 +2,17 @@ import React from 'react';
 import styles from '@/web-client/components/AdminHeader/style.css';
 import Link from '@/web-client/components/Link';
 
-const AdminHeader = ({onClickToggle = () => {}, isLoggedIn}) => {
+const AdminHeader = ({onClickToggle = () => {}, showToggleButton = true}) => {
     return (
         <div className={styles.container}>
             <header className={styles.header}>
                 <button
-                    className={styles.toggleButton + ' ' + (isLoggedIn ? '' : styles.hidden)}
+                    className={styles.toggleButton + ' ' + (showToggleButton ? '' : styles.hidden)}
                     onClick={e => {e.preventDefault(); onClickToggle();}}
                     title="Toggle Navigation"
                 >
                     <span>
-                        <span className={styles.showIconContainer}><i className="fas fa-bars"></i></span>
+                        <span><i className="fas fa-bars"></i></span>
                         <span className={styles.toggleText}>Toggle Menu</span>
                     </span>
                 </button>

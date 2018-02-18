@@ -14,7 +14,7 @@ class ShopHeaderContainer extends Component
             <ShopHeader
                 bubbleTextOnCartButton={shop.ui.bubbleTextOnCartButton}
                 onBubbleTextDisappear={() => dispatch(removeBubbleTextOnCartButton())}
-                isLoggedIn={!!auth.token}
+                showLogoutButton={!!auth.token}
             />
         );
     }

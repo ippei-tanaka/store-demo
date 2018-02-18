@@ -1,0 +1,27 @@
+.noPermissionMessageContainer {
+  padding: 50px;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.noPermissionMessage {
+  margin-bottom: 40px;
+}
+
+.noPermissionMenu {
+  padding-left: auto;
+  list-style-type: disc;
+}
+
+.noPermissionMenuItem {
+  margin-bottom: 30px;
+}
+
+.noPermissionLogoutButton {
+  font-size: 1rem;
+  border-color: #ccc;
+  background: #f0f0f0;
+  border-radius: 4px;
+  padding: 4px 10px;
+  cursor: pointer;
+}

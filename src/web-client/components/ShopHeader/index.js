@@ -41,7 +41,7 @@ export default class ShopHeader extends Component {
         const {
             bubbleTextOnCartButton = '',
             onBubbleTextDisappear = () => {},
-            isLoggedIn
+            showLogoutButton
         } = this.props;
 
         return (
@@ -53,7 +53,7 @@ export default class ShopHeader extends Component {
                     </span>
                 </Link>
                 <menu className={styles.menu}>
-                    {isLoggedIn ? (
+                    {showLogoutButton ? (
                         <li className={styles.menuItem}>
                             <LogoutButtonContainer className={styles.menuButton}>
                                 <i className="fas fa-sign-out-alt"></i>

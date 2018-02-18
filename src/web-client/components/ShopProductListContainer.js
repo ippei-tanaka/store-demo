@@ -1,37 +1,24 @@
 import {connect} from 'react-redux';
 import ShopProductList from '@/web-client/components/ShopProductList';
+import LoadingPane from '@/web-client/components/LoadingPane';
 import React, {Component} from 'react';
 import {loadProductList} from '@/web-client/actions/shop';
-
-const mapStateToProps = (state) => {
-    return {
-        productList: state.shop.productList,
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        loadProductList: () => {
-            dispatch(loadProductList());
-        },
-    };
-};
 
 class ShopProductListContainer extends Component
 {
     componentDidMount ()
     {
-        this.props.loadProductList();
+        this.props.dispatch(loadProductList());
     }
 
     render ()
     {
-        const {productList} = this.props;
+        const {shop:{productList}} = this.props;
         return (
-            <ShopProductList productList={productList} />
+            productList.length > 0 ? <ShopProductList productList={productList} /> : <LoadingPane />
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShopProductListContainer);
+export default connect(s => s, dispatch => ({dispatch}))(ShopProductListContainer);
 

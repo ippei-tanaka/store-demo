@@ -2,43 +2,29 @@ import {connect} from 'react-redux';
 import ShopProductDetail from '@/web-client/components/ShopProductDetail';
 import React, {Component} from 'react';
 import {loadProductList, addToCart} from '@/web-client/actions/shop';
-
-const mapStateToProps = (state) => {
-    return {
-        productList: state.shop.productList,
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        loadProductList: () => {
-            dispatch(loadProductList());
-        },
-        addToCart: ({productId, quantity}) => {
-            dispatch(addToCart({productId, quantity}));
-        }
-    };
-};
+import LoadingPane from '@/web-client/components/LoadingPane';
 
 class ShopProductDetailContainer extends Component
 {
     componentDidMount ()
     {
-        this.props.loadProductList();
+        this.props.dispatch(loadProductList());
     }
 
     render ()
     {
-        const {productId, productList, addToCart} = this.props;
+        const {productId, shop:{productList}, dispatch} = this.props;
         const product = productList.find(product => product.id === productId);
-        return (
+        return productList.length > 0 ? (
             <ShopProductDetail
                 product={product}
-                onSubmit={({quantity}) => addToCart({productId, quantity})}
+                onSubmit={({quantity}) => {
+                    dispatch(addToCart({productId, quantity}));
+                }}
             />
-        );
+        ) : <LoadingPane />;
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ShopProductDetailContainer);
+export default connect(s => s, dispatch => ({dispatch}))(ShopProductDetailContainer);
 
