@@ -1,6 +1,6 @@
 import React from 'react';
 import ShopHeaderContainer from '@/web-client/components/ShopHeaderContainer';
-import styles from '@/web-client/components/ShopRoot/style.css';
+import styles from '@/web-client/components/ShopRoot.css';
 
 const ShopRoot = ({children}) => {
     return (

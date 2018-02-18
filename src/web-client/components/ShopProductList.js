@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from '@/web-client/components/Link';
-import styles from '@/web-client/components/ShopProductList/style.css';
+import styles from '@/web-client/components/ShopProductList.css';
 
 const ShopProductList = ({productList}) => (
     <div>

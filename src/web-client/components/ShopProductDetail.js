@@ -1,6 +1,6 @@
 import React from 'react';
 import {Form, Text} from 'react-form';
-import styles from '@/web-client/components/ShopProductDetail/style.css';
+import styles from '@/web-client/components/ShopProductDetail.css';
 import uniqueId from 'lodash/uniqueId';
 import isInteger from 'lodash/isInteger';
 import clone from 'lodash/clone';

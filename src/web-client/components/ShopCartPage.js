@@ -1,6 +1,6 @@
 import React from 'react';
 import ShopCartContainer from '@/web-client/components/ShopCartContainer';
-import styles from '@/web-client/components/ShopCartPage/style.css';
+import styles from '@/web-client/components/ShopCartPage.css';
 
 const ShopCartPage = () =>
 {

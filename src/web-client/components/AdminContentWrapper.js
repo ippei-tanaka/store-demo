@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@/web-client/components/AdminContentWrapper/style.css';
+import styles from '@/web-client/components/AdminContentWrapper.css';
 
 const AdminContentWrapper = ({children}) => {
     return (

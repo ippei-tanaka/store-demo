@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductDetailContainer from '@/web-client/components/ShopProductDetailContainer';
-import styles from '@/web-client/components/ShopProductDetailPage/style.css'
+import styles from '@/web-client/components/ShopProductDetailPage.css'
 
 const ShopProductDetailPage = ({productId}) => (
     <div className={styles.container}>

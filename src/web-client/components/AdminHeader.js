@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@/web-client/components/AdminHeader/style.css';
+import styles from '@/web-client/components/AdminHeader.css';
 import Link from '@/web-client/components/Link';
 
 const AdminHeader = ({onClickToggle = () => {}, showToggleButton = true}) => {

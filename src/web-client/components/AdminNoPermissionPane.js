@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@/web-client/components/AdminNoPermissionPane/style.css';
+import styles from '@/web-client/components/AdminNoPermissionPane.css';
 import Link from '@/web-client/components/Link';
 import LogoutButtonContainer from '@/web-client/components/LogoutButtonContainer';
 

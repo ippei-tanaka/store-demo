@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@/web-client/components/AdminRoot/style.css';
+import styles from '@/web-client/components/AdminRoot.css';
 import AdminNavigation from '@/web-client/components/AdminNavigation';
 import AdminHeader from '@/web-client/components/AdminHeader';
 

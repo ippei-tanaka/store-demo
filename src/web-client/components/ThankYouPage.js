@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '@/web-client/components/ThankYouPage/style.css';
+import styles from '@/web-client/components/ThankYouPage.css';
 
 const ThankYouPage = () =>
 {
