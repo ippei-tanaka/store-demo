@@ -9,6 +9,8 @@ const schemaString = `
         findUserById(id: ID!): User
         findUserByName(name: String!): User
         getAllUsers: [User]
+        
+        getAllOrders: [Order]
     }
 
     type Mutation {
@@ -60,6 +62,17 @@ const schemaString = `
         password: String
         oldPassword: String
         permissions: [Permission]
+    }
+    
+    type Order {
+        id: ID!
+        userId: ID!
+        items: [OrderItem]!
+    }
+    
+    type OrderItem {
+        productId: ID!
+        quantity: Int!
     }
 
     enum Permission {

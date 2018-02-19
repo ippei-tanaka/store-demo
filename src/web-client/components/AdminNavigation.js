@@ -27,6 +27,12 @@ const AdminNavigation = ({focusable = true}) => {
                         </Link>
                     </li>
                     <li className={styles.listItem}>
+                        <Link href="/admin/order-manager" className={styles.link} tabIndex={focusable ? '0' : '-1'}>
+                            <span className={styles.linkIconContainer}><i className="fas fa-shopping-cart"></i></span>
+                            <span className={styles.linkText}>Order Manager</span>
+                        </Link>
+                    </li>
+                    <li className={styles.listItem}>
                         <LogoutButtonContainer className={styles.link} tabIndex={focusable ? '0' : '-1'}>
                             <span className={styles.linkIconContainer}><i className="fas fa-sign-out-alt"></i></span>
                             <span className={styles.linkText}>Logout</span>

@@ -1,0 +1,64 @@
+@import '~@/web-client/styles/colors.css';
+
+.orderList {
+
+}
+
+.orderListItem {
+  margin-bottom: 20px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #ccc;
+
+  &:first-child {
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+  }
+}
+
+.orderNumber {
+  margin-bottom: 15px;
+  line-height: 1.4;
+  font-size: 0.8rem;
+  color: #777;
+  display: inline-block;
+}
+
+.orderDetailList {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.orderFieldName {
+  margin-bottom: 2px;
+  line-height: 1.4;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.orderFieldValue {
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.orderItemList {
+  padding-left: 10px;
+}
+
+.orderItemListItem {
+
+}
+
+.orderItemListItemIndex {
+  font-size: 0.8rem;
+  display: inline-block;
+  padding-right: 4px;
+  vertical-align: middle;
+}
+
+.orderItemListItemSeparator {
+  font-size: 0.5rem;
+  display: inline-block;
+  padding: 0 5px 0 4px;
+  vertical-align: middle;
+}

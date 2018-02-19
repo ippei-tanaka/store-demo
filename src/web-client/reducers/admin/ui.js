@@ -4,7 +4,7 @@ import {
 } from '@/web-client/actions/constants';
 
 const initialState = {
-    isNavOpen: false
+    isNavOpen: true
 };
 
 const ui = (state = initialState, {type}) => {

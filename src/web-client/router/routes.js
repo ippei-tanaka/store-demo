@@ -57,6 +57,15 @@ export default [
                                 <AdminUserManagerPage/>
                             );
                         },
+                    },
+                    {
+                        path: '/order-manager',
+                        async action() {
+                            const AdminOrderManagerPage = await import('@/web-client/components/AdminOrderManagerPage');
+                            return (
+                                <AdminOrderManagerPage/>
+                            );
+                        },
                     }
                 ],
             },

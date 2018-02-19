@@ -6,6 +6,8 @@ import {
     DELETE_PRODUCT,
     OPEN_ADMIN_NAV,
     CLOSE_ADMIN_NAV,
+    LOAD_ADMIN_ORDER_LIST,
+    LOAD_ADMIN_USER_LIST,
 } from '@/web-client/actions/constants';
 import store from '@/web-client/stores';
 
@@ -82,6 +84,40 @@ export const deleteProduct = async (id) => {
     return {
         type: DELETE_PRODUCT,
         payload: response.data.deleteProduct,
+    };
+};
+
+export const loadAdminOrderList = async () => {
+    const state = store.getState();
+    const response = await fetch({
+        path: '/admin',
+        query: `
+            query {
+                getAllOrders { id, userId, items { productId, quantity } }
+            }
+        `,
+        token: state.auth.token,
+    });
+    return {
+        type: LOAD_ADMIN_ORDER_LIST,
+        payload: response.data.getAllOrders,
+    };
+};
+
+export const loadAdminUserList = async () => {
+    const state = store.getState();
+    const response = await fetch({
+        path: '/admin',
+        query: `
+            query {
+                getAllUsers { id, name }
+            }
+        `,
+        token: state.auth.token,
+    });
+    return {
+        type: LOAD_ADMIN_USER_LIST,
+        payload: response.data.getAllUsers,
     };
 };
 

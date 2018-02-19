@@ -93,6 +93,22 @@ describe('placeOrder', () => {
         expect(response3.data.placeOrder).toBeNull();
         expect(response3.errors).toBeTruthy();
     });
+
+    it('should return errors if user is invalid.', async () => {
+        const product = await createProduct({
+            name: 'Glasses',
+            price: 120,
+            description: 'You\'ll be able to see better.',
+        });
+        const query = `
+            mutation { 
+                placeOrder (input : [{productId: "${product.id}", quantity: 1}]) { id }
+            }
+        `;
+        const response = await graphql(accountSchema, query, accountResolvers);
+        expect(response.data.placeOrder).toBeNull();
+        expect(response.errors).toBeTruthy();
+    });
 });
 
 describe('getMyself', () => {

@@ -1,6 +1,8 @@
 import {graphql} from 'graphql';
 import adminSchema from '@/api-server/graphql-schemas/admin-schema';
 import adminResolvers from '@/api-server/resolvers/admin-resolvers';
+import accountSchema from '@/api-server/graphql-schemas/account-schema';
+import accountResolvers from '@/api-server/resolvers/account-resolvers';
 import {connect, disconnect, dropDatabase} from '@/api-server/mongo-db-driver';
 
 const TEST_DB = 'store-demo-graphql-admin-test';
@@ -374,5 +376,44 @@ describe('deleteUser', () => {
         const query = '{ getAllUsers { id } }';
         const {data} = await graphql(adminSchema, query, adminResolvers);
         expect(data.getAllUsers).toHaveLength(0);
+    });
+});
+
+const placeOrder = async ({user, productId, quantity}) => {
+    const query = `
+            mutation { 
+                placeOrder (input : [{productId: "${productId}", quantity: ${quantity}}]) { id }
+            }
+        `;
+    return await graphql(accountSchema, query, accountResolvers, {user});
+};
+
+describe('getAllOrders', () => {
+    it('should get all the orders', async () => {
+        const userId = await createUser({
+            name: 'my_name',
+            password: 'password1',
+        });
+        const productId = await createProduct({
+            name: 'Glasses',
+            price: 120,
+            description: 'You\'ll be able to see better.',
+        });
+        await placeOrder({
+            user: {id: userId},
+            productId,
+            quantity: 3
+        });
+        await placeOrder({
+            user: {id: userId},
+            productId,
+            quantity: 1
+        });
+        const query = '{ getAllOrders { id, userId, items { productId, quantity } } }';
+        const {data} = await graphql(adminSchema, query, adminResolvers);
+        expect(data.getAllOrders[0].items[0].quantity).toBe(3);
+        expect(data.getAllOrders[0].userId).toBe(userId);
+        expect(data.getAllOrders[1].items[0].quantity).toBe(1);
+        expect(data.getAllOrders[1].userId).toBe(userId);
     });
 });
