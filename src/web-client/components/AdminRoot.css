@@ -1,5 +1,6 @@
 @import '~@/web-client/styles/colors.css';
 @import '~@/web-client/styles/media.css';
+@import '~@/web-client/components/AdminNavigation-Variables.css';
 
 .container {
   background: #f0f0f0;
@@ -11,7 +12,6 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
 }
 
 .headerContainer {
@@ -20,27 +20,25 @@
 
 .bodyContainer {
   display: flex;
+  flex-direction: row;
   flex-grow: 1;
   background: #fff;
 }
 
 @media (--small-screen) {
   .bodyContainer {
-    flex-wrap: wrap;
+    flex-direction: column;
   }
 }
 
 .navContainer {
-  min-width: 210px;
   width: 210px;
-  transition: min-width 0.3s, width 0.3s;
-  overflow-x: hidden;
+  transition: 0.3s;
   background: #e7e7e7;
   border-right: 1px solid #cccccc;
   box-sizing: border-box;
 
   &.hidden {
-    min-width: 0;
     width: 0;
   }
 }
@@ -48,9 +46,10 @@
 @media (--small-screen) {
   .navContainer {
     width: 100%;
-    transition: none;
+    height: var(--nav-height);
 
     &.hidden {
+      width: 100%;
       height: 0;
     }
   }
@@ -60,4 +59,5 @@
   flex-grow: 1;
   overflow: auto;
   background: #fff;
+  position: relative;
 }

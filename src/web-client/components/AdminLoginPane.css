@@ -9,6 +9,7 @@
   align-content: center;
   align-items: center;
   overflow-y: hidden;
+  position: absolute;
 }
 
 .loginPane {

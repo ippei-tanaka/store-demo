@@ -1,4 +1,5 @@
 @import '~@/web-client/styles/colors.css';
+@import '~@/web-client/components/AdminNavigation-Variables.css';
 
 .container {
   font-family: 'Lato', Helvetica, Arial, sans-serif;
@@ -10,6 +11,9 @@
 
 .listItem {
   border-bottom: 1px solid #cccccc;
+  height: var(--nav-item-height);
+  box-sizing: border-box;
+  display: flex;
 
   &:first-child {
     border-top: 1px solid #cccccc;
@@ -17,32 +21,35 @@
 }
 
 .link {
+  display: flex;
+  flex-direction: row;
+  flex-basis: 100%;
+  justify-content: flex-start;
+  align-items: center;
+
   cursor: pointer;
-  display: block;
   text-decoration: none;
-  padding: 14px;
   color: #555555;
   text-align: left;
   white-space: nowrap;
   border: 0;
-  width: 100%;
   background: #f3f3f3;
   font-family: inherit;
   box-sizing: border-box;
   outline: 0;
+  padding: 0;
 
-  &:hover {
+  &:hover, &:focus {
     background: #ffffff;
-  }
-
-  &:focus {
-    border-right: 1px solid var(--link-color);
   }
 }
 
 .linkIconContainer {
   font-size: 0.9rem;
   vertical-align: middle;
+  padding-left: 14px;
+  padding-right: 3px;
+  width: 0.9rem;
 }
 
 .linkText {

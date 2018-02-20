@@ -3,7 +3,7 @@ import styles from '@/web-client/components/AdminRoot.css';
 import AdminNavigation from '@/web-client/components/AdminNavigation';
 import AdminHeader from '@/web-client/components/AdminHeader';
 
-const AdminRoot = ({children, isNavOpen, onClickToggleButton, showHeaderToggleButton}) => {
+const AdminRoot = ({children, isNavOpen, disableNav, onClickToggleButton, showHeaderToggleButton}) => {
     return (
         <div className={styles.container}>
             <div className={styles.headerContainer}>
@@ -12,9 +12,11 @@ const AdminRoot = ({children, isNavOpen, onClickToggleButton, showHeaderToggleBu
                     onClickToggle={() => onClickToggleButton(!isNavOpen)}/>
             </div>
             <div className={styles.bodyContainer}>
-                <div className={styles.navContainer + ' ' + (isNavOpen ? '' : styles.hidden)}>
-                    <AdminNavigation focusable={isNavOpen}/>
-                </div>
+                {!disableNav && (
+                    <div className={styles.navContainer + ' ' + (isNavOpen ? '' : styles.hidden)}>
+                        <AdminNavigation focusable={isNavOpen}/>
+                    </div>
+                )}
                 <div className={styles.mainContentContainer}>
                     {children}
                 </div>

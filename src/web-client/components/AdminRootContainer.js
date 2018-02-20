@@ -23,6 +23,7 @@ class AdminRootContainer extends Component
         const isNavOpen = admin.ui.isNavOpen;
         return (
             <AdminRoot
+                disableNav={!isAdmin}
                 isNavOpen={isAdmin && isNavOpen}
                 onClickToggleButton={openIt => dispatch(openIt ? openNav() : closeNav())}
                 showHeaderToggleButton={isAdmin}
