@@ -11,7 +11,7 @@ const schemaString = `
         name: String!
         description: String!
         price: Float!
-        image: String
+        imageUrl: String
     }
 `;
 

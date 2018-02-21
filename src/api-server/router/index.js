@@ -71,4 +71,8 @@ router.use('/admin', identifyUser, authorize(ADMIN), graphqlHTTP((request) => ({
     // graphiql: true,
 })));
 
+router.use('/admin/media', identifyUser, authorize(ADMIN), (request, response, next) => {
+    
+});
+
 export default router;

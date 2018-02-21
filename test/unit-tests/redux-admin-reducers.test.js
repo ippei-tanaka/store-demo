@@ -28,7 +28,7 @@ describe('adminProductList', () => {
                 name: 'name2',
                 price: 20,
                 description: 'testtesttest',
-                image: 'test',
+                imageUrl: 'test',
                 something: true,
             },
         ];
@@ -48,7 +48,7 @@ describe('adminProductList', () => {
                 name: 'name2',
                 price: 20,
                 description: 'testtesttest',
-                image: 'test',
+                imageUrl: 'test',
             },
         ]);
 

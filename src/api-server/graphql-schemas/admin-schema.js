@@ -28,21 +28,21 @@ const schemaString = `
         name: String!
         description: String!
         price: Float!
-        image: String
+        imageUrl: String
     }
 
     input NewProductInput {
         name: String!
         description: String!
         price: Float!
-        image: String
+        imageUrl: String
     }
 
     input ExistingProductInput {
         name: String
         description: String
         price: Float
-        image: String
+        imageUrl: String
     }
 
     type User {
