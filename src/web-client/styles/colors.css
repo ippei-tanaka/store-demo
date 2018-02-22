@@ -1,5 +1,9 @@
 :root {
-   --proceed-button-backgound-color: #489918;
-   --proceed-button-base-text-color: #ffffff;
-   --link-color: #2e9000;
- }
+  --proceed-button-backgound-color: #489918;
+  --proceed-button-base-text-color: #ffffff;
+  --link-color: #2e9000;
+
+  --text-color-neutral: #333;
+  --text-color-warning: #ff5b5d;
+  --text-color-encouraging: #2e9000;
+}

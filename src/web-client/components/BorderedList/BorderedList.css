@@ -1,0 +1,15 @@
+.adminList {
+}
+
+.adminListItem {
+  border-bottom: 1px solid #ccc;
+
+  &:first-child {
+    border-top: 1px solid #ccc;
+  }
+}
+
+.adminListItemContainer {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
