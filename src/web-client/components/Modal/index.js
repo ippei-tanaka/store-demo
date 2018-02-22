@@ -9,7 +9,7 @@ export const ModalBackground = ({children, className, onEnterKeyDown = () => {},
             className={styles.modalBackground + (className ? ' ' + className : '')}
             tabIndex={0}
             onKeyDown={(e) => {
-                if (e.keyCode === ENTER_KEY)
+                if (e.currentTarget === document.activeElement && e.keyCode === ENTER_KEY)
                 {
                     onEnterKeyDown();
                 }
@@ -29,10 +29,12 @@ export class ModalContentContainer extends Component {
     render() {
         const {children, className, ...rest} = this.props;
         return (
-            <div className={styles.modalContentContainer + (className ? ' ' + className : '')}
+            <div
+                className={styles.modalContentContainer + (className ? ' ' + className : '')}
                 tabIndex={0}
                 ref={el => {this.container = el;}}
-                {...rest}>
+                {...rest}
+                onClick={e => e.stopPropagation()}>
                 {children}
             </div>
         );

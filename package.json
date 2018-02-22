@@ -24,6 +24,7 @@
     "body-parser": "^1.18.2",
     "copyfiles": "^1.2.0",
     "cors": "^2.8.4",
+    "create-react-context": "^0.1.6",
     "cssnano": "^3.10.0",
     "deep-equal": "^1.0.1",
     "express": "^4.16.2",

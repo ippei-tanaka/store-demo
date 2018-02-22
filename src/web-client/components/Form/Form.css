@@ -1,0 +1,19 @@
+.input {
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  background: #fff;
+  box-sizing: border-box;
+  width: 100%;
+  display: inline-block;
+}
+
+.inputError {
+  background: #ffd5cd;
+  border: 1px solid #cc7d73;
+}
+
+.errorMessage {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: #ff5b5d;
+}
