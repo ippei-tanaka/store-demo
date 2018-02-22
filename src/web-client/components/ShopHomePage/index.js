@@ -1,5 +1,5 @@
 import React from 'react';
-import ShopProductListContainer from '@/web-client/components/ShopProductListContainer/index';
+import ShopProductListContainer from '@/web-client/components/ShopProductList/index';
 
 const ShopHomePage = () => (
     <ShopProductListContainer/>

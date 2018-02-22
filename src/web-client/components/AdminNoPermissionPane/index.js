@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '@/web-client/components/AdminNoPermissionPane/AdminNoPermissionPane.css';
 import Link from '@/web-client/components/Link/index';
-import LogoutButtonContainer from '@/web-client/components/LogoutButtonContainer/index';
+import LogoutButtonContainer from '@/web-client/components/LogoutButton/index';
 
 const AdminNoPermissionPane = () => {
     return (

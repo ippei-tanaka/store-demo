@@ -1,10 +1,10 @@
 import React from 'react';
-import AdminOrderListContainer from '@/web-client/components/AdminOrderListContainer/index';
+import AdminOrderList from '@/web-client/components/AdminOrderList';
 
 const AdminOrderManagerPage = () => (
     <div>
         <h1>Admin Order Manager</h1>
-        <AdminOrderListContainer />
+        <AdminOrderList />
     </div>
 );
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import AdminOrderList from '@/web-client/components/AdminOrderList/index';
+import AdminOrderList from '@/web-client/components/AdminOrderList/AdminOrderList';
 import LoadingPane from '@/web-client/components/LoadingPane/index';
 import {
     loadAdminOrderList,

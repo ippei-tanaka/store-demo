@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Link from '@/web-client/components/Link/index';
-import LogoutButtonContainer from '@/web-client/components/LogoutButtonContainer/index';
+import LogoutButtonContainer from '@/web-client/components/LogoutButton/index';
 import styles from '@/web-client/components/ShopHeader/ShopHeader.css';
 import Bubble from '@/web-client/components/Bubble/index';
 import debounce from 'lodash/debounce';

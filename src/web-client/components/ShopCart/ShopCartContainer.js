@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import ShopCart from '@/web-client/components/ShopCart/index';
+import ShopCart from '@/web-client/components/ShopCart/ShopCart';
 import ShopCartLoginPane from '@/web-client/components/ShopCartLoginPane/index';
 import {placeOrder, removeFromCart} from '@/web-client/actions/shop';
 import {verifyToken} from '@/web-client/actions/auth';

@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import ShopProductDetail from '@/web-client/components/ShopProductDetail/index';
+import ShopProductDetail from '@/web-client/components/ShopProductDetail/ShopProductDetail';
 import React, {Component} from 'react';
 import {loadProductList, addToCart} from '@/web-client/actions/shop';
 import LoadingPane from '@/web-client/components/LoadingPane/index';

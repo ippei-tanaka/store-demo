@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from '@/web-client/components/Link/index';
 import styles from '@/web-client/components/AdminNavigation/AdminNavigation.css';
-import LogoutButtonContainer from '@/web-client/components/LogoutButtonContainer/index';
+import LogoutButtonContainer from '@/web-client/components/LogoutButton/index';
 
 const AdminNavigation = ({focusable = true}) => {
     return (

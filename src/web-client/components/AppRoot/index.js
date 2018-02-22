@@ -1,5 +1,2 @@
-const AppRoot = ({children}) => {
-    return children;
-};
-
-export default AppRoot;
+import AppRootContainer from '@/web-client/components/AppRoot/AppRootContainer';
+export default AppRootContainer;

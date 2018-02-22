@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import AdminRoot from '@/web-client/components/AdminRoot/index';
+import AdminRoot from '@/web-client/components/AdminRoot/AdminRoot';
 import {permissions} from '@/web-client/auth/index';
 import {verifyToken} from '@/web-client/actions/auth';
 import {openNav, closeNav} from '@/web-client/actions/admin';

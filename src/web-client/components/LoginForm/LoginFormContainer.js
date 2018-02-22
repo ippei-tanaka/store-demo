@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import LoginForm from '@/web-client/components/LoginForm/index';
+import LoginForm from '@/web-client/components/LoginForm/LoginForm';
 import {authenticate} from '@/web-client/actions/auth';
 
 const mapDispatchToProps = (dispatch) => {

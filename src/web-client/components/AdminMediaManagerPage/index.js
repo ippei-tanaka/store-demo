@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminMediaListContainer from '@/web-client/components/AdminMediaListContainer/index';
+import AdminMediaListContainer from '@/web-client/components/AdminMediaList/index';
 
 const AdminMediaManagerPage = () => (
     <div>

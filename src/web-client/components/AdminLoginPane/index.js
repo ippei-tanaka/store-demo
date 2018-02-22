@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '@/web-client/components/AdminLoginPane/AdminLoginPane.css';
-import LoginFormContainer from '@/web-client/components/LoginFormContainer/index';
+import LoginFormContainer from '@/web-client/components/LoginForm/index';
 
 const AdminLoginPane = () => {
     return (
