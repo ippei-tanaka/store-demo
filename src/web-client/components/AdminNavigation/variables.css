@@ -1,0 +1,4 @@
+:root {
+  --nav-item-height: 45px;
+  --nav-height: calc(var(--nav-item-height) * 6);
+}

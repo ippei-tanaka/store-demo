@@ -1,0 +1,160 @@
+@import '~@/web-client/styles/media.css';
+@import '~@/web-client/components/ShopHeader/variables.css';
+
+.container {
+  padding: 20px 30px  20px 20px;
+  height: var(--header-height);
+  box-sizing: border-box;
+  background: #97cd15;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+}
+
+@media (--small-screen) {
+  .container {
+    padding: 8px;
+    flex-direction: column;
+    height: var(--header-height-small-screen);
+    align-items: center;
+  }
+}
+
+.logoLink {
+  color: #ffff00;
+  text-decoration: none;
+  padding: 15px;
+  outline: 0;
+  border-radius: 4px;
+  display: flex;
+  white-space: nowrap;
+
+  &:hover, &:focus {
+    background: #668815;
+  }
+}
+
+@media (--small-screen) {
+  .logoLink {
+    padding: 5px;
+  }
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.logoIconContainer {
+  font-size: 2.5rem;
+  margin-right: 15px;
+}
+
+@media (--small-screen) {
+  .logoIconContainer {
+    font-size: 1.5rem;
+  }
+}
+.logoText {
+  font-size: 2.1rem;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+@media (--small-screen) {
+  .logoText {
+    font-size: 1.2rem;
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (--small-screen) {
+  .menu {
+    justify-content: center;
+  }
+}
+
+.menuItem {
+  margin-left: 5px;
+  display: flex;
+  position: relative;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+@media (--small-screen) {
+  .menuItem {
+    margin-left: 0;
+  }
+}
+
+.menuButton {
+  cursor: pointer;
+  font-size: 1.3rem;
+  border: 0;
+  background: transparent;
+  color: #5f810e;
+  padding: 15px;
+  outline: 0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+  &:hover, &:focus {
+    background: #668815;
+    color: #fff;
+  }
+}
+
+@media (--small-screen) {
+  .menuButton {
+    padding: 8px;
+    font-size: 1.0rem;
+  }
+}
+
+.menuButtonText {
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-left: 5px;
+  white-space: nowrap;
+}
+
+@media (--small-screen) {
+  .menuButton {
+    font-size: 0.8rem;
+  }
+}
+
+.bubbleContainer {
+  display: inline-block;
+  position: absolute;
+  top: 60px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  z-index: 10;
+  opacity: 1;
+  transition: opacity 0.4s, top 0.4s;
+  color: #fff;
+
+  &.bubbleHidden {
+    top: 30px;
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
+@media (--small-screen) {
+  .bubbleContainer {
+    top: 50px;
+  }
+}

@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import graphqlHTTP from 'express-graphql';
+import fileUpload from 'express-fileupload';
 import adminSchema from '@/api-server/graphql-schemas/admin-schema';
 import adminResolvers from '@/api-server/resolvers/admin-resolvers';
 import authSchema from '@/api-server/graphql-schemas/auth-schema';
@@ -71,8 +72,8 @@ router.use('/admin', identifyUser, authorize(ADMIN), graphqlHTTP((request) => ({
     // graphiql: true,
 })));
 
-router.use('/admin/media', identifyUser, authorize(ADMIN), (request, response, next) => {
-    
+router.use('/admin/media', identifyUser, authorize(ADMIN), fileUpload(), (request, response, next) => {
+    console.log(request.files);
 });
 
 export default router;
