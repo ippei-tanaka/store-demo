@@ -9,7 +9,7 @@ import {
     deleteProduct
 } from '@/web-client/actions/admin';
 
-class AdminProductListContainer extends Component
+class AdminMediaListContainer extends Component
 {
     componentDidMount ()
     {
@@ -42,5 +42,5 @@ class AdminProductListContainer extends Component
     }
 }
 
-export default connect(s => s, dispatch => ({dispatch}))(AdminProductListContainer);
+export default connect(s => s, dispatch => ({dispatch}))(AdminMediaListContainer);
 

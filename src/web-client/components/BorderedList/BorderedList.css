@@ -1,7 +1,7 @@
-.adminList {
+.list {
 }
 
-.adminListItem {
+.listItem {
   border-bottom: 1px solid #ccc;
 
   &:first-child {
@@ -9,7 +9,20 @@
   }
 }
 
-.adminListItemContainer {
+.listItemContainer {
   margin-top: 20px;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.listItemIndex {
+  margin-bottom: 1rem;
+  margin-right: 0.2rem;
+  line-height: 1.4;
+  font-size: 0.8rem;
+  color: #777;
+  display: inline-block;
+  min-width: 1.6rem;
 }

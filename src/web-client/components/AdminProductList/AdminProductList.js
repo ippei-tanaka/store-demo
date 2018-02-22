@@ -3,7 +3,12 @@ import styles from '@/web-client/components/AdminProductList/AdminProductList.cs
 import {verifyProductName, verifyProductPrice, verifyProductDescription} from '@/validator/index';
 import {Form, Text} from '@/web-client/components/Form';
 import isNaN from 'lodash/isNaN';
-import {BorderedList, BorderedListItem} from '@/web-client/components/BorderedList';
+import {
+    BorderedList,
+    BorderedListItem,
+    BorderedListItemContainer,
+    BorderedListItemIndex
+} from '@/web-client/components/BorderedList';
 import {Button, ButtonMenu, ButtonThemes} from '@/web-client/components/Button';
 import {DL, DT, DD} from '@/web-client/components/DictionaryList';
 import {ModalBackground, ModalContentContainer} from '@/web-client/components/Modal';
@@ -131,28 +136,34 @@ export default class AdminProductList extends Component {
                 <BorderedList>
                     {productList.map((product, index) => (
                         <BorderedListItem key={product.id}>
-                            <span className={styles.productNumber}>#{index + 1}</span>
-                            <DL>
-                                <DT>Name</DT>
-                                <DD>{product.name}</DD>
-                                <DT>Description</DT>
-                                <DD>{product.description}</DD>
-                                <DT>Price</DT>
-                                <DD>${product.price}</DD>
-                            </DL>
-                            <ButtonMenu>
-                                <Button
-                                    onClick={this.onClickEditButton.bind(this)}
-                                    productid={product.id}
-                                    title="Edit"
-                                ><i className="fas fa-pencil-alt"></i></Button>
-                                <Button
-                                    onClick={this.onClickDeleteButton.bind(this)}
-                                    productid={product.id}
-                                    title="Delete"
-                                    theme={ButtonThemes.WARNING}
-                                ><i className="fas fa-trash"></i></Button>
-                            </ButtonMenu>
+                            <BorderedListItemContainer>
+                                <BorderedListItemIndex index={index + 1} />
+                                <div>
+                                    <div className={styles.specListContainer}>
+                                        <DL>
+                                            <DT>Name</DT>
+                                            <DD>{product.name}</DD>
+                                            <DT>Description</DT>
+                                            <DD>{product.description}</DD>
+                                            <DT>Price</DT>
+                                            <DD>${product.price}</DD>
+                                        </DL>
+                                    </div>
+                                    <ButtonMenu>
+                                        <Button
+                                            onClick={this.onClickEditButton.bind(this)}
+                                            productid={product.id}
+                                            title="Edit"
+                                        ><i className="fas fa-pencil-alt"></i></Button>
+                                        <Button
+                                            onClick={this.onClickDeleteButton.bind(this)}
+                                            productid={product.id}
+                                            title="Delete"
+                                            theme={ButtonThemes.WARNING}
+                                        ><i className="fas fa-trash"></i></Button>
+                                    </ButtonMenu>
+                                </div>
+                            </BorderedListItemContainer>
                         </BorderedListItem>
                     ))}
                 </BorderedList>

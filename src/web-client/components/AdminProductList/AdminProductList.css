@@ -1,22 +1,16 @@
-@import '~@/web-client/styles/colors.css';
-
 .addButtonContainer {
   margin-bottom: 20px;
   text-align: right;
-}
-
-.productNumber {
-  margin-bottom: 15px;
-  line-height: 1.4;
-  font-size: 0.8rem;
-  color: #777;
-  display: inline-block;
 }
 
 .showCreateButtonContainer {
   width: 100%;
   text-align: right;
   box-sizing: border-box;
+}
+
+.specListContainer {
+  margin-bottom: 20px;
 }
 
 .editForm {
