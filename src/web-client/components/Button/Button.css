@@ -11,20 +11,14 @@
 
 .neutral {
   color: var(--text-color-neutral);
-  outline-color: var(--text-color-neutral);
-  outline-width: medium;
 }
 
 .warning {
   color: var(--text-color-warning);
-  outline-color: var(--text-color-warning);
-  outline-width: medium;
 }
 
 .encouraging {
   color: var(--text-color-encouraging);
-  outline-color: var(--text-color-encouraging);
-  outline-width: medium;
 }
 
 .buttonContainer {

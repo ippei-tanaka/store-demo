@@ -1,4 +1,5 @@
 @import '~@/web-client/styles/colors.css';
+@import '~@/web-client/styles/z-indexes.css';
 @import '~@/web-client/components/AdminNavigation/variables.css';
 
 .container {
@@ -36,11 +37,15 @@
   background: #f3f3f3;
   font-family: inherit;
   box-sizing: border-box;
-  outline: 0;
   padding: 0;
+  position: relative;
 
-  &:hover, &:focus {
+  &:hover {
     background: #ffffff;
+  }
+
+  &:focus {
+    z-index: var(--admin-nav-button-focused-z-index);
   }
 }
 

@@ -1,3 +1,4 @@
 :root {
   --modal-z-index: 10100;
+  --admin-nav-button-focused-z-index: 10010;
 }
