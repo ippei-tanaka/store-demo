@@ -55,7 +55,7 @@ export const loadProductList = async () => {
         path: '/product',
         query: `
             query {
-                getAllProducts { id, name, description, price }
+                getAllProducts { id, name, description, price, imageId }
             }
         `,
     });

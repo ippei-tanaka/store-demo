@@ -9,7 +9,9 @@ const ShopProductList = ({productList}) => (
                 <li key={product.id} className={styles.productListItem}>
                     <div className={styles.imageLinkContainer}>
                         <Link className={styles.imageLink} href={`/products/${product.id}`}>
-                            {product.image ? (null) : (
+                            {product.imageSrc ? (
+                                <img className={styles.image} src={product.imageSrc} />
+                            ) : (
                                 <div className={styles.noImagePane}>No Image</div>
                             )}
                         </Link>

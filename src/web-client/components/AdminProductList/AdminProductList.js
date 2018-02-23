@@ -112,6 +112,8 @@ export default class AdminProductList extends Component {
                                         <DD><Text name="description" /></DD>
                                         <DT>Price</DT>
                                         <DD><Text name="price" type="number" /></DD>
+                                        <DT>Medium ID (Image)</DT>
+                                        <DD><Text name="imageId" /></DD>
                                     </DL>
                                 </div>
                                 <ButtonMenu>
@@ -149,6 +151,12 @@ export default class AdminProductList extends Component {
                                             <DD>{product.description}</DD>
                                             <DT>Price</DT>
                                             <DD>${product.price}</DD>
+                                            {product.imageSrc && (
+                                                <DT>Image</DT>
+                                            )}
+                                            {product.imageSrc && (
+                                                <DD><img src={product.imageSrc} className={styles.productImage} /></DD>
+                                            )}
                                         </DL>
                                     </div>
                                     <ButtonMenu>

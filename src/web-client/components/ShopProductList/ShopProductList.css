@@ -43,6 +43,10 @@
   }
 }
 
+.image {
+  max-width: 100%;
+}
+
 .nameLinkContainer {
   margin-bottom: 10px;
   text-align: center;

@@ -23,7 +23,7 @@ export const loadAdminProductList = async () => async (dispatch, getState) => {
         path: '/admin',
         query: `
             query {
-                getAllProducts { id, name, description, price }
+                getAllProducts { id, name, description, price, imageId }
             }
         `,
         token: state.auth.token,
@@ -34,17 +34,18 @@ export const loadAdminProductList = async () => async (dispatch, getState) => {
     });
 };
 
-export const createProduct = async (productData) => async (dispatch, getState) => {
+export const createProduct = async (product) => async (dispatch, getState) => {
     const state = getState();
     const response = await query({
         path: '/admin',
         query: `
             mutation {
                 createProduct (input: {
-                    name: "${productData.name}",
-                    description: "${productData.description}",
-                    price: ${productData.price}
-                }) { id, name, description, price }
+                    name: "${product.name}",
+                    description: "${product.description}",
+                    price: ${product.price}
+                    ` + (product.imageId ? `, imageId: "${product.imageId}"` : '') + `
+                }) { id, name, description, price, imageId }
             }
         `,
         token: state.auth.token,
@@ -55,17 +56,18 @@ export const createProduct = async (productData) => async (dispatch, getState) =
     });
 };
 
-export const updateProduct = async (id, productData) => async (dispatch, getState) => {
+export const updateProduct = async (id, product) => async (dispatch, getState) => {
     const state = getState();
     const response = await query({
         path: '/admin',
         query: `
             mutation {
                 updateProduct (id: "${id}", input: {
-                    name: "${productData.name}",
-                    description: "${productData.description}",
-                    price: ${productData.price}
-                }) { id, name, description, price }
+                    name: "${product.name}",
+                    description: "${product.description}",
+                    price: ${product.price}
+                    ` + (product.imageId ? `, imageId: "${product.imageId}"` : '') + `
+                }) { id, name, description, price, imageId }
             }
         `,
         token: state.auth.token,

@@ -35,7 +35,7 @@ const schema = new Schema({
             },
         }
     },
-    imageUrl: String,
+    imageId: Schema.Types.ObjectId,
 });
 
 export default mongoose.model('Product', schema);

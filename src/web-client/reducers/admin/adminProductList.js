@@ -23,7 +23,7 @@ import {
 } from 'lodash/fp';
 
 const pickProductFields = pick([
-    'id', 'name', 'price', 'description', 'imageUrl',
+    'id', 'name', 'price', 'description', 'imageId',
 ]);
 
 const processProductList = flow([
