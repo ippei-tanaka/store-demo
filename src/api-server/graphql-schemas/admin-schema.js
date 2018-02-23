@@ -11,6 +11,8 @@ const schemaString = `
         getAllUsers: [User]
         
         getAllOrders: [Order]
+        
+        getAllMedia: [Medium]
     }
 
     type Mutation {
@@ -21,6 +23,8 @@ const schemaString = `
         createUser(input: NewUserInput!): User
         updateUser(id: ID!, input: ExistingUserInput!): User
         deleteUser(id: ID!): User
+        
+        deleteMedium(id: ID!): Medium
     }
 
     type Product {
@@ -73,6 +77,11 @@ const schemaString = `
     type OrderItem {
         productId: ID!
         quantity: Int!
+    }
+    
+    type Medium {
+        id: ID!
+        type: String!
     }
 
     enum Permission {

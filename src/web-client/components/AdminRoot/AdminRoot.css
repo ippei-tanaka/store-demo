@@ -33,6 +33,7 @@
 
 .navContainer {
   width: 210px;
+  min-width: 210px;
   transition: 0.3s;
   background: #e7e7e7;
   border-right: 1px solid #cccccc;
@@ -40,16 +41,19 @@
 
   &.hidden {
     width: 0;
+    min-width: 0;
   }
 }
 
 @media (--small-screen) {
   .navContainer {
     width: 100%;
+    min-width: auto;
     height: var(--nav-height);
 
     &.hidden {
       width: 100%;
+      min-width: auto;
       height: 0;
     }
   }

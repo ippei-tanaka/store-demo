@@ -1,4 +1,7 @@
-import {fetchDataFromGraphQlPath as fetch} from '@/web-client/fetch';
+import {
+    fetchDataFromGraphQlPath as query,
+    uploadFile
+} from '@/web-client/fetch';
 import {
     LOAD_ADMIN_PRODUCT_LIST,
     CREATE_PRODUCT,
@@ -8,12 +11,14 @@ import {
     CLOSE_ADMIN_NAV,
     LOAD_ADMIN_ORDER_LIST,
     LOAD_ADMIN_USER_LIST,
+    UPLOAD_ADMIN_MEDIA,
+    LOAD_ADMIN_MEDIA_LIST,
+    DELETE_ADMIN_MEDIUM,
 } from '@/web-client/actions/constants';
-import store from '@/web-client/stores';
 
-export const loadAdminProductList = async () => {
-    const state = store.getState();
-    const response = await fetch({
+export const loadAdminProductList = async () => async (dispatch, getState) => {
+    const state = getState();
+    const response = await query({
         path: '/admin',
         query: `
             query {
@@ -22,15 +27,15 @@ export const loadAdminProductList = async () => {
         `,
         token: state.auth.token,
     });
-    return {
+    dispatch({
         type: LOAD_ADMIN_PRODUCT_LIST,
         payload: response.data.getAllProducts,
-    };
+    });
 };
 
-export const createProduct = async (productData) => {
-    const state = store.getState();
-    const response = await fetch({
+export const createProduct = async (productData) => async (dispatch, getState) => {
+    const state = getState();
+    const response = await query({
         path: '/admin',
         query: `
             mutation {
@@ -43,15 +48,15 @@ export const createProduct = async (productData) => {
         `,
         token: state.auth.token,
     });
-    return {
+    dispatch({
         type: CREATE_PRODUCT,
         payload: response.data.createProduct,
-    };
+    });
 };
 
-export const updateProduct = async (id, productData) => {
-    const state = store.getState();
-    const response = await fetch({
+export const updateProduct = async (id, productData) => async (dispatch, getState) => {
+    const state = getState();
+    const response = await query({
         path: '/admin',
         query: `
             mutation {
@@ -64,15 +69,15 @@ export const updateProduct = async (id, productData) => {
         `,
         token: state.auth.token,
     });
-    return {
+    dispatch({
         type: UPDATE_PRODUCT,
         payload: response.data.updateProduct,
-    };
+    });
 };
 
-export const deleteProduct = async (id) => {
-    const state = store.getState();
-    const response = await fetch({
+export const deleteProduct = async (id) => async (dispatch, getState) => {
+    const state = getState();
+    const response = await query({
         path: '/admin',
         query: `
             mutation {
@@ -81,15 +86,15 @@ export const deleteProduct = async (id) => {
         `,
         token: state.auth.token,
     });
-    return {
+    dispatch({
         type: DELETE_PRODUCT,
         payload: response.data.deleteProduct,
-    };
+    });
 };
 
-export const loadAdminOrderList = async () => {
-    const state = store.getState();
-    const response = await fetch({
+export const loadAdminOrderList = async () => async (dispatch, getState) => {
+    const state = getState();
+    const response = await query({
         path: '/admin',
         query: `
             query {
@@ -98,15 +103,15 @@ export const loadAdminOrderList = async () => {
         `,
         token: state.auth.token,
     });
-    return {
+    dispatch({
         type: LOAD_ADMIN_ORDER_LIST,
         payload: response.data.getAllOrders,
-    };
+    });
 };
 
-export const loadAdminUserList = async () => {
-    const state = store.getState();
-    const response = await fetch({
+export const loadAdminUserList = async () => async (dispatch, getState) => {
+    const state = getState();
+    const response = await query({
         path: '/admin',
         query: `
             query {
@@ -115,10 +120,59 @@ export const loadAdminUserList = async () => {
         `,
         token: state.auth.token,
     });
-    return {
+    dispatch({
         type: LOAD_ADMIN_USER_LIST,
         payload: response.data.getAllUsers,
-    };
+    });
+};
+
+export const deleteAdminMedium = async (id) => async (dispatch, getState) => {
+    const state = getState();
+    const response = await query({
+        path: '/admin',
+        query: `
+            mutation {
+                deleteMedium (id: "${id}") { id }
+            }
+        `,
+        token: state.auth.token,
+    });
+    dispatch({
+        type: DELETE_ADMIN_MEDIUM,
+        payload: response.data.deleteMedium,
+    });
+    dispatch(loadAdminMediumList());
+};
+
+export const loadAdminMediumList = async () => async (dispatch, getState) => {
+    const state = getState();
+    const response = await query({
+        path: '/admin',
+        query: `
+            query {
+                getAllMedia { id, type }
+            }
+        `,
+        token: state.auth.token,
+    });
+    dispatch({
+        type: LOAD_ADMIN_MEDIA_LIST,
+        payload: response.data.getAllMedia,
+    });
+};
+
+export const uploadAdminMedia = async (files) => async (dispatch, getState) => {
+    const state = getState();
+    const response = await uploadFile({
+        path: '/media',
+        file: files[0],
+        token: state.auth.token,
+    });
+    dispatch({
+        type: UPLOAD_ADMIN_MEDIA,
+        payload: response.data.id,
+    });
+    dispatch(loadAdminMediumList());
 };
 
 export const openNav = async () => {

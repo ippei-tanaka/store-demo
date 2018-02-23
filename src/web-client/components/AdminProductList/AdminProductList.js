@@ -104,14 +104,16 @@ export default class AdminProductList extends Component {
                                 onSubmit={this.onSubmitForm(editedProductId).bind(this)}
                                 validator={validator}
                                 preValidate={preValidate}>
-                                <DL>
-                                    <DT>Name</DT>
-                                    <DD><Text name="name" /></DD>
-                                    <DT>Description</DT>
-                                    <DD><Text name="description" /></DD>
-                                    <DT>Price</DT>
-                                    <DD><Text name="price" type="number" /></DD>
-                                </DL>
+                                <div className={styles.specListContainer}>
+                                    <DL>
+                                        <DT>Name</DT>
+                                        <DD><Text name="name" /></DD>
+                                        <DT>Description</DT>
+                                        <DD><Text name="description" /></DD>
+                                        <DT>Price</DT>
+                                        <DD><Text name="price" type="number" /></DD>
+                                    </DL>
+                                </div>
                                 <ButtonMenu>
                                     <Button
                                         title="Save"

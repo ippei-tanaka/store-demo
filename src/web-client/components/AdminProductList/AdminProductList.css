@@ -1,12 +1,5 @@
 .addButtonContainer {
   margin-bottom: 20px;
-  text-align: right;
-}
-
-.showCreateButtonContainer {
-  width: 100%;
-  text-align: right;
-  box-sizing: border-box;
 }
 
 .specListContainer {

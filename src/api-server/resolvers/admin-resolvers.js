@@ -1,6 +1,7 @@
 import ProductModel from '@/api-server/mongo-models/product';
 import UserModel from '@/api-server/mongo-models/user';
 import OrderModel from '@/api-server/mongo-models/order';
+import MediumModel from '@/api-server/mongo-models/medium';
 
 export default {
     findProductById: async ({id}) => {
@@ -57,5 +58,14 @@ export default {
 
     getAllOrders: () => {
         return OrderModel.find();
+    },
+
+    getAllMedia: () => {
+        return MediumModel.find();
+    },
+
+    deleteMedium: async ({id}) => {
+        const medium = await MediumModel.findById(id);
+        return medium.remove();
     },
 };

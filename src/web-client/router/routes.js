@@ -68,9 +68,9 @@ export default [
                         },
                     },
                     {
-                        path: '/media-manager',
+                        path: '/medium-manager',
                         async action() {
-                            const AdminMediaManagerPage = await import('@/web-client/components/AdminMediaManagerPage');
+                            const AdminMediaManagerPage = await import('@/web-client/components/AdminMediumManagerPage');
                             return (
                                 <AdminMediaManagerPage/>
                             );

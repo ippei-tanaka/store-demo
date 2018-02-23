@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styles from '@/web-client/components/Form/Form.css';
 import createReactContext from 'create-react-context';
 import compact from 'lodash/compact';
+import isFunction from 'lodash/isFunction';
 
 const ValueContext = createReactContext({});
 const ErrorContext = createReactContext({});
@@ -31,7 +32,10 @@ export class Form extends Component
     _onSubmit (event)
     {
         event.preventDefault();
-        const {validator, preValidate} = this.props;
+        const {
+            validator = () => ({}),
+            preValidate = v => v
+        } = this.props;
         const values = preValidate(this.state.values);
         const errors = validator(values);
         this.setState({errors});
@@ -44,14 +48,22 @@ export class Form extends Component
 
     render ()
     {
-        const {className, children} = this.props;
+        const {
+            className,
+            defaultValues,
+            onSubmit,
+            validator,
+            preValidate,
+            children,
+            ...rest
+        } = this.props;
 
         return (
             <ControllerContext.Provider value={this.controllers}>
                 <ErrorContext.Provider value={this.state.errors}>
                     <ValueContext.Provider value={this.state.values}>
-                        <form onSubmit={this._onSubmit.bind(this)} className={className}>
-                            {children}
+                        <form onSubmit={this._onSubmit.bind(this)} className={className} {...rest}>
+                            {isFunction(children) ? children(this.state) : children}
                         </form>
                     </ValueContext.Provider>
                 </ErrorContext.Provider>
@@ -85,10 +97,32 @@ export const Text = ({name, className, ...rest}) => {
                         <input
                             name={name}
                             value={values[name] || ''}
-                            className={styles.input + (errors[name] ? ' ' + styles.inputError : '') +
-                            (className ? ' ' + className : '')}
-                            onChange={(e) => controllers.setValue(name, e.target.value)}
+                            className={styles.input + (errors[name] ? ' ' + styles.inputError : '') + (className ? ' ' + className : '')}
+                            onChange={(e) => controllers.setValue(name, e.currentTarget.value)}
                             {...rest}
+                        />
+                        {errors[name] && <span className={styles.errorMessage}>{errors[name].message}</span>}
+                    </span>
+                );
+            }}
+        </Consumer>
+    );
+};
+
+export const File = ({name, className, ...rest}) => {
+    return (
+        <Consumer>
+            {({errors, controllers}) => {
+                return (
+                    <span>
+                        <input
+                            name={name}
+                            className={styles.input + (errors[name] ? ' ' + styles.inputError : '') + (className ? ' ' + className : '')}
+                            onChange={(e) => {
+                                controllers.setValue(name, e.currentTarget.files);
+                            }}
+                            {...rest}
+                            type="file"
                         />
                         {errors[name] && <span className={styles.errorMessage}>{errors[name].message}</span>}
                     </span>

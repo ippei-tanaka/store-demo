@@ -1,6 +1,6 @@
 import {Router} from 'express';
+import bodyParser from 'body-parser';
 import graphqlHTTP from 'express-graphql';
-import fileUpload from 'express-fileupload';
 import adminSchema from '@/api-server/graphql-schemas/admin-schema';
 import adminResolvers from '@/api-server/resolvers/admin-resolvers';
 import authSchema from '@/api-server/graphql-schemas/auth-schema';
@@ -12,8 +12,20 @@ import accountResolvers from '@/api-server/resolvers/account-resolvers';
 import {pickBackReferences} from '@/api-server/regex-parser';
 import {verifyToken, findUserById} from '@/api-server/graphql-queries';
 import {ADMIN, SHOP} from '@/api-server/permissions';
+import MediumModel from '@/api-server/mongo-models/medium';
 
 const router = new Router();
+
+const constructErrorResponse = (error) => ({
+    errors: [
+        {
+            message: error.message,
+            locations: error.locations,
+            //stack: error.stack,
+            //path: error.path
+        },
+    ],
+});
 
 const identifyUser = async (request, response, next) => {
     const token = pickBackReferences(request.get('Authorization'),
@@ -32,16 +44,7 @@ const authorize = (permission) => {
             next();
         } else {
             const error = new Error('Unauthorized.');
-            response.json({
-                errors: [
-                    {
-                        message: error.message,
-                        locations: error.locations,
-                        stack: error.stack,
-                        path: error.path
-                    },
-                ],
-            });
+            response.json(constructErrorResponse(error));
         }
     };
 };
@@ -72,8 +75,31 @@ router.use('/admin', identifyUser, authorize(ADMIN), graphqlHTTP((request) => ({
     // graphiql: true,
 })));
 
-router.use('/admin/media', identifyUser, authorize(ADMIN), fileUpload(), (request, response, next) => {
-    console.log(request.files);
+const options = {
+    type:['image/jpeg', 'image/png', 'image/gif'],
+    limit: 1024 * 1000
+};
+router.post('/media', identifyUser, authorize(ADMIN), bodyParser.raw(options), async (request, response) => {
+    const type = request.headers['content-type'];
+    const binary = request.body;
+    try {
+        const medium = await (new MediumModel({type, binary})).save();
+        response.json({data: {id: medium.id}});
+    } catch (error) {
+        response.json(constructErrorResponse(error));
+    }
+});
+
+router.get('/media/:id', async (request, response) => {
+    const id = request.params.id;
+    try {
+        const medium = await MediumModel.findById(id);
+        const {type, binary} = medium;
+        response.contentType(type);
+        response.end(binary);
+    } catch (error) {
+        response.json(constructErrorResponse(error));
+    }
 });
 
 export default router;

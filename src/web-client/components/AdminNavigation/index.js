@@ -33,9 +33,9 @@ const AdminNavigation = ({focusable = true}) => {
                         </Link>
                     </li>
                     <li className={styles.listItem}>
-                        <Link href="/admin/media-manager" className={styles.link} tabIndex={focusable ? '0' : '-1'}>
+                        <Link href="/admin/medium-manager" className={styles.link} tabIndex={focusable ? '0' : '-1'}>
                             <span className={styles.linkIconContainer}><i className="fas fa-file-image"></i></span>
-                            <span className={styles.linkText}>Media Manager</span>
+                            <span className={styles.linkText}>Medium Manager</span>
                         </Link>
                     </li>
                     <li className={styles.listItem}>
