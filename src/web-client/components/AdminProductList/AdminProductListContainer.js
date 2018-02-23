@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import AdminProductList from '@/web-client/components/AdminProductList/AdminProductList';
-import LoadingPane from '@/web-client/components/LoadingPane/index';
 import {
     createProduct,
     loadAdminProductList,
@@ -22,7 +21,7 @@ class AdminProductListContainer extends Component
             admin: {adminProductList},
             dispatch
         } = this.props;
-        return adminProductList.length > 0 ? (
+        return (
             <AdminProductList
                 productList={adminProductList}
 
@@ -38,7 +37,7 @@ class AdminProductListContainer extends Component
                     dispatch(deleteProduct(id));
                 }}
             />
-        ) : <LoadingPane />;
+        );
     }
 }
 

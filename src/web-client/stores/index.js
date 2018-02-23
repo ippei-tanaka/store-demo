@@ -21,7 +21,9 @@ const store = createStore(
 
 store.subscribe(throttle(() => {
     const state = store.getState();
-    saveState(state);
+    saveState({
+        auth: {token: state.auth.token}
+    });
 }, 1000));
 
 export default store;

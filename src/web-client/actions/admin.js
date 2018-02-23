@@ -10,6 +10,7 @@ import {
     OPEN_ADMIN_NAV,
     CLOSE_ADMIN_NAV,
     LOAD_ADMIN_ORDER_LIST,
+    DELETE_ADMIN_ORDER,
     LOAD_ADMIN_USER_LIST,
     UPLOAD_ADMIN_MEDIA,
     LOAD_ADMIN_MEDIA_LIST,
@@ -107,6 +108,24 @@ export const loadAdminOrderList = async () => async (dispatch, getState) => {
         type: LOAD_ADMIN_ORDER_LIST,
         payload: response.data.getAllOrders,
     });
+};
+
+export const deleteOrder = async (id) => async (dispatch, getState) => {
+    const state = getState();
+    const response = await query({
+        path: '/admin',
+        query: `
+            mutation {
+                deleteOrder (id: "${id}") { id }
+            }
+        `,
+        token: state.auth.token,
+    });
+    dispatch({
+        type: DELETE_ADMIN_ORDER,
+        payload: response.data.deleteOrder,
+    });
+    dispatch(loadAdminOrderList());
 };
 
 export const loadAdminUserList = async () => async (dispatch, getState) => {

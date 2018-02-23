@@ -1,15 +1,12 @@
 @import '~@/web-client/styles/colors.css';
 
-.orderItemListItemIndex {
-  font-size: 0.8rem;
-  display: inline-block;
-  padding-right: 4px;
-  vertical-align: middle;
-}
-
 .orderItemListItemSeparator {
   font-size: 0.5rem;
   display: inline-block;
   padding: 0 5px 0 4px;
   vertical-align: middle;
+}
+
+.specListContainer {
+  margin-bottom: 20px;
 }

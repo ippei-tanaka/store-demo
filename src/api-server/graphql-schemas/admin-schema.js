@@ -24,6 +24,8 @@ const schemaString = `
         updateUser(id: ID!, input: ExistingUserInput!): User
         deleteUser(id: ID!): User
         
+        deleteOrder(id: ID!): Order
+        
         deleteMedium(id: ID!): Medium
     }
 

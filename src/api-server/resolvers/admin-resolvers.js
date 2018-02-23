@@ -60,6 +60,11 @@ export default {
         return OrderModel.find();
     },
 
+    deleteOrder: async ({id}) => {
+        const order = await OrderModel.findById(id);
+        return order.remove();
+    },
+
     getAllMedia: () => {
         return MediumModel.find();
     },
