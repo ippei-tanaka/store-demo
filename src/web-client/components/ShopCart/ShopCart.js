@@ -13,16 +13,13 @@ const ShopCart = ({
             {order.map(({product, quantity}) => {
                 return (
                     <li key={product.id} className={styles.orderListItem}>
-                        <dl className={styles.productSpecList}>
-                            <dt className={styles.productSpecName}>Product Name</dt>
-                            <dd className={styles.productSpecValue}><Link className={styles.nameLink} href={`/products/${product.id}`}>{product.name}</Link></dd>
-                            <dt className={styles.productSpecName}>Subtotal</dt>
-                            <dd className={styles.productSpecValue}>${product.price} x {quantity} = ${product.price * quantity}</dd>
-                        </dl>
-                        {product.imageSrc && (
-                            <div><img className={styles.productImage} src={product.imageSrc} /></div>
-                        )}
-                        <div className={styles.removeButtonContainer}>
+                        <div>
+                            <dl className={styles.productSpecList}>
+                                <dt className={styles.productSpecName}>Product Name</dt>
+                                <dd className={styles.productSpecValue}><Link className={styles.nameLink} href={`/products/${product.id}`}>{product.name}</Link></dd>
+                                <dt className={styles.productSpecName}>Subtotal</dt>
+                                <dd className={styles.productSpecValue}>${product.price} x {quantity} = ${product.price * quantity}</dd>
+                            </dl>
                             <Button
                                 theme={ButtonThemes.WARNING}
                                 onClick={e => {
@@ -31,6 +28,9 @@ const ShopCart = ({
                                 }}
                             ><i className="fas fa-trash-alt"></i></Button>
                         </div>
+                        {product.imageSrc && (
+                            <div><img className={styles.productImage} src={product.imageSrc} /></div>
+                        )}
                     </li>
                 );
             })}

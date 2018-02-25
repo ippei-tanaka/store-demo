@@ -3,13 +3,18 @@
 @import '~@/web-client/styles/colors.css';
 @import '~@/web-client/components/ShopHeader/variables.css';
 
+:root {
+  --item-width: 110px;
+  --item-width-in-small-screen: 90px;
+}
+
 .container {
   position: fixed;
   background: #fff;
   right: 0;
   top: calc(var(--header-height) + 30px);
   padding: 20px;
-  width: 150px;
+  width: calc(var(--item-width) + (20px * 2));
   box-sizing: border-box;
   transition: 0.3s;
   border-radius: 10px 0 0 10px;
@@ -21,13 +26,19 @@
   box-shadow: -2px 4px 7px 0 rgba(0, 0, 0, 0.5);
 
   &.hidden {
-    right: -150px;
+    right: calc((var(--item-width) + (20px * 2)) * -1);
   }
 
   @media (--small-screen)
   {
     & {
-      top: calc(var(--header-height-small-screen) + 15px);
+      top: calc(var(--header-height-small-screen) + 7px);
+      padding: 10px;
+      width: calc(var(--item-width-in-small-screen) + (10px * 2));
+
+      &.hidden {
+        right: calc((var(--item-width-in-small-screen) + (10px * 2)) * -1);
+      }
     }
   }
 }
@@ -61,8 +72,14 @@
 }
 
 .orderListContainer {
-  width: 110px;
+  width: var(--item-width);
   overflow: hidden;
+  @media (--small-screen)
+  {
+    & {
+      width: var(--item-width-in-small-screen);
+    }
+  }
 }
 
 .orderList {
@@ -73,9 +90,32 @@
   position: relative;
   transition: 0.3s;
 }
+@each $n, $i in 0, 110, 220, 330, 440, 550, 660, 770, 880, 990, 1100, 1210, 1320, 1430, 1540, 1650, 1760, 1870, 1980, 2090, 2200, 2310, 2420, 2530, 2640, 2750, 2860, 2970, 3080, 3190, 3300, 3410, 3520, 3630, 3740, 3850, 3960, 4070, 4180, 4290, 4400, 4510, 4620, 4730, 4840, 4950, 5060, 5170, 5280, 5390, 5500, 5610, 5720, 5830, 5940, 6050, 6160, 6270, 6380, 6490, 6600, 6710, 6820, 6930, 7040, 7150, 7260, 7370, 7480, 7590, 7700, 7810, 7920, 8030, 8140, 8250, 8360, 8470, 8580, 8690, 8800, 8910, 9020, 9130, 9240, 9350, 9460, 9570, 9680, 9790, 9900, 10010, 10120, 10230, 10340, 10450, 10560, 10670, 10780, 10890
+{
+  .orderList[data-displayed-item-index='$(i)']
+  {
+    right: $(n)px;
+  }
+}
+@media (--small-screen) {
+  @each $n, $i in 0, 90, 180, 270, 360, 450, 540, 630, 720, 810, 900, 990, 1080, 1170, 1260, 1350, 1440, 1530, 1620, 1710, 1800, 1890, 1980, 2070, 2160, 2250, 2340, 2430, 2520, 2610, 2700, 2790, 2880, 2970, 3060, 3150, 3240, 3330, 3420, 3510, 3600, 3690, 3780, 3870, 3960, 4050, 4140, 4230, 4320, 4410, 4500, 4590, 4680, 4770, 4860, 4950, 5040, 5130, 5220, 5310, 5400, 5490, 5580, 5670, 5760, 5850, 5940, 6030, 6120, 6210, 6300, 6390, 6480, 6570, 6660, 6750, 6840, 6930, 7020, 7110, 7200, 7290, 7380, 7470, 7560, 7650, 7740, 7830, 7920, 8010, 8100, 8190, 8280, 8370, 8460, 8550, 8640, 8730, 8820, 8910
+  {
+    .orderList[data-displayed-item-index='$(i)']
+    {
+      right: $(n)px;
+    }
+  }
+}
 
 .orderListItem {
-  width: 110px;
+  width: var(--item-width);
+
+  @media (--small-screen)
+  {
+    & {
+      width: var(--item-width-in-small-screen);
+    }
+  }
 }
 
 .productSpecList {
@@ -85,11 +125,27 @@
 .productSpecName {
   font-size: 0.8rem;
   margin-bottom: 5px;
+
+  @media (--small-screen)
+  {
+    & {
+      font-size: 0.6rem;
+      margin-bottom: 2px;
+    }
+  }
 }
 
 .productSpecValue {
   font-size: 1rem;
   margin-bottom: 20px;
+
+  @media (--small-screen)
+  {
+    & {
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+  }
 }
 
 .productImage {
@@ -98,6 +154,13 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
+
+  @media (--small-screen)
+  {
+    & {
+      max-height: 60px;
+    }
+  }
 }
 
 .productSpecValueLink {
@@ -112,6 +175,13 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media (--small-screen)
+  {
+    & {
+      margin-top: 12px;
+    }
+  }
 }
 
 .checkOutButton {
@@ -120,4 +190,13 @@
   padding-top: 7px !important;
   padding-bottom: 7px !important;
   margin-top: 20px;
+
+  @media (--small-screen)
+  {
+    & {
+      margin-top: 12px;
+      padding-right: 0 !important;
+      padding-left: 0 !important;
+    }
+  }
 }

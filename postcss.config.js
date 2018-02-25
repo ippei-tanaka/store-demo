@@ -24,5 +24,6 @@ module.exports = {
             }
         },
         'postcss-cssnext': {},
+        'postcss-each': {}
     },
 };

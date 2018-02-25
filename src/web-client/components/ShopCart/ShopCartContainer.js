@@ -46,10 +46,17 @@ class ShopCartContainer extends Component {
             };
         }).filter(order => order.product);
 
+        if (!isLoggedIn)
+        {
+            return <ShopCartLoginPane />;
+        }
 
-        return !isLoggedIn ? (
-            <ShopCartLoginPane />
-        ) : (
+        if (order.length === 0)
+        {
+            return <div>No Items</div>
+        }
+        
+        return (
             <ShopCart
                 order={order}
                 onOrderConfirmed={async () => {

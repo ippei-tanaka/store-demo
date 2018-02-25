@@ -18,7 +18,7 @@ const ShopCartPane = (
     <div className={styles.container + (isCartVisible ? '' : ' ' + styles.hidden)}>
         {order.length > 0 ? (
             <div className={styles.orderListContainer}>
-                <ul className={styles.orderList} style={{left: displayedItemIndex * -110}}>
+                <ul className={styles.orderList} data-displayed-item-index={displayedItemIndex}>
                     {order.map(({product, quantity}) => {
                         return (
                             <li key={product.id} className={styles.orderListItem}>
