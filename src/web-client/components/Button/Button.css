@@ -7,18 +7,32 @@
   border-radius: 3px;
   background: #fff;
   cursor: pointer;
+
+  &:disabled {
+    background: #eee;
+    cursor: default;
+  }
 }
 
 .neutral {
   color: var(--text-color-neutral);
+  &:disabled {
+    color: color(var(--text-color-neutral) alpha(-50%));
+  }
 }
 
 .warning {
   color: var(--text-color-warning);
+  &:disabled {
+    color: color(var(--text-color-warning) alpha(-50%));
+  }
 }
 
 .encouraging {
   color: var(--text-color-encouraging);
+  &:disabled {
+    color: color(var(--text-color-encouraging) alpha(-50%));
+  }
 }
 
 .buttonContainer {

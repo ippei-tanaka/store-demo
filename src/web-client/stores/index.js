@@ -22,7 +22,8 @@ const store = createStore(
 store.subscribe(throttle(() => {
     const state = store.getState();
     saveState({
-        auth: {token: state.auth.token}
+        auth: {token: state.auth.token},
+        shop: {cart: state.shop.cart}
     });
 }, 1000));
 

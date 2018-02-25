@@ -9,13 +9,13 @@
 }
 
 .container {
-  width: 200px;
-  height: 200px;
+  width: 140px;
+  height: 140px;
   @media (--small-screen)
   {
     & {
-      width: 120px;
-      height: 120px;
+      width: 100px;
+      height: 100px;
     }
   }
 }

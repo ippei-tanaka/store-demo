@@ -1,21 +1,34 @@
 @import '~@/web-client/styles/media.css';
 @import '~@/web-client/styles/z-indexes.css';
+@import '~@/web-client/styles/colors.css';
+@import '~@/web-client/components/ShopHeader/variables.css';
 
 .container {
   position: fixed;
   background: #fff;
   right: 0;
-  top: 20%;
+  top: calc(var(--header-height) + 30px);
   padding: 20px;
   width: 150px;
   box-sizing: border-box;
   transition: 0.3s;
-  border-left: 1px solid #555;
   border-radius: 10px 0 0 10px;
   z-index: var(--shop-cart-pane-z-index);
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: -2px 4px 7px 0 rgba(0, 0, 0, 0.5);
 
   &.hidden {
-    right: -140px;
+    right: -150px;
+  }
+
+  @media (--small-screen)
+  {
+    & {
+      top: calc(var(--header-height-small-screen) + 15px);
+    }
   }
 }
 
@@ -30,21 +43,73 @@
   padding: 20px 7px;
   border-radius: 10px 0 0 10px;
   background: #fff;
-  border-left: 1px solid #555;
-  border-top: 1px solid #555;
-  border-bottom: 1px solid #555;
-  border-right: 0;
   cursor: pointer;
+  border: 0;
+  box-shadow: -2px 4px 2px 0 rgba(0, 0, 0, 0.5);
 }
 
 .hideButton {
   position: absolute;
   top: 0;
   right: 0;
-  color: #888;
-  font-size: 1.5rem;
-  padding: 5px;
+  color: #999;
+  font-size: 1.1rem;
+  padding: 6px;
   border: 0;
   background: 0;
   cursor: pointer;
+}
+
+.orderListContainer {
+  width: 110px;
+  overflow: hidden;
+}
+
+.orderList {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  width: 10000000px;
+  position: relative;
+  transition: 0.3s;
+}
+
+.orderListItem {
+  width: 110px;
+}
+
+.productSpecList {
+
+}
+
+.productSpecName {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+
+.productSpecValue {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.productSpecValueLink {
+  color: inherit;
+}
+
+.deleteButtonContainer {
+}
+
+.itemRotateButtonContainer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.checkOutButton {
+  width: 100%;
+  font-size: 0.9rem !important;
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+  margin-top: 20px;
 }

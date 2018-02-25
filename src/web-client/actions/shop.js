@@ -3,7 +3,8 @@ import {
     ADD_TO_CART,
     REMOVE_FROM_CART,
     LOAD_PRODUCT_LIST,
-    REMOVE_BUBBLE_TEXT_ON_CART_BUTTON,
+    SHOW_CART_PANE,
+    HIDE_CART_PANE,
     PLACE_ORDER,
 } from '@/web-client/actions/constants';
 
@@ -44,12 +45,6 @@ export const placeOrder = async () => async (dispatch, getState) => {
     });
 };
 
-
-export const removeBubbleTextOnCartButton = async () => ({
-    type: REMOVE_BUBBLE_TEXT_ON_CART_BUTTON,
-    payload: null,
-});
-
 export const loadProductList = async () => {
     const response = await fetch({
         path: '/product',
@@ -64,3 +59,13 @@ export const loadProductList = async () => {
         payload: response.data.getAllProducts,
     };
 };
+
+export const showCartPane = async () => ({
+    type: SHOW_CART_PANE,
+    payload: null,
+});
+
+export const hideCartPane = async () => ({
+    type: HIDE_CART_PANE,
+    payload: null,
+});
