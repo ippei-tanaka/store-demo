@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from '@/web-client/components/Link';
+import {Button, ButtonThemes, ButtonMenu} from '@/web-client/components/Button';
 import styles from '@/web-client/components/ShopCart/ShopCart.css';
 
 const ShopCart = ({
@@ -18,21 +19,29 @@ const ShopCart = ({
                             <dt className={styles.productSpecName}>Subtotal</dt>
                             <dd className={styles.productSpecValue}>${product.price} x {quantity} = ${product.price * quantity}</dd>
                         </dl>
-                        <div>
-                            <button
-                                className={styles.removeButton}
+                        {product.imageSrc && (
+                            <div><img className={styles.productImage} src={product.imageSrc} /></div>
+                        )}
+                        <div className={styles.removeButtonContainer}>
+                            <Button
+                                theme={ButtonThemes.WARNING}
                                 onClick={e => {
                                     e.preventDefault();
                                     onClickRemoveButton({productId: product.id, quantity});
                                 }}
-                            ><i className="fas fa-trash-alt"></i></button>
+                            ><i className="fas fa-trash-alt"></i></Button>
                         </div>
                     </li>
                 );
             })}
         </ul>
         <div className={styles.totalContainer}> Total: ${order.reduce((memo, {product, quantity}) => memo + quantity * product.price, 0)}</div>
-        <button type="submit" className={styles.orderButton} disabled={order.length === 0}>Make Order</button>
+        <Button
+            type="submit"
+            theme={ButtonThemes.ENCOURAGING}
+            disabled={order.length === 0}>
+            Make Order
+        </Button>
     </form>
 );
 

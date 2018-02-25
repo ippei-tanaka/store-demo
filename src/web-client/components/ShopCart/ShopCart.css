@@ -7,11 +7,21 @@
 .orderListItem {
   margin-bottom: 20px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  @media (--small-screen)
+  {
+    display: block;
+  }
 }
 
 .productSpecList {
+  margin-right: 20px;
   margin-bottom: 20px;
+  align-self: start;
 }
 
 .productSpecName {
@@ -24,59 +34,27 @@
   margin-bottom: 15px;
 }
 
+.productImage {
+  max-width: 120px;
+  max-height: 120px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 20px;
+  display: inline-block;
+}
+
+.removeButtonContainer {
+  margin-top: 20px;
+}
+
 .nameLink {
   font-weight: bold;
   outline: 0;
   text-decoration: underline;
-  color: #333;
-
-  &:hover, &:focus {
-    color: #398522;
-  }
+  color: inherit;
 }
 
 .totalContainer {
   margin-bottom: 30px;
   font-weight: bold;
-}
-
-.orderButton {
-  vertical-align: middle;
-  display: inline-block;
-  border-radius: 5px;
-  padding: 6px 10px;
-  font-size: 0.8rem;
-  background: #15aa10;
-  border: 1px solid #0e700b;
-  cursor: pointer;
-  outline: 0;
-  color: #fff;
-
-  &:hover, &:focus {
-    color: #fff;
-    background: #094507;
-  }
-
-  &:disabled {
-    color: #555;
-    background: #aaa;
-    border: 1px solid #999;
-  }
-}
-
-.removeButton {
-  color: #ff6e7a;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 3px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  outline: 0;
-  display: inline-block;
-
-  &:hover, &:focus {
-    color: #fff;
-    background: #ff6e7a;
-  }
 }

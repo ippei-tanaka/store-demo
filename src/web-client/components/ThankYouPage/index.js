@@ -5,7 +5,7 @@ const ThankYouPage = () =>
 {
     return (
         <div className={styles.container}>
-            <p className={styles.title}>Thank You For Ordering!</p>
+            <p className={styles.title}>Thank you for ordering!</p>
         </div>
     );
 };

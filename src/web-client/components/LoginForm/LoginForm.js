@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import styles from '@/web-client/components/LoginForm/LoginForm.css';
+import {Button, ButtonThemes} from '@/web-client/components/Button';
 
 export default class LoginForm extends Component
 {
@@ -27,7 +28,7 @@ export default class LoginForm extends Component
                     name="password"
                     ref={this.referenceElement.bind(this)}
                 />
-                <button className={styles.submitButton} type="submit">Login</button>
+                <Button theme={ButtonThemes.ENCOURAGING} className={styles.submitButton} type="submit">Login</Button>
             </form>
         );
     }

@@ -15,13 +15,8 @@
 
 .submitButton
 {
-  display: block;
-  border: 0;
-  background: var(--proceed-button-backgound-color);
-  color: var(--proceed-button-base-text-color);
   width: 100%;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 3px;
-  font-size: 1rem;
+  font-size: 1.2rem !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
 }

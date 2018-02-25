@@ -110,6 +110,15 @@ export default class ShopHeader extends Component {
                                 Products
                             </Link>
                         </li>
+                        <li className={styles.menuItem}>
+                            <Link
+                                href="/cart"
+                                className={styles.menuButton}
+                                onClick={this._onClickMenuButton.bind(this)}
+                                title="Checkout">
+                                Checkout
+                            </Link>
+                        </li>
                         {showLogoutButton ? (
                             <li className={styles.menuItem}>
                                 <LogoutButtonContainer
@@ -119,15 +128,6 @@ export default class ShopHeader extends Component {
                                 </LogoutButtonContainer>
                             </li>
                         ) : null}
-                        <li className={styles.menuItem}>
-                            <Link
-                                href="/cart"
-                                className={styles.menuButton}
-                                onClick={this._onClickMenuButton.bind(this)}
-                                title="Cart">
-                                Cart
-                            </Link>
-                        </li>
                         <li className={styles.menuItem}>
                             <Link
                                 href="/admin"

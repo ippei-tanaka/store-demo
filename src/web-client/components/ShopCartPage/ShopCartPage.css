@@ -1,11 +1,18 @@
 @import '~@/web-client/styles/media.css';
 
+.layout {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .container {
   box-sizing: border-box;
-  background: #97cd15;
-  border-radius: 10px;
+  background: #fff;
   margin: 30px auto;
   padding: 30px;
+  border-radius: 5px;
 }
 
 .title {

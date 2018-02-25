@@ -25,6 +25,13 @@ const ShopCartPane = (
                                 <dl className={styles.productSpecList}>
                                     <dt className={styles.productSpecName}>Product Name</dt>
                                     <dd className={styles.productSpecValue}><Link className={styles.productSpecValueLink} href={`/products/${product.id}`}>{product.name}</Link></dd>
+                                    {product.imageSrc && (<dt className={styles.productSpecName}>Image</dt>)}
+                                    {product.imageSrc && (
+                                        <dd className={styles.productSpecValue}>
+                                            <Link className={styles.productSpecValueLink} href={`/products/${product.id}`}><img src={product.imageSrc} className={styles.productImage} /></Link>
+                                        </dd>
+                                    )}
+
                                     <dt className={styles.productSpecName}>Subtotal</dt>
                                     <dd className={styles.productSpecValue}>${product.price} x {quantity} = ${product.price * quantity}</dd>
                                 </dl>

@@ -5,9 +5,11 @@ import {
     loadProductList,
     removeFromCart,
     showCartPane,
-    hideCartPane
+    hideCartPane,
+    changeCartPaneDisplayedItemIndex
 } from '@/web-client/actions/shop';
 import history from '@/web-client/history';
+import {getApiBase} from '@/web-client/fetch';
 
 class ShopCartPaneContainer extends Component
 {
@@ -15,8 +17,7 @@ class ShopCartPaneContainer extends Component
     {
         super(props);
         this.state = {
-            isCartExplicitState: null,
-            displayedItemIndex: 0
+            apiBase: null
         };
     }
 
@@ -24,20 +25,26 @@ class ShopCartPaneContainer extends Component
     {
         const {dispatch} = this.props;
         dispatch(loadProductList());
+        getApiBase().then(apiBase => {
+            this.setState({apiBase});
+        });
     }
 
     _onClickPrevItemButton (size)
     {
         return function() {
-            const {displayedItemIndex} = this.state;
+            const {
+                shop:{ui: {displayedItemIndex}},
+                dispatch
+            } = this.props;
 
             if (displayedItemIndex <= 0)
             {
-                this.setState({displayedItemIndex: size - 1});
+                dispatch(changeCartPaneDisplayedItemIndex(size - 1));
             }
             else
             {
-                this.setState({displayedItemIndex: displayedItemIndex - 1});
+                dispatch(changeCartPaneDisplayedItemIndex(displayedItemIndex - 1));
             }
         };
     }
@@ -45,27 +52,41 @@ class ShopCartPaneContainer extends Component
     _onClickNextItemButton (size)
     {
         return function () {
-            const {displayedItemIndex} = this.state;
+            const {
+                shop:{ui: {displayedItemIndex}},
+                dispatch
+            } = this.props;
 
             if ((size - 1) <= displayedItemIndex)
             {
-                this.setState({displayedItemIndex: 0});
+                dispatch(changeCartPaneDisplayedItemIndex(0));
             }
             else
             {
-                this.setState({displayedItemIndex: displayedItemIndex + 1});
+                dispatch(changeCartPaneDisplayedItemIndex(displayedItemIndex + 1));
             }
         };
     }
 
     render ()
     {
-        const {shop:{ui: {isCartPaneVisible}, cart, productList}, dispatch} = this.props;
-        const {displayedItemIndex} = this.state;
-        const order = Object.keys(cart).map(productId => ({
-            product: productList.find(p => p.id === productId),
-            quantity: cart[productId],
-        })).filter(order => order.product);
+        const {
+            shop:{ui: {isCartPaneVisible, displayedItemIndex}, cart, productList},
+            dispatch
+        } = this.props;
+
+        const {apiBase} = this.state;
+
+        const order = Object.keys(cart).map(productId => {
+            const product = productList.find(p => p.id === productId);
+            return {
+                product: product && {
+                    ...product,
+                    imageSrc: product.imageId && apiBase ? apiBase + '/media/' + product.imageId : null
+                },
+                quantity: cart[productId],
+            };
+        }).filter(order => order.product);
 
         return (
             <ShopCartPane
@@ -77,7 +98,6 @@ class ShopCartPaneContainer extends Component
                 onClickHideButton={e => dispatch(hideCartPane())}
                 onClickRemoveButton={({productId, quantity}) => {
                     dispatch(removeFromCart({productId, quantity}));
-                    this.setState({displayedItemIndex: 0});
                 }}
                 onClickCheckOutButton={() => {
                     history.push('/cart');
