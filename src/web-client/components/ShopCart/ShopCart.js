@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from '@/web-client/components/Link';
-import {Button, ButtonThemes, ButtonMenu} from '@/web-client/components/Button';
+import {Button, ButtonThemes} from '@/web-client/components/Button';
 import styles from '@/web-client/components/ShopCart/ShopCart.css';
 
 const ShopCart = ({

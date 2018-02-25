@@ -4,6 +4,7 @@ import styles from '@/web-client/components/ShopProductDetail/ShopProductDetail.
 import uniqueId from 'lodash/uniqueId';
 import isInteger from 'lodash/isInteger';
 import clone from 'lodash/clone';
+import {Button, ButtonThemes} from '@/web-client/components/Button';
 
 const errorValidator = (values) => {
     const {quantity} = values;
@@ -47,7 +48,7 @@ const ShopProductDetail = ({
                     name="quantity"
                     id={idPrefix + 'quantity'}
                 />
-                <button className={styles.button} type="submit">Add to Cart</button>
+                <Button theme={ButtonThemes.ENCOURAGING} type="submit">Add to Cart</Button>
             </Form>
         </article>
     );

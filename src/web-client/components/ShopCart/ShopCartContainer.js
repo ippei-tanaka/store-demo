@@ -55,7 +55,7 @@ class ShopCartContainer extends Component {
         {
             return <div>No Items</div>
         }
-        
+
         return (
             <ShopCart
                 order={order}

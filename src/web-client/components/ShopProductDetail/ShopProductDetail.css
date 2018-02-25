@@ -16,31 +16,41 @@
 .imagePaneContainer {
   text-decoration: none;
   outline: 0;
-  border-radius: 20px;
   overflow: hidden;
   display: inline-block;
   box-sizing: border-box;
-  border: 1px solid #ccc;
-  margin-bottom: 20px;
   text-align: center;
+  width: 100%;
 }
 
 .noImagePane {
   height: 320px;
-  width: 240px;
+  width: 320px;
   background: rgba(0, 0, 0, 0.54);
   display: flex;
   align-items: center;
   align-content: center;
   justify-content: center;
   color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-sizing: border-box;
+  @media (max-width: 320px) {
+    & {
+      width: 100%;
+      height: 240px;
+    }
+  }
 }
 
 .image {
-  width: 100%;
   max-width: 320px;
   max-height: 320px;
   vertical-align: bottom;
+  display: inline-block;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 20px;
 }
 
 .description {
@@ -82,22 +92,4 @@
   border: 1px solid #ccc;
   display: inline-block;
   margin: 0 10px;
-}
-
-.button {
-  vertical-align: middle;
-  display: inline-block;
-  border-radius: 5px;
-  padding: 6px 10px;
-  font-size: 0.8rem;
-  background: #15aa10;
-  border: 1px solid #0e700b;
-  cursor: pointer;
-  outline: 0;
-  color: #fff;
-
-  &:hover, &:focus {
-    color: #fff;
-    background: #094507;
-  }
 }
