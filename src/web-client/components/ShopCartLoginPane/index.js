@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginFormContainer from '@/web-client/components/LoginForm/index';
+import LoginFormContainer from '@/web-client/components/LoginForm';
 import styles from '@/web-client/components/ShopCartLoginPane/ShopCartLoginPane.css';
 
 const ShopCartLoginPane = () => (

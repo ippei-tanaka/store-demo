@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from '@/web-client/components/Link/index';
+import Link from '@/web-client/components/Link';
 
 const AdminHomePage = () => {
     return (

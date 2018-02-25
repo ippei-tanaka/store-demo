@@ -1,4 +1,9 @@
 :root {
   --modal-z-index: 10100;
-  --admin-nav-button-focused-z-index: 10010;
+
+  --admin-nav-button-focused-z-index: 10020;
+
+  --shop-header-z-index: 10070;
+  --shop-cart-pane-z-index: 10040;
+  --shop-page-content-z-index: 10000;
 }

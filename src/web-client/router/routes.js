@@ -4,6 +4,7 @@ import AdminRootContainer from '@/web-client/components/AdminRoot';
 import ShopRootContainer from '@/web-client/components/ShopRoot';
 import ContentLoaderContainer from '@/web-client/components/ContentLoaderContainer';
 import LoadingPane from '@/web-client/components/LoadingPane';
+import ShopLoadingPane from '@/web-client/components/ShopLoadingPane';
 
 export default [
     {
@@ -82,7 +83,7 @@ export default [
                 path: '',
                 async action({next}) {
                     return (
-                        <ContentLoaderContainer contentPromise={next()} loadingContent={<LoadingPane />}>
+                        <ContentLoaderContainer contentPromise={next()} loadingContent={<ShopLoadingPane />}>
                             {({content}) => (
                                 <ShopRootContainer>
                                     {content}
@@ -98,6 +99,15 @@ export default [
                             const ShopHomePage = await import('@/web-client/components/ShopHomePage');
                             return (
                                 <ShopHomePage/>
+                            );
+                        },
+                    },
+                    {
+                        path: '/products',
+                        async action() {
+                            const ShopProductListPage = await import('@/web-client/components/ShopProductListPage');
+                            return (
+                                <ShopProductListPage/>
                             );
                         },
                     },

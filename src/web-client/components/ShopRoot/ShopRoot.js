@@ -1,19 +1,25 @@
 import React from 'react';
-import ShopHeaderContainer from '@/web-client/components/ShopHeader/index';
+import ShopHeaderContainer from '@/web-client/components/ShopHeader';
+import ShopCartPane from '@/web-client/components/ShopCartPane';
 import styles from '@/web-client/components/ShopRoot/ShopRoot.css';
 
 const ShopRoot = ({children}) => {
     return (
-        <div>
-            <header>
-                <ShopHeaderContainer />
-            </header>
-            <div className={styles.bodyContent}>
-                {children}
+        <div className={styles.background}>
+            <div className={styles.layout}>
+                <header className={styles.header}>
+                    <ShopHeaderContainer />
+                </header>
+                <main className={styles.main}>
+                    {children}
+                </main>
+                <aside className={styles.cartContainer}>
+                    <ShopCartPane />
+                </aside>
+                <footer className={styles.footer}>
+                    <div>&copy; Store Demo</div>
+                </footer>
             </div>
-            <footer className={styles.footer}>
-                <div>&copy; Store Demo <span className={styles.iconContainer}><i className="fas fa-bolt"></i></span></div>
-            </footer>
         </div>
     );
 };

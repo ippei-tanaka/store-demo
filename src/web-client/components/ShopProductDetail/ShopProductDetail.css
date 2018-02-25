@@ -1,14 +1,13 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  color: #fff;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .name {
   font-size: 1.6rem;
   text-decoration: none;
-  color: #15aa10;
-  font-family: 'Francois One', sans-serif;
   line-height: 1.4;
   margin-bottom: 15px;
   text-align: center;
@@ -29,12 +28,19 @@
 .noImagePane {
   height: 320px;
   width: 240px;
-  background: #eee;
+  background: rgba(0, 0, 0, 0.54);
   display: flex;
   align-items: center;
   align-content: center;
   justify-content: center;
-  color: #777;
+  color: #fff;
+}
+
+.image {
+  width: 100%;
+  max-width: 320px;
+  max-height: 320px;
+  vertical-align: bottom;
 }
 
 .description {
@@ -48,44 +54,34 @@
   font-size: 0.9rem;
   text-align: center;
   line-height: 1.4;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 .form {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  background: #97cd15;
-  padding: 15px;
   border-radius: 5px;
   width: 100%;
   box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
 }
 
 .label {
   font-size: 0.8rem;
   display: inline-block;
-  margin-right: 5px;
+  line-height: 1.8rem;
 }
 
 .input {
   font-size: 0.8rem;
-  width: 1.5rem;
+  width: 3.5rem;
   vertical-align: middle;
   border-radius: 5px;
-  padding: 6px 10px;
+  padding: 6px 7px;
   border: 1px solid #ccc;
   display: inline-block;
-  margin-right: 5px;
-  outline: 0;
-
-  &:hover, &:focus {
-    border: 1px solid #338e2c;
-  }
-
-  &.inputError {
-    background: #ffc8c5;
-  }
+  margin: 0 10px;
 }
 
 .button {

@@ -1,5 +1,5 @@
 import React from 'react';
-import ShopCartContainer from '@/web-client/components/ShopCart/index';
+import ShopCartContainer from '@/web-client/components/ShopCart';
 import styles from '@/web-client/components/ShopCartPage/ShopCartPage.css';
 
 const ShopCartPage = () =>

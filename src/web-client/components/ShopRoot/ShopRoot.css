@@ -1,43 +1,78 @@
 @import '~@/web-client/styles/media.css';
+@import '~@/web-client/styles/z-indexes.css';
 @import '~@/web-client/components/ShopHeader/variables.css';
 
 :root {
-  min-height: 100%;
-  position: relative;
+  --footer-height: 4rem;
+  --footer-height-small-screen: 2rem;
 }
 
-.bodyContent {
-  padding: calc(var(--header-height) + 30px) 35px 100px;
-  display: flex;
-  flex-direction: row;
-  max-width: 900px;
-  margin: 0 auto;
-  justify-content: center;
-}
-
-@media (--small-screen) {
-  .bodyContent {
-    padding-top: calc(var(--header-height-small-screen) + 30px);
+.background {
+  background-image: url('/shop-background-01.jpg');
+  background-color: #271a0e;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position-x: center;
+  background-position-y: top;
+  background-attachment: fixed;
+  @media (min-aspect-ratio: 6/4) {
+    & {
+      background-size: 100% auto;
+      background-position-y: center;
+    }
   }
+}
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: fixed;
+  z-index: var(--shop-header-z-index);
+  width: 100%;
+}
+
+.main {
+  box-sizing: border-box;
+  padding-top: var(--header-height);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  font-family: 'Assistant', sans-serif;
+  z-index: var(--shop-page-content-z-index);
+  position: relative;
+  @media (--small-screen) {
+    & {
+      padding-top: var(--header-height-small-screen);
+    }
+  }
+}
+
+.cartContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 .footer {
   text-align: center;
-  background: #97cd15;
-  font-family: 'Fjalla One', sans-serif;
   font-size: 0.9rem;
-  color: #222;
-  position: absolute;
+  color: #fff;
   bottom: 0;
   width: 100%;
   box-sizing: border-box;
-  height: 50px;
+  height: var(--footer-height);
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.iconContainer {
-  font-size: 1rem;
-  color: #ffff00;
+  font-family: 'Bellefair', serif;
+  @media (--small-screen) {
+    & {
+      font-size: 0.7rem;
+      height: var(--footer-height-small-screen);
+    }
+  }
 }

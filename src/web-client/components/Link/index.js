@@ -1,6 +1,6 @@
 import React from 'react';
-import {basename} from '@/web-client/router/index';
-import history from '@/web-client/history/index';
+import {basename} from '@/web-client/router';
+import history from '@/web-client/history';
 
 const createOnClickAnchor = (callback) => {
     return (e) => {

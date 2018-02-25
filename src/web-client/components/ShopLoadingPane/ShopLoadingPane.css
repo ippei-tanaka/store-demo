@@ -1,0 +1,26 @@
+@import '~@/web-client/styles/media.css';
+
+.layout {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 200px;
+  height: 200px;
+  @media (--small-screen)
+  {
+    & {
+      width: 120px;
+      height: 120px;
+    }
+  }
+}
+
+.loadingPane {
+  width: 100%;
+  height: 100%;
+}

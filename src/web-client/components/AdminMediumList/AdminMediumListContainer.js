@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import AdminMediumList from '@/web-client/components/AdminMediumList/AdminMediumList';
-import LoadingPane from '@/web-client/components/LoadingPane/index';
+import LoadingPane from '@/web-client/components/LoadingPane';
 import {
     loadAdminMediumList,
     uploadAdminMedia,

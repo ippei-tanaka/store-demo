@@ -1,9 +1,10 @@
 import React from 'react';
 
-const LogoutButton = ({onClick, children, ...rest}) => (
+const LogoutButton = ({onClickLogoutButton, onClick, children, ...rest}) => (
     <button
         onClick={e => {
             e.preventDefault();
+            onClickLogoutButton(e);
             onClick(e);
         }}
         {...rest}

@@ -1,0 +1,45 @@
+@import '~@/web-client/styles/media.css';
+@import '~@/web-client/styles/z-indexes.css';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding: 0 35px;
+  margin: 50px 0;
+  @media (--small-screen) {
+    & {
+      padding: 0 20px;
+      margin: 30px 0;
+    }
+  }
+}
+
+.heading {
+  color: #fff;
+  justify-self: stretch;
+  text-align: left;
+  width: 100%;
+  font-size: 1.5rem;
+  font-family: 'Bellefair', serif;
+  box-sizing: border-box;
+  margin-bottom: 25px;
+  @media (--small-screen) {
+    & {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+.listContainer {
+  width: 100%;
+  max-width: 830px;
+  box-sizing: border-box;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

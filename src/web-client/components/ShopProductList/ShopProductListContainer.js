@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import ShopProductList from '@/web-client/components/ShopProductList/ShopProductList';
-import LoadingPane from '@/web-client/components/LoadingPane/index';
+import LoadingPane from '@/web-client/components/LoadingPane';
 import React, {Component} from 'react';
 import {loadProductList} from '@/web-client/actions/shop';
 import {getApiBase} from '@/web-client/fetch';
@@ -26,7 +26,6 @@ class ShopProductListContainer extends Component
     render ()
     {
         const {shop:{productList}} = this.props;
-
 
         const {apiBase} = this.state;
 

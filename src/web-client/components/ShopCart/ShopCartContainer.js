@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import ShopCart from '@/web-client/components/ShopCart/ShopCart';
-import ShopCartLoginPane from '@/web-client/components/ShopCartLoginPane/index';
+import ShopCartLoginPane from '@/web-client/components/ShopCartLoginPane';
 import {placeOrder, removeFromCart} from '@/web-client/actions/shop';
 import {verifyToken} from '@/web-client/actions/auth';
-import history from '@/web-client/history/index';
+import history from '@/web-client/history';
 
 class ShopCartContainer extends Component {
 

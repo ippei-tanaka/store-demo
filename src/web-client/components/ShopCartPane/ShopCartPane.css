@@ -1,0 +1,50 @@
+@import '~@/web-client/styles/media.css';
+@import '~@/web-client/styles/z-indexes.css';
+
+.container {
+  position: fixed;
+  background: #fff;
+  right: 0;
+  top: 20%;
+  padding: 20px;
+  width: 150px;
+  box-sizing: border-box;
+  transition: 0.3s;
+  border-left: 1px solid #555;
+  border-radius: 10px 0 0 10px;
+  z-index: var(--shop-cart-pane-z-index);
+
+  &.hidden {
+    right: -140px;
+  }
+}
+
+.showButton {
+  position: absolute;
+  top: 20px;
+  left: -37px;
+  width: 37px;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 20px 7px;
+  border-radius: 10px 0 0 10px;
+  background: #fff;
+  border-left: 1px solid #555;
+  border-top: 1px solid #555;
+  border-bottom: 1px solid #555;
+  border-right: 0;
+  cursor: pointer;
+}
+
+.hideButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #888;
+  font-size: 1.5rem;
+  padding: 5px;
+  border: 0;
+  background: 0;
+  cursor: pointer;
+}

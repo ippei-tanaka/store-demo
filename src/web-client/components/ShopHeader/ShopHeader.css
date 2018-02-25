@@ -1,71 +1,100 @@
 @import '~@/web-client/styles/media.css';
+@import '~@/web-client/styles/z-indexes.css';
 @import '~@/web-client/components/ShopHeader/variables.css';
 
 .container {
-  padding: 20px 30px  20px 20px;
+  padding: 15px 30px  15px 20px;
   height: var(--header-height);
   box-sizing: border-box;
-  background: #97cd15;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  position: fixed;
-  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.65);
 }
 
-@media (--small-screen) {
+@media (--small-screen)
+{
   .container {
-    padding: 8px;
-    flex-direction: column;
     height: var(--header-height-small-screen);
-    align-items: center;
+    padding-right: 20px;
   }
 }
 
 .logoLink {
-  color: #ffff00;
+  color: #fff;
   text-decoration: none;
   padding: 15px;
-  outline: 0;
-  border-radius: 4px;
   display: flex;
-  white-space: nowrap;
-
-  &:hover, &:focus {
-    background: #668815;
-  }
+  flex-direction: column;
+  justify-content: center;
 }
 
-@media (--small-screen) {
+@media (--small-screen)
+{
   .logoLink {
-    padding: 5px;
+    padding: 0;
   }
 }
 
-.logoContainer {
-  display: flex;
-  align-items: center;
-}
-
-.logoIconContainer {
-  font-size: 2.5rem;
-  margin-right: 15px;
-}
-
-@media (--small-screen) {
-  .logoIconContainer {
-    font-size: 1.5rem;
-  }
-}
 .logoText {
-  font-size: 2.1rem;
-  font-family: 'Fjalla One', sans-serif;
+  font-size: 1.9rem;
+  line-height: 1;
+  font-family: 'Bellefair', serif;
+  white-space: nowrap;
+}
+
+@media (--small-screen)
+{
+  .logoText {
+    font-size: 1.5rem;
+    padding: 0;
+  }
+}
+
+.menuContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.showMenuButton {
+  background-color: transparent;
+  border: 0;
+  font-size: 1.4rem;
+  color: #fff;
+  padding: 0 15px;
+  display: none;
+  cursor: pointer;
 }
 
 @media (--small-screen) {
-  .logoText {
-    font-size: 1.2rem;
+  .showMenuButton {
+    display: inline-block;
+    font-size: 1rem;
+    padding: 0;
+  }
+}
+
+.closeMenuButton {
+  background-color: transparent;
+  border: 0;
+  font-size: 1.7rem;
+  color: #fff;
+  padding: 30px;
+  display: none;
+  position: fixed;
+  z-index: 10800;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+@media (--small-screen) {
+  .closeMenuButton {
+    display: none;
+    &.modalMenuCloseButtonOpen {
+      display: inline-block;
+    }
   }
 }
 
@@ -76,85 +105,47 @@
 
 @media (--small-screen) {
   .menu {
+    position: fixed;
+    z-index: 10500;
+    background-color: rgba(0, 0, 0, 0.9);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    display: none;
+    &.modalMenuOpen {
+      display: flex;
+    }
   }
 }
 
 .menuItem {
   margin-left: 5px;
   display: flex;
-  position: relative;
+  justify-content: center;
+  flex-direction: column;
 
   &:first-child {
     margin-left: 0;
   }
 }
 
-@media (--small-screen) {
-  .menuItem {
-    margin-left: 0;
-  }
-}
-
 .menuButton {
   cursor: pointer;
-  font-size: 1.3rem;
   border: 0;
   background: transparent;
-  color: #5f810e;
-  padding: 15px;
-  outline: 0;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-
-  &:hover, &:focus {
-    background: #668815;
-    color: #fff;
-  }
-}
-
-@media (--small-screen) {
-  .menuButton {
-    padding: 8px;
-    font-size: 1.0rem;
-  }
-}
-
-.menuButtonText {
-  font-size: 0.9rem;
-  display: inline-block;
-  margin-left: 5px;
-  white-space: nowrap;
-}
-
-@media (--small-screen) {
-  .menuButton {
-    font-size: 0.8rem;
-  }
-}
-
-.bubbleContainer {
-  display: inline-block;
-  position: absolute;
-  top: 60px;
-  font-size: 0.8rem;
-  line-height: 1.4;
-  z-index: 10;
-  opacity: 1;
-  transition: opacity 0.4s, top 0.4s;
   color: #fff;
-
-  &.bubbleHidden {
-    top: 30px;
-    opacity: 0;
-    z-index: -1;
-  }
-}
-
-@media (--small-screen) {
-  .bubbleContainer {
-    top: 50px;
-  }
+  padding: 15px;
+  display: inline-block;
+  text-decoration: none;
+  font-family: 'Bellefair', serif;
+  font-size: 1.1rem;
+  white-space: nowrap;
+  line-height: 2.5rem;
+  vertical-align: bottom;
+  box-sizing: border-box;
+  height: 100%;
 }

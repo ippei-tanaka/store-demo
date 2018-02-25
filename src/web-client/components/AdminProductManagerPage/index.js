@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminProductListContainer from '@/web-client/components/AdminProductList/index';
+import AdminProductListContainer from '@/web-client/components/AdminProductList';
 
 const AdminProductManagerPage = () => (
     <div>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import AdminProductList from '@/web-client/components/AdminProductList/AdminProductList';
-import LoadingPane from '@/web-client/components/LoadingPane/index';
+import LoadingPane from '@/web-client/components/LoadingPane';
 import {
     createProduct,
     loadAdminProductList,

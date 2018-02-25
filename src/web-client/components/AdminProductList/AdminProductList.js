@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styles from '@/web-client/components/AdminProductList/AdminProductList.css';
-import {verifyProductName, verifyProductPrice, verifyProductDescription} from '@/validator/index';
+import {verifyProductName, verifyProductPrice, verifyProductDescription} from '@/validator';
 import {Form, Text} from '@/web-client/components/Form';
 import isNaN from 'lodash/isNaN';
 import {

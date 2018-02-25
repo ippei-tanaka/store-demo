@@ -42,7 +42,7 @@ export class Form extends Component
 
         if (compact(Object.values(errors)).length === 0)
         {
-            this.props.onSubmit(this.state.values, event);
+            this.props.onSubmit(values, event);
         }
     }
 

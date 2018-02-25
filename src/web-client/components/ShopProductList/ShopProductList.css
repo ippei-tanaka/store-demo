@@ -1,22 +1,23 @@
 @import '~@/web-client/styles/media.css';
 
 .productList {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
 }
-
 .productListItem {
-  width: 240px;
-  margin: 30px;
+  margin: 20px 0;
 }
-
-@media (--small-screen)
-{
-  .productListItem {
+@supports (display: grid) {
+  .productList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 20px;
+    box-sizing: border-box;
     width: 100%;
-    margin: 0 0 50px 0;
+    margin: 0 auto;
+  }
+  .productListItem {
+    max-width: 240px;
+    width: 100%;
+    margin: 0 auto;
   }
 }
 
@@ -27,24 +28,21 @@
 
 .imageLink {
   text-decoration: none;
-  outline: 0;
   border-radius: 20px;
   overflow: hidden;
   display: block;
   box-sizing: border-box;
   border: 1px solid #ccc;
   height: 240px;
-  width: 240px;
+  width: 100%;
   position: relative;
   margin: 0 auto;
-
-  &:hover, &:focus {
-    border-color: #15aa10;
-  }
 }
 
 .image {
   max-width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  vertical-align: bottom;
 }
 
 .nameLinkContainer {
@@ -53,14 +51,12 @@
 }
 
 .nameLink {
-  font-size: 1.3rem;
   text-decoration: none;
-  color: #15aa10;
-  font-family: 'Francois One', sans-serif;
   line-height: 1.4;
-  outline: 0;
+  color: #fff;
+  font-size: 1.2rem;
 
-  &:hover, &:focus {
+  &:hover {
     text-decoration: underline;
   }
 }
@@ -69,15 +65,16 @@
   font-size: 0.9rem;
   text-align: center;
   line-height: 1.4;
+  color: #fff;
 }
 
 .noImagePane {
-  background: #eee;
+  background: rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   align-content: center;
   justify-content: center;
-  color: #777;
+  color: #fff;
   height: 100%;
   width: 100%;
 }

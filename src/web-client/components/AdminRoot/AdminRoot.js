@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '@/web-client/components/AdminRoot/AdminRoot.css';
-import AdminNavigation from '@/web-client/components/AdminNavigation/index';
-import AdminHeader from '@/web-client/components/AdminHeader/index';
+import AdminNavigation from '@/web-client/components/AdminNavigation';
+import AdminHeader from '@/web-client/components/AdminHeader';
 
 const AdminRoot = ({children, isNavOpen, disableNav, onClickToggleButton, showHeaderToggleButton}) => {
     return (

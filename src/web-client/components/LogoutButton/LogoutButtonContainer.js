@@ -4,7 +4,7 @@ import {logout} from '@/web-client/actions/auth';
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onClick: () => {
+        onClickLogoutButton: () => {
             dispatch(logout());
         },
     };

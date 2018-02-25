@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default () => (
-    <img src='/loading.svg'/>
+export default ({...attributes}) => (
+    <img src='/loading.svg' {...attributes} />
 );

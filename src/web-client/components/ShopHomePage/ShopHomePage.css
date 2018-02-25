@@ -1,0 +1,36 @@
+@import '~@/web-client/styles/media.css';
+
+.container {
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  color: #fff;
+  font-size: 1.4rem;
+  font-family: 'Assistant', sans-serif;
+  line-height: 1.6;
+  box-sizing: border-box;
+  padding: 30px 35px;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  & p {
+    margin-bottom: 30px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media (--small-screen)
+{
+  .container {
+    display: block;
+    padding: 20px;
+    font-size: 1.2rem;
+    height: auto;
+  }
+}
