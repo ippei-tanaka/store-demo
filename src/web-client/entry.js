@@ -7,7 +7,7 @@ import router from '@/web-client/router';
 import '@/web-client/styles/base.css';
 
 const render = async (location) => {
-    const element = await router.resolve(location);
+    const element = await router(location.pathname);
     ReactDOM.render(
         <Provider store={store}>
             {element}

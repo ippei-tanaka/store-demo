@@ -30,7 +30,6 @@ module.exports = merge({
             'redux',
             'redux-promise',
             'redux-thunk',
-            'universal-router',
             'url-parse',
             'validator',
             'whatwg-fetch',

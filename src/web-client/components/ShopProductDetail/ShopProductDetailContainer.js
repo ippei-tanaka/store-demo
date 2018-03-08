@@ -1,5 +1,6 @@
 import {connect} from 'react-redux';
 import ShopProductDetail from '@/web-client/components/ShopProductDetail/ShopProductDetail';
+import ShopProductDetailNotFound from '@/web-client/components/ShopProductDetail/ShopProductDetailNotFound';
 import React, {Component} from 'react';
 import {loadProductList, addToCart} from '@/web-client/actions/shop';
 import LoadingPane from '@/web-client/components/LoadingPane';
@@ -31,7 +32,7 @@ class ShopProductDetailContainer extends Component
 
         if (!product)
         {
-            return <p>The product is not found.</p>;
+            return <ShopProductDetailNotFound/>;
         }
 
         if (!apiBase)

@@ -93,3 +93,14 @@
   display: inline-block;
   margin: 0 10px;
 }
+
+.notFoundContainer
+{
+  width: 300px;
+  padding: 60px 30px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 5px;
+  font-size: 1.3rem;
+  text-align: center;
+}

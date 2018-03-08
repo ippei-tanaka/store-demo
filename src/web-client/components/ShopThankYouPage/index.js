@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from '@/web-client/components/ThankYouPage/ThankYouPage.css';
+import styles from '@/web-client/components/ShopThankYouPage/ShopThankYouPage.css';
 
-const ThankYouPage = () =>
+const ShopThankYouPage = () =>
 {
     return (
         <div className={styles.container}>
@@ -10,4 +10,4 @@ const ThankYouPage = () =>
     );
 };
 
-export default ThankYouPage;
+export default ShopThankYouPage;
