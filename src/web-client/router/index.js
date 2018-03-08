@@ -1,4 +1,4 @@
-import {buildRouter} from 'router404';
+import {buildRouter} from 'chibi-router';
 import React from 'react';
 import AppRootContainer from '@/web-client/components/AppRoot';
 import AdminRootContainer from '@/web-client/components/AdminRoot';

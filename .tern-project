@@ -1,0 +1,15 @@
+{
+  "libs": [
+    "browser"
+  ],
+  "plugins": {
+    "node": {},
+    "modules": {},
+    "requirejs": {},
+    "es_modules": {},
+    "jest": {},
+    "webpack": {
+      "configPath": "./webpack.config.js"
+    }
+  }
+}
