@@ -9,8 +9,6 @@ import ShopLoadingPane from '@/web-client/components/ShopLoadingPane';
 
 const rootRouter = buildRouter({
     ['/' + (basename ? basename + '/' : '') + '*']: ({wildcards}) => {
-        gtag('config', 'UA-2990082-9', {'page_path': '/' + wildcards[0]});
-        gtag('event', 'page_view', { 'send_to': 'UA-2990082-9' });
         return (
             <AppRootContainer>
                 {contentRootRouter(wildcards[0])}

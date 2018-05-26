@@ -20,9 +20,6 @@
   "plugins": [
     "react"
   ],
-  "globals": {
-    "gtag": false
-  },
   "rules": {
     "indent": [
       "error",
